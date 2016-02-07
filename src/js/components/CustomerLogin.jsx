@@ -59,14 +59,14 @@ var CustomerLogin = React.createClass({
     return (
       <div>
            <h2>To get details please enter your:</h2>
-
+              <div>
               <label for="txtRegEmail">Email address</label>
               <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" />
-
-
+              </div>
+              <div>
               <label>Mobile Number</label>
               <input class="form-control" id="phoneNumber" placeholder="07xxxxxxxxx" />
-
+              </div>
           <button id="button">Register</button>
       </div>
     )
