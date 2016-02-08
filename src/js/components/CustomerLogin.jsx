@@ -41,7 +41,7 @@ var submitUser = () => {
 
 var setCookie = () => {
   console.log('setting cookie');
-  firebaseRef.on('child_added', function(snapshot){
+  firebaseRef.on('value', function(snapshot){
     var allUsers = snapshot.val();
     var allUsersArr = Object.keys(allUsers)
     var userNo = allUsersArr.length - 1;

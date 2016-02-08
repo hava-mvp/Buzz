@@ -2,6 +2,8 @@ import React from 'react';
 import Firebase from 'firebase';
 //import Offer from './Offer';
 
+var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
+
 var checkCookie = (callback) => {
   if(document.cookie.match('havaid')) {
     callback('');
@@ -50,7 +52,6 @@ var OffersPage = React.createClass({
   render: function() {
     return (
       <h2>HELLO!</h2>
-      React.createElement('ul', {}, OfferDivs)
     )
   }
 });
