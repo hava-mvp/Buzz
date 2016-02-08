@@ -7,20 +7,17 @@ var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 
 var checkCookie = () => {
   if(document.cookie.match('havaBarName')) {
-    console.log('COOKIE IS HERE');
-    window.location = '/#create-offers';
+    navigateToNextPage();
   } else {
     return;
   }
 }
 
-var BarLogin = React.createClass({
+var navigateToNextPage = () => {
+  window.location = '/public/#create-offers';
+}
 
-  getInitialState : function() {
-      return {
-        loggedIn : "false"
-      };
-    },
+var BarLogin = React.createClass({
 
   componentWillMount: function() {
     checkCookie();
@@ -38,21 +35,14 @@ var BarLogin = React.createClass({
           console.log("Login Failed!", error);
           alert('Login failed. Check your username or password.')
         } else {
-          document.cookie = 'havaBarName=' + barName + "; path='/'";
-          self.setState({
-            loggedIn : "true"
-          });
-          window.location = '/#create-offers';
+          console.log('barname cookified')
+          document.cookie = 'havaBarName=' + JSON.stringify(barName) + "; path='/'";
           console.log("Authenticated successfully with payload:", authData);
+          navigateToNextPage();
         }
       });
     })
   },
-
-  // shouldComponentUpdate: function(nextProps, nextState) {
-  //   //ROUTE TO NEXT PAGE
-  //   return true
-  // },
 
   render: function() {
     return (

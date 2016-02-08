@@ -7,22 +7,25 @@ var firebaseRefPush = firebaseRef.push();
 
 var checkCookie = () => {
   if(document.cookie.match('havaid')) {
-    window.location = '/#live-offers'
+    navigateToNextPage();
   } else {
+    console.log('no havaid');
     return;
   }
 }
 
 var checkInput = () => {
   var userPhoneNumber = document.getElementById('phoneNumber').value.replace("+44", "0").replace(/\s/g, "");
+  console.log(userPhoneNumber);
   (userPhoneNumber.match(/^\d{11}$/)) ? checkUser(userPhoneNumber) : alert('Please enter a valid phone number');
 }
 
 var checkUser = (userPhoneNumber) => {
-  var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber + '\\b');
+  console.log('inside check user');
+  var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber.toString() + '\\b');
   firebaseRef.on('value', function(snapshot){
     var databaseSnapshot = JSON.stringify(snapshot.val());
-    databaseSnapshot.match(userPhoneNumberRegex) ? window.location = '/#live-offers' : submitUser();
+    databaseSnapshot.match(userPhoneNumberRegex) ? setCookie() : submitUser();
   });
 }
 
@@ -37,6 +40,7 @@ var submitUser = () => {
 }
 
 var setCookie = () => {
+  console.log('setting cookie');
   firebaseRef.on('child_added', function(snapshot){
     var allUsers = snapshot.val();
     var allUsersArr = Object.keys(allUsers)
@@ -44,9 +48,15 @@ var setCookie = () => {
     var user = allUsersArr[userNo];
     document.cookie = "havaid=" + user + "; path=/";
   })
+  navigateToNextPage();
+}
+
+var navigateToNextPage = () => {
+  window.location = '/public/#live-offers';
 }
 
 var CustomerLogin = React.createClass({
+
   componentWillMount: function() {
     checkCookie();
   },

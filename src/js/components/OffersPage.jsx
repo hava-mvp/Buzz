@@ -2,12 +2,36 @@ import React from 'react';
 import Firebase from 'firebase';
 //import Offer from './Offer';
 
+var checkCookie = (callback) => {
+  if(document.cookie.match('havaid')) {
+    callback('');
+  } else {
+    navigateToPreviousPage();
+  }
+}
 
+var navigateToPreviousPage = () => {
+  window.location = '/public/#customer';
+}
 
-var RetrieveOffers = React.createClass({
+var displayOffers = () => {
+  var offersList = React.createElement('ul');
+  firebaseRef.limitToLast(100).on("child_added", function(snapshot) {
+    snapshot.forEach(function(childSnapshot){
+      var offerCode = childSnapshot.key();
+      console.log(offerCode);
+    });
+  });
+}
+
+// var OfferDivs = React.createClass()
+
+var OffersPage = React.createClass({
 
   componentWillMount: function() {
-
+    checkCookie(function(message){
+      displayOffers();
+    });
     // var fetchOffersfromFB = function (){
     //
     //   var offersArray = [];
@@ -25,11 +49,10 @@ var RetrieveOffers = React.createClass({
 
   render: function() {
     return (
-      <div>
-        Offers go here
-      </div>
+      <h2>HELLO!</h2>
+      React.createElement('ul', {}, OfferDivs)
     )
   }
 });
 
-export default RetrieveOffers;
+export default OffersPage;
