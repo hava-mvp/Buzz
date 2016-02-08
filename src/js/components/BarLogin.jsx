@@ -2,7 +2,6 @@ import React from 'react';
 import Firebase from 'firebase';
 import { Router, Route, Link } from 'react-router';
 import CreateOffers from './CreateOffers.jsx';
-import { Input, ButtonInput } from 'react-bootstrap';
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 
@@ -58,14 +57,14 @@ var BarLogin = React.createClass({
   render: function() {
     return (
       <div>
-
-       <div className="wrapper">
-         <h2>Hava Bar Login</h2>
-         <Input type="text" label="Bar Name" placeholder="Enter the name of your bar" id="barName"/>
-         <Input type="email" label="Email Address" placeholder="Enter email" id="email" />
-         <Input type="password" label="Password" id="password"/>
-         <ButtonInput value="Login" id="button" className="button"/>
-       </div>
+        
+        <div className="wrapper">
+           <h2>Hava Bar Login</h2>
+           <Input type="text" label="Bar Name" placeholder="Enter the name of your bar" id="barName"/>
+           <Input type="email" label="Email Address" placeholder="Enter email" id="email" />
+           <Input type="password" label="Password" id="password"/>
+           <ButtonInput value="Login" id="button" className="button"/>
+        </div>
 
       </div>
     )

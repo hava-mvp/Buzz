@@ -37,7 +37,7 @@
     "css-loader": "^0.23.1",
     "firebase": "^2.3.2",
     "formsy-react": "^0.17.0",
-    "formsy-react-components": "^0.6.3",
+    "formsy-react-components": "^0.6.6",
     "hapi": "^11.1.4",
     "history": "~1.17.0",
     "hoek": "^3.0.4",
