@@ -1,7 +1,10 @@
 import React from 'react';
 import Firebase from 'firebase';
 import { Router, Route, Link } from 'react-router';
-import CreateOffers from './CreateOffers.jsx';
+import CreateOffers from './CreateOffers.js';
+import { Input, ButtonInput } from 'react-bootstrap';
+
+var Image = require('react-image-component')
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 
@@ -49,28 +52,17 @@ var BarLogin = React.createClass({
     })
   },
 
-  // shouldComponentUpdate: function(nextProps, nextState) {
-  //   //ROUTE TO NEXT PAGE
-  //   return true
-  // },
-
   render: function() {
     return (
       <div>
-         <h2> Bar Login</h2>
-            <div>
-              <label for="txtRegEmail">Email address</label>
-              <input value="conorc1000@gmail.com" type="email" id="email" placeholder="Enter email" name="email" />
-            </div>
-            <div>
-              <label>Bar Name</label>
-              <input value="The Nag's Head" placeholder="Enter Bar Name" id="barName" />
-            </div>
-            <div>
-              <label for="txtRegPassword">Password</label>
-              <input type="password" id="password" placeholder="password" />
-            </div>
-          <button id="button">Login</button>
+
+        <div className="wrapper">
+           <h2>Hava Bar Login</h2>
+           <Input type="text" label="Bar Name" placeholder="Enter the name of your bar" id="barName"/>
+           <Input type="email" label="Email Address" placeholder="Enter email" id="email" />
+           <Input type="password" label="Password" id="password"/>
+           <ButtonInput value="Login" id="button" className="button"/>
+        </div>
 
       </div>
     )

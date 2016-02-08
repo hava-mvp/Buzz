@@ -1,5 +1,6 @@
 import React from 'react';
 import Firebase from 'firebase';
+import { Input, ButtonInput } from 'react-bootstrap';
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 var firebaseRefPush = firebaseRef.push();
@@ -58,16 +59,12 @@ var CustomerLogin = React.createClass({
   render: function() {
     return (
       <div>
-           <h2>To get details please enter your:</h2>
-              <div>
-              <label for="txtRegEmail">Email address</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" />
-              </div>
-              <div>
-              <label>Mobile Number</label>
-              <input class="form-control" id="phoneNumber" placeholder="07xxxxxxxxx" />
-              </div>
-          <button id="button">Register</button>
+        <div className="wrapper">
+           <h2>To see Hava offers please enter:</h2>
+           <Input type="email" label="Email Address" placeholder="Enter email" id="email" />
+           <Input type="text" label="Phone Number" placeholder="Enter phone number" id="phoneNumber"/>
+           <ButtonInput value="Get Deals" id="button" className="button"/>
+        </div>
       </div>
     )
   }

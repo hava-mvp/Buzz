@@ -1,5 +1,6 @@
 import React from 'react';
 import Firebase from 'firebase';
+import { Input, ButtonInput } from 'react-bootstrap';
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
 
@@ -23,11 +24,13 @@ var CreateOffers = React.createClass({
   render: function() {
     return (
       <div>
+        <div className="wrapper">
            <h2>Create an Offer</h2>
-           <input id='offerDescription' placeholder='offer description - e.g. 2 for 1 on pints'/>
-           <input id='endTime' placeholder='end of offer - e.g. 16:00'/>
-           <input id='offerCode' placeholder='241PINTS' />
-           <input type='submit' id='offerSubmitButton'/>
+           <Input type="text" label="Offer Description" id='offerDescription' placeholder="Enter offer" />
+           <Input type="text" label="End Time" placeholder="Enter end time" id='endTime' />
+           <Input type="text" label="Offer Code" placeholder="Enter offer code" id='offerCode' />
+           <ButtonInput value="BUZZ" id="offerSubmitButton" className="button"/>
+        </div>
       </div>
     )
   }
