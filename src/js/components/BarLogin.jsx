@@ -58,25 +58,56 @@ var BarLogin = React.createClass({
     return (
       <div>
 
-            <div className="wrapper">
-               <h2>Hava Bar Login</h2>
-               <input type="text" label="Bar Name" placeholder="Enter the name of your bar" id="barName"/>
-               <input type="email" label="Email Address" placeholder="Enter email" id="email" />
-               <input type="password" label="Password" id="password"/>
-               <button id="button" className="button">Login</button>
+        <div className='form-group'>
+        <form id='sign_up'>
+          <div className='input-container'>
+            <div className='row'>
+              <input
+                className='form-control box-spacing'
+                id="first_name"
+                name='landing[first_name]'
+                placeholder='First name'
+                required type='text'
+              />
+              <input
+                className='form-control box-spacing'
+                id="last_name"
+                placeholder='Last name'
+                required type='text'
+              />
             </div>
-
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" />
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
-              </div>
-              <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+            <div className='row'>
+              <input
+                className='form-control box-spacing'
+                id='email'
+                placeholder='Your email'
+                required type='email'
+              />
+              <input
+                className='form-control box-spacing'
+                id='postcode'
+                placeholder='Your postcode'
+                required type='text'
+              />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='dropdown-container'>
+              <div id='select_arrow'></div>
+              <select className='btn drop' id='survey'>
+                <option value>How did you first hear about Hava?</option>
+                <option value='Friends or Family'>Friends or Family</option>
+                <option value='Social Media'>Social Media</option>
+                <option value='Search Engine'>Search Engine</option>
+                <option value='Meet-up or Conference'>Meet-up or Conference</option>
+                <option value='Online Ad'>Online Ad</option>
+                <option value='Other'>Other</option>
+              </select>
+            </div>
+          </div>
+          <button type='submit' className='btn btn-md submit'>Submit your details!</button>
+        </form>
+      </div>
 
       </div>
     )
