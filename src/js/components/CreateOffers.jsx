@@ -23,11 +23,16 @@ var CreateOffers = React.createClass({
   render: function() {
     return (
       <div>
+         <div className='wrapper'>
            <h2>Create an Offer</h2>
-           <input id='offerDescription' placeholder='offer description - e.g. 2 for 1 on pints'/>
-           <input id='endTime' placeholder='end of offer - e.g. 16:00'/>
-           <input id='offerCode' placeholder='241PINTS' />
-           <input type='submit' id='offerSubmitButton'/>
+           <label>Offer Description</label>
+           <input className='form-control' id="offerDescription" placeholder='Write offer description here' required type='text'/>
+           <label>End Time</label>
+           <input className='form-control' id="endTime" placeholder='Enter end time for offer here' />
+           <label>Offer Code</label>
+           <input className='form-control' id='offerCode' />
+           <button id='offerSubmitButton' className='btn btn-md button'>BUZZ</button>
+         </div>
       </div>
     )
   }

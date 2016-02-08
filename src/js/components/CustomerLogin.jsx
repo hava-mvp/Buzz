@@ -58,16 +58,14 @@ var CustomerLogin = React.createClass({
   render: function() {
     return (
       <div>
-           <h2>To get details please enter your:</h2>
-              <div>
-              <label for="txtRegEmail">Email address</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" />
-              </div>
-              <div>
-              <label>Mobile Number</label>
-              <input class="form-control" id="phoneNumber" placeholder="07xxxxxxxxx" />
-              </div>
-          <button id="button">Register</button>
+        <div className='wrapper'>
+          <h2>To get details please enter your:</h2>
+          <label>Email address</label>
+          <input className='form-control' id="email" placeholder='Enter email' required type='email'/>
+          <label>Mobile Number</label>
+          <input className='form-control' id="phoneNumber" placeholder='Enter phone number' />
+          <button id='button' className='btn btn-md button'>Get Deals</button>
+        </div>
       </div>
     )
   }
