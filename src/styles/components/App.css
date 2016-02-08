@@ -13,6 +13,10 @@ h2 {
   font-weight: normal;
 }
 
+label {
+  font-weight: lighter;
+}
+
 /* LOGIN PAGES & CREATE OFFER PAGE */
 .button {
   width: 100%;
@@ -36,7 +40,7 @@ h2 {
   position: absolute;
   top: 0;
   margin-bottom: 15%;
-  height: 80%;
+  height: 85%;
   display: flex;
   justify-content: center;
   align-content: center;

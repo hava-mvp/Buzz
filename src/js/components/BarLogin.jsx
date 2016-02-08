@@ -59,10 +59,13 @@ var BarLogin = React.createClass({
       <div>
         <div className='wrapper'>
           <h2>Hava Bar Login</h2>
+          <label>Bar Name</label>
           <input className='form-control' id="barName" placeholder='Enter the name of your bar' required type='text'/>
+          <label>Email Address</label>
           <input className='form-control' id="email" placeholder='Enter email' required type='email' />
+          <label>Password</label>
           <input className='form-control' id='password' required type='password'/>
-          <button id='button' className='btn btn-md button'>Submit your details!</button>
+          <button id='button' className='btn btn-md button'>Login</button>
         </div>
       </div>
     )
