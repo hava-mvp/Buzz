@@ -7,7 +7,7 @@ let Home = React.createClass({
   render: function() {
     return (
       <div>
-        <h1>Hava</h1>
+        <h1>Welcome To Hava</h1>
         {this.props.children}
       </div>
     );
