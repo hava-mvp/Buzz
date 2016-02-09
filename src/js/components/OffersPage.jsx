@@ -1,5 +1,6 @@
 import React from 'react';
 import Firebase from 'firebase';
+import IndividualOffer from './IndividualOffer.jsx'
 
 var checkCookie = () => {
   if(document.cookie.match('havaid')) {
@@ -21,23 +22,9 @@ var getLiveOffers = (callback) => {
 }
 
 var afterStateSet = (state) => {
-  console.log(Object.keys(state.offers));
+  console.log("stateKeys->>", Object.keys(state.offers));
+
 }
-
-var ListOfOffers = React.createClass({
-  getDefaultProps: function(){
-
-  },
-
-  render: function() {
-    return (
-      <div>
-        <h1> HAVANOFFER </h1>
-        <input id='ListOfOffers'></input>
-      </div>
-    )
-  }
-});
 
 var OffersPage = React.createClass({
   componentWillMount: function() {
@@ -45,14 +32,15 @@ var OffersPage = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log('inside');
     var _this = this;
     if(_this.isMounted()) {
     getLiveOffers(function(data){
       _this.setState({
-        offers: data
+        offers: data,
+        offersKeys: Object.keys(data)
+
       }, function() {
-        console.log('state changed', _this.state);
+        console.log('state changed here it is', _this.state);
         afterStateSet(_this.state);
       });
     });
@@ -62,11 +50,29 @@ var OffersPage = React.createClass({
   },
 
   render: function() {
+    var _this = this;
+
+   if(!_this.state){
+
     return (
       <div>
-        <ListOfOffers offersList={this.state}/>
+        <input value="LOADING..."/>
       </div>
     )
+   }
+
+  var offerItems = _this.state.offersKeys.map((offerKey) => {
+    return <IndividualOffer
+      offerKey={offerKey}
+      offerDetails ={_this.state.offers[offerKey]} />
+
+  });
+   console.log("THIS-->>>>>",_this.state);
+   return (
+     <div>
+       {offerItems}
+     </div>
+   )
   }
 
 });
