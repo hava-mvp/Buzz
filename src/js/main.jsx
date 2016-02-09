@@ -21,20 +21,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      offers: [1]
+      offers: []
     };
-
-    var offersArray = [];
-    var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
-
-    firebaseRef.limitToLast(100).on("child_added", function(snapshot) {
-      console.log(snapshot.val());
-      offersArray.push(snapshot.val());
-      console.log(offersArray);
-      this.setState({
-        offers: offersArray
-      });
-    })
   }
 
   render(){

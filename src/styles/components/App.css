@@ -26,6 +26,15 @@ form {
 }
 
 /* LOGIN PAGES & CREATE OFFER PAGE */
+
+.barName{
+  font-size: 1.5em;
+}
+
+.listItem{
+  color: white;
+}
+
 .button {
   width: 100%;
   margin-top: 1em;

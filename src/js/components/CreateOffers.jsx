@@ -3,6 +3,19 @@ import Firebase from 'firebase';
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
 
+
+var checkCookie = function() {
+  if(document.cookie.match('havaBarName')) {
+    return;
+  } else {
+    navigateToPreviousPage();
+  }
+}
+
+var navigateToPreviousPage = () => {
+  window.location = '/public/#bar';
+}
+
 var CreateOffers = React.createClass({
   getInitialState: function() {
     return {
@@ -45,6 +58,9 @@ var CreateOffers = React.createClass({
         queryString.push(encodeURIComponent(property) + '=' + encodeURIComponent(params[property]));
       }
     return queryString.join('&');
+
+  componentWillMount: function() {
+    checkCookie();
   },
 
   componentDidMount: function() {
