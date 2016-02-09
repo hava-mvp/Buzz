@@ -58,6 +58,7 @@ var CreateOffers = React.createClass({
         queryString.push(encodeURIComponent(property) + '=' + encodeURIComponent(params[property]));
       }
     return queryString.join('&');
+  },
 
   componentWillMount: function() {
     checkCookie();
