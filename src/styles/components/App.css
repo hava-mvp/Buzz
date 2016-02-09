@@ -20,6 +20,11 @@ label {
   width: 500px;
 }
 
+form {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* LOGIN PAGES & CREATE OFFER PAGE */
 .button {
   width: 100%;
