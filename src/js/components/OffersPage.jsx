@@ -1,7 +1,5 @@
 import React from 'react';
 import Firebase from 'firebase';
-//import Offer from './Offer';
-
 
 var checkCookie = () => {
   if(document.cookie.match('havaid')) {
@@ -15,40 +13,31 @@ var navigateToPreviousPage = () => {
   window.location = '/public/#customer';
 }
 
-// var IndividualOffer = React.createClass({
-//   render: function() {
-//     return (
-//       <h3>HI</h3>
-//     )
-//   }
-// })
-
-var ListOfOffers = React.createClass({
-
-  render: function() {
-    return (
-      <div id='listOfOffers'>HELLO WORLD
-      </div>
-    )
-  }
-})
-
-// {this.props.data.map(function(element, index){
-//   return <IndividualOffer />
-// })}
-// <ul>
-// {this.props.offer.map(function(element, i){
-//   return 'SHEEP!';
-//   // return <IndividualOffer key={i} data={element}  />
-// })}
-// </ul>
-
 var getLiveOffers = (callback) => {
   var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
   firebaseRef.limitToLast(100).on("value", function(snapshot) {
-    callback (snapshot.val());
+    callback(snapshot.val());
   });
 }
+
+var afterStateSet = (state) => {
+  console.log(Object.keys(state.offers));
+}
+
+var ListOfOffers = React.createClass({
+  getDefaultProps: function(){
+
+  },
+
+  render: function() {
+    return (
+      <div>
+        <h1> HAVANOFFER </h1>
+        <input id='ListOfOffers'></input>
+      </div>
+    )
+  }
+});
 
 var OffersPage = React.createClass({
   componentWillMount: function() {
@@ -63,7 +52,8 @@ var OffersPage = React.createClass({
       _this.setState({
         offers: data
       }, function() {
-        console.log('state changed');
+        console.log('state changed', _this.state);
+        afterStateSet(_this.state);
       });
     });
     } else {
@@ -74,7 +64,7 @@ var OffersPage = React.createClass({
   render: function() {
     return (
       <div>
-        <ListOfOffers />
+        <ListOfOffers offersList={this.state}/>
       </div>
     )
   }

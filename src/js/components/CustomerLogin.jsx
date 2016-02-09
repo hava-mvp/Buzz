@@ -29,7 +29,6 @@ var checkUser = (userPhoneNumber) => {
   });
 }
 
-
 var submitUser = () => {
   console.log('user details submitted');
   firebaseRefPush.set({
