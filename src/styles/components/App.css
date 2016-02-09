@@ -15,6 +15,9 @@ h2 {
 
 label {
   font-weight: lighter;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
 }
 
 /* LOGIN PAGES & CREATE OFFER PAGE */
@@ -24,6 +27,9 @@ label {
   background-color: #76EEC6;
   border-color: #76EEC6;
   color: #474747;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .button:hover {
@@ -32,6 +38,9 @@ label {
 
 .form-control {
   margin-bottom: 1em;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .wrapper {

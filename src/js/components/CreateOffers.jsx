@@ -3,10 +3,22 @@ import Firebase from 'firebase';
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
 
+function sendTextMessage (offer, endTime, barName) {
+  console.log('MESSAGE BIRD FUNCTION');
+  $.post('/sendTextMessage', {
+    'offer': offer,
+    'endTime': endTime,
+    'barName': barName
+  }, function(response) {
+    console.log('RESPONSE FROM SERVER:',response);
+  });
+}
+
 var CreateOffers = React.createClass({
 
   componentDidMount: function() {
     document.getElementById('offerSubmitButton').addEventListener('click', function() {
+      console.log('clicked');
       var offer = document.getElementById('offerDescription').value;
       var offerCode = document.getElementById('offerCode').value;
       var endTime = document.getElementById('endTime').value;
@@ -17,6 +29,7 @@ var CreateOffers = React.createClass({
         offerCode: offerCode,
         endTime: endTime
       })
+      sendTextMessage(offer, endTime, barName)
     })
   },
 
