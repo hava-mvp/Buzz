@@ -71,3 +71,10 @@ form {
   padding: 2em;
   color: #fff;
 }
+
+@media only screen and (max-width: 555px) {
+  form {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
