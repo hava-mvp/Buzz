@@ -1,35 +1,74 @@
 import React from 'react';
 import Firebase from 'firebase';
-//import Offer from './Offer';
 
+var checkCookie = () => {
+  if(document.cookie.match('havaid')) {
+    return;
+  } else {
+    navigateToPreviousPage();
+  }
+}
 
+var navigateToPreviousPage = () => {
+  window.location = '/public/#customer';
+}
 
-var RetrieveOffers = React.createClass({
+var getLiveOffers = (callback) => {
+  var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
+  firebaseRef.limitToLast(100).on("value", function(snapshot) {
+    callback(snapshot.val());
+  });
+}
 
-  componentWillMount: function() {
+var afterStateSet = (state) => {
+  console.log(Object.keys(state.offers));
+}
 
-    // var fetchOffersfromFB = function (){
-    //
-    //   var offersArray = [];
-    //   var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
-    //
-    //   firebaseRef.limitToLast(100).on("child_added", function(snapshot) {
-    //     console.log(snapshot.key());
-    //     offersArray.push(snapshot.key());
-    //     console.log(offersArray);
-    //
-    //   })
-    //}
+var ListOfOffers = React.createClass({
+  getDefaultProps: function(){
+
   },
-
 
   render: function() {
     return (
       <div>
-        Offers go here
+        <h1> HAVANOFFER </h1>
+        <input id='ListOfOffers'></input>
       </div>
     )
   }
 });
 
-export default RetrieveOffers;
+var OffersPage = React.createClass({
+  componentWillMount: function() {
+    checkCookie();
+  },
+
+  componentDidMount: function() {
+    console.log('inside');
+    var _this = this;
+    if(_this.isMounted()) {
+    getLiveOffers(function(data){
+      _this.setState({
+        offers: data
+      }, function() {
+        console.log('state changed', _this.state);
+        afterStateSet(_this.state);
+      });
+    });
+    } else {
+      console.log('NOT MOUNTED');
+    }
+  },
+
+  render: function() {
+    return (
+      <div>
+        <ListOfOffers offersList={this.state}/>
+      </div>
+    )
+  }
+
+});
+
+export default OffersPage;
