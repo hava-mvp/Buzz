@@ -1,8 +1,8 @@
 import React from 'react';
 import Firebase from 'firebase';
+import EndTime from './EndTime.jsx'
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
-
 
 var checkCookie = function() {
   if(document.cookie.match('havaBarName')) {
@@ -14,6 +14,10 @@ var checkCookie = function() {
 
 var navigateToPreviousPage = () => {
   window.location = '/public/#bar';
+}
+
+var customerFriendlyExpiryTime = () => {
+
 }
 
 var CreateOffers = React.createClass({
@@ -30,9 +34,10 @@ var CreateOffers = React.createClass({
   },
 
   sendFormData: function () {
+    var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
     var formData = {
       offer: document.getElementById('offerDescription').value,
-      endTime: document.getElementById('endTime').value,
+      endTime: endTime,
     };
 
     var request = new XMLHttpRequest();
@@ -69,18 +74,23 @@ var CreateOffers = React.createClass({
       console.log('clicked');
       var offer = document.getElementById('offerDescription').value;
       var offerCode = document.getElementById('offerCode').value;
-      var endTime = document.getElementById('endTime').value;
       var barName = document.cookie.match('havaBarName').input.split('havaBarName=')[1];
-      firebaseRef.push({
-        barName: barName,
-        offer: offer,
-        offerCode: offerCode,
-        endTime: endTime
-      })
+      var offerExpiryHour = document.getElementById('hours').value;
+      var offerExpiryMinutes = document.getElementById('minutes').value;
+      var offerExpiryMeridiem = document.getElementById('amPm').value;
+      
+      // firebaseRef.push({
+      //   barName: barName,
+      //   offer: offer,
+      //   offerCode: offerCode,
+      //   endTime: endTime
+      // })
     })
   },
 
   render: function() {
+    console.log('RENDERING');
+    // <input className='form-control' id="endTime" placeholder='Enter end time for offer here' />
     return (
       <div>
          <div className='wrapper'>
@@ -88,8 +98,8 @@ var CreateOffers = React.createClass({
            <form action="" onSubmit={this.handleSubmit}>
              <label>Offer description</label>
              <input className='form-control' id="offerDescription" placeholder='Write offer description here' required type='text'/>
-             <label>End time</label>
-             <input className='form-control' id="endTime" placeholder='Enter end time for offer here' />
+             <label>Offer Expiry Time: </label>
+             <EndTime />
              <label>Offer code</label>
              <input className='form-control' id='offerCode' placeholder='Enter offer code here' />
              <button id='offerSubmitButton' className='btn btn-md button'>{this.state.message}</button>

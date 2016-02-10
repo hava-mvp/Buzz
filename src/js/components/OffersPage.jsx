@@ -21,11 +21,6 @@ var getLiveOffers = (callback) => {
   });
 }
 
-var afterStateSet = (state) => {
-  console.log("stateKeys->>", Object.keys(state.offers));
-
-}
-
 var OffersPage = React.createClass({
   componentWillMount: function() {
     checkCookie();
@@ -33,7 +28,7 @@ var OffersPage = React.createClass({
 
   componentDidMount: function() {
     var _this = this;
-    if(_this.isMounted()) {
+    if(this.isMounted()) {
     getLiveOffers(function(data){
       _this.setState({
         offers: data,
@@ -41,7 +36,6 @@ var OffersPage = React.createClass({
 
       }, function() {
         console.log('state changed here it is', _this.state);
-        afterStateSet(_this.state);
       });
     });
     } else {
@@ -51,30 +45,21 @@ var OffersPage = React.createClass({
 
   render: function() {
     var _this = this;
-
-   if(!_this.state){
-
-    return (
+    return !_this.state ? (
       <div>
         <input value="LOADING..."/>
       </div>
-    )
-   }
-
-  var offerItems = _this.state.offersKeys.map((offerKey) => {
-    return <IndividualOffer
-      offerKey={offerKey}
-      offerDetails ={_this.state.offers[offerKey]} />
-
-  });
-   console.log("THIS-->>>>>",_this.state);
-   return (
-     <div>
-       {offerItems}
-     </div>
-   )
+    ) : (
+      <div>
+        {_this.state.offersKeys.map((offerKey) => (
+          <IndividualOffer
+            offerKey={offerKey}
+            offerDetails ={_this.state.offers[offerKey]}
+          />
+        ))}
+      </div>
+    );
   }
-
 });
 
 export default OffersPage;
