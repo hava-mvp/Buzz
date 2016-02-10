@@ -8,11 +8,7 @@ var Footer = React.createClass({
 
     return (
       <div>
-        <footer class="footer">
-         <div class="container">
-           <p class="text-muted">Place sticky footer content here.</p>
-         </div>
-       </footer>
+        <Link to="/public/#/customer-contact" className="navbar-brand">Contact Us</Link>
       </div>
     )
   }

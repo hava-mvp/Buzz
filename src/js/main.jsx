@@ -13,14 +13,9 @@ import BarContact      from './components/BarContact.jsx'
 import HavaAdmin       from './components/HavaAdmin.jsx'
 import Footer          from './components/Footer.jsx';
 
-
-let Home = require('./components/views/home.jsx');
-
 require('../styles/main.js');
 
-let rootElement = document.getElementById('react-content');
-
-ReactDOM.render(<Footer />, document.querySelector('.nav-bar'));
+ReactDOM.render(<Footer />, document.querySelector('.the-footer'));
 
 class App extends Component {
   constructor(props){

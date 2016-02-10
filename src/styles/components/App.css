@@ -25,6 +25,13 @@ form {
   margin-right: auto;
 }
 
+@media only screen and (max-width: 555px) {
+  form {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
 /* LOGIN PAGES & CREATE OFFER PAGE */
 
 .barName{
@@ -72,9 +79,25 @@ form {
   color: #fff;
 }
 
-@media only screen and (max-width: 555px) {
-  form {
-    margin-right: 0;
-    margin-left: 0;
-  }
+/* FOOTER STYLING */
+
+.the-footer {
+  position: fixed;
+  height: 3em;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: auto 25px;
+}
+
+.navbar-brand {
+  text-shadow: none;
+  color: #7e7e7e;
+  float: right;
+  padding-right: 2em;
+  font-size: medium;
+}
+
+.navbar-brand:hover {
+  color: #7e7e7e;
 }
