@@ -3,6 +3,7 @@ import Firebase from 'firebase';
 import { Router, Route, Link } from 'react-router';
 import CreateOffers from './CreateOffers.jsx';
 
+
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 
 var checkCookie = () => {

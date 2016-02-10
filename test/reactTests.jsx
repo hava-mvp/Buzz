@@ -1,16 +1,18 @@
-var test = require('tape');
-var ReactTestUtils = require('react-addons-test-utils');
-var React = require('react');
-var shallowRenderer = ReactTestUtils.createRenderer();
-var App = require('../src/js/Components/CreateOffers.jsx');
+import test from 'tape';
+import ReactTestUtils from 'react-addons-test-utils';
+import React from 'react';
 
-shallowRenderer.render(<App />);
+let shallowRenderer = ReactTestUtils.createRenderer();
 
-var appRender = shallowRenderer.getRenderOutput();
+import {CreateOffers} from '../src/js/Components/CreateOffers.jsx';
 
-test('App exists', t => {
+shallowRenderer.render(<CreateOffers />);
+//
+// var appRender = shallowRenderer.getRenderOutput();
+// console.log(appRender);
+
+test('CreateOffers exists', t => {
   t.ok("test", 'test');
-
   //t.ok(appRender, 'app render object exists');
   t.end();
 });

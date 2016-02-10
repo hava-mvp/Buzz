@@ -71,3 +71,13 @@ form {
   padding: 2em;
   color: #fff;
 }
+
+/* Navbar styling*/
+
+nav {
+  z-index: 1000;
+}
+
+.navButton {
+  color: red;
+}

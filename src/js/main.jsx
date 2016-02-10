@@ -9,13 +9,12 @@ import CreateOffers from './components/CreateOffers.jsx';
 import OffersPage from './components/OffersPage.jsx'
 import CustomerContact from './components/CustomerContact.jsx'
 import BarContact from './components/BarContact.jsx'
-
-
-let Home = require('./components/views/home.jsx');
+import NavBar from './components/nav/NavBar.jsx';
 
 require('../styles/main.js');
 
-let rootElement = document.getElementById('react-content');
+
+ReactDOM.render(<NavBar />, document.querySelector('.nav-bar'));
 
 class App extends Component {
   constructor(props){
