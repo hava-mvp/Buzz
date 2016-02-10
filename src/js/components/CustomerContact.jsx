@@ -2,10 +2,6 @@ import React from 'react';
 
 var CustomerContact = React.createClass({
 
-  componentDidMount: function() {
-
-  },
-
   render: function() {
     return (
       <div>
