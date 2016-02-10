@@ -72,6 +72,7 @@ form {
   color: #fff;
 }
 
+
 /* Navbar styling*/
 
 nav {
@@ -80,4 +81,11 @@ nav {
 
 .navButton {
   color: red;
+}
+
+@media only screen and (max-width: 555px) {
+  form {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }

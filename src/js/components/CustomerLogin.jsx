@@ -70,7 +70,7 @@ var CustomerLogin = React.createClass({
     return (
       <div>
         <div className='wrapper'>
-          <h2>To get details please enter your:</h2>
+          <h2>To get deals please enter your:</h2>
           <label>Email address</label>
           <input className='form-control' id="email" placeholder='Enter email' required type='email'/>
           <label>Mobile Number</label>

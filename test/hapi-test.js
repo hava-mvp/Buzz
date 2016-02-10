@@ -45,13 +45,11 @@ test('public served', function(t) {
 test('sendTextMessage', function(t) {
   var offer =  "This is a test offer";
   var endTime = "16:00";
+  var barName = "Pub Ruth";
 
-  var actual = 'Hello! ' + 'barName' + ' has a new offer: This is a test offer. The offer ends at 16:00. Click the link below to get your code. http://hava-mvp.herokuapp.com/#/live-offers';
-
-    sendTextMessage(offer,endTime, function(response){
-      var expected = 'Hello! ' + 'barName' + ' has a new offer: ' + offer + '. The offer ends at ' + endTime + '. Click the link below to get your code. http://hava-mvp.herokuapp.com/#/live-offers';
-
-
+  var actual = 'Hello! Pub Ruth has a new offer: This is a test offer. The offer ends at 16:00. Click the link below to get your code. http://hava-mvp.herokuapp.com/#/live-offers';
+    sendTextMessage(offer,endTime, barName, function(response){
+      var expected = 'Hello! ' + barName + ' has a new offer: ' + offer + '. The offer ends at ' + endTime + '. Click the link below to get your code. http://hava-mvp.herokuapp.com/#/live-offers';
       t.equal( actual , expected, "Passed" );
       server.stop(t.end);
     })
