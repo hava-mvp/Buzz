@@ -51,7 +51,7 @@ var setCookie = () => {
 }
 
 var navigateToNextPage = () => {
-  window.location = '#live-offers';
+  window.location = '/public/#live-offers';
 }
 
 var CustomerLogin = React.createClass({

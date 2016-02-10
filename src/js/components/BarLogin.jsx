@@ -14,7 +14,7 @@ var checkCookie = () => {
 }
 
 var navigateToNextPage = () => {
-  window.location = '#create-offers';
+  window.location = '/public/#create-offers';
 }
 
 var BarLogin = React.createClass({

@@ -13,7 +13,7 @@ var checkCookie = function() {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '#bar';
+  window.location = '/public/#bar';
 }
 
 var CreateOffers = React.createClass({
