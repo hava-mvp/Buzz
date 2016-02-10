@@ -1,6 +1,9 @@
 {
   "name": "buzz",
   "version": "1.0.0",
+  "engines": {
+    "node": "4.1.0"
+  },
   "description": "landing page",
   "main": "index.js",
   "directories": {
