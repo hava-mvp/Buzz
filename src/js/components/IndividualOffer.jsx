@@ -20,7 +20,6 @@ var IndividualOffer = React.createClass({
         <div>
           Show Offer Code
         </div>
-
       </li>
 
     )
