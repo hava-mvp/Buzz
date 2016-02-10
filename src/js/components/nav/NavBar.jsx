@@ -4,11 +4,11 @@ import {Link} from 'react-router';
 
 var NavBar = React.createClass({
 
-  componentDidMount: function() {
-    document.getElementById('contactBtn').addEventListener('click', function(){
-      window.location.assign("/public/#/customer-contact");
-    })
-  },
+  // componentDidMount: function() {
+  //   document.getElementById('contactBtn').addEventListener('click', function(){
+  //     window.location.assign("/public/#/customer-contact");
+  //   })
+  // },
 
   render : function (){
 
@@ -17,7 +17,7 @@ var NavBar = React.createClass({
         <nav className="navbar navbar-default">
           <div className="navbar-header">
             <a className="navbar-brand" href="#">Hava</a>
-            <button type="submit" id="contactBtn" className="btn btn-default">Contact</button>
+            <Link to="/public/#/customer-contact" className="navbar-brand">Contact</Link>
           </div>
         </nav>
       </div>
@@ -26,3 +26,6 @@ var NavBar = React.createClass({
 });
 
 module.exports = NavBar;
+
+
+//<button type="submit" id="contactBtn" className="btn btn-default">Contact</button>
