@@ -5,11 +5,9 @@
 
 body {
   background-color: #474747;
-  color:
-
 }
 
-p{
+p {
   text-align: center;
 }
 
@@ -76,7 +74,7 @@ form {
   position: absolute;
   top: 0;
   margin-top: 15%;
-  height: 90%;
+  height: 85%;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -85,8 +83,38 @@ form {
   color: #fff;
 }
 
+/* LIVE OFFERS PAGE */
+
+li {
+  list-style-type: none;
+  text-align: center;
+}
+
+.show-code-button {
+  background-color: #76EEC6;
+  border-color: #76EEC6;
+  color: #474747;
+}
+
+.line {
+  width: 85%;
+}
+
+.info {
+  padding-top: 0.5em;
+}
+
+/*.outer {
+  clear: both;
+  padding-bottom: 1em;
+}
+
+.inner {
+  float: left;
+}*/
 
 
+/* HAVA LOGO IN NAV BAR */
 
 .havaLogo{
   margin-top: 1em;
@@ -95,23 +123,14 @@ form {
   margin-right: auto;
   display: block;
 }
+
 .navbar {
   border-radius: 0;
   margin: 0;
   min-height: 25px;
 }
 
-.navbar-brand {
-  padding: 0;
-  height: 25px;
-  font-size: medium;
-  margin: 0.5em;
-}
-
-.navButton {
-  color: red;
-}
-
+/* FOOTER */
 
 .navbar-brand {
   text-shadow: none;
@@ -119,10 +138,17 @@ form {
   margin-top: 1em;
   padding-top: 2em;
   font-size: small;
+  padding-right: 2em;
 }
 
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
 
 /* CONTACT PAGE */
+
 .rowSocial {
   margin-left: auto;
   margin-right: auto;
@@ -133,8 +159,6 @@ form {
   height:4em;
   padding-left: 1em;
   padding-right: 0.5em;
-
-
 }
 
 .contact-wrapper {

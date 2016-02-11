@@ -1,3 +1,4 @@
+// var log = require('why-is-node-running')
 var test = require('tape');
 var start = require('../lib/start.js');
 var server = require('../lib/index.js');
