@@ -5,6 +5,12 @@
 
 body {
   background-color: #474747;
+  color:
+
+}
+
+p{
+  text-align: center;
 }
 
 h2 {
@@ -69,8 +75,8 @@ form {
   right: 0;
   position: absolute;
   top: 0;
-  margin-bottom: 15%;
-  height: 85%;
+  margin-top: 15%;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -80,12 +86,15 @@ form {
 }
 
 
-/* Navbar styling*/
 
-nav {
-  z-index: 1000;
+
+.havaLogo{
+  margin-top: 1em;
+  height: 5em;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
-
 .navbar {
   border-radius: 0;
   margin: 0;
@@ -101,4 +110,43 @@ nav {
 
 .navButton {
   color: red;
+}
+
+
+.navbar-brand {
+  text-shadow: none;
+  color: #7e7e7e;
+  margin-top: 1em;
+  padding-top: 2em;
+  font-size: small;
+}
+
+
+/* CONTACT PAGE */
+.rowSocial {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.icon{
+  height:4em;
+  padding-left: 1em;
+  padding-right: 0.5em;
+
+
+}
+
+.contact-wrapper {
+  left: 0;
+  right: 0;
+  position: absolute;
+  top: 0;
+  height: 85%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  padding: 2em;
+  color: #fff;
 }
