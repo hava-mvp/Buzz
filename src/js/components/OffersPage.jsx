@@ -17,13 +17,24 @@ var navigateToPreviousPage = () => {
 var getLiveOffers = (callback) => {
   var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
   firebaseRef.limitToLast(100).on("value", function(snapshot) {
-    callback(snapshot.val());
+    var data = snapshot.val();
+    var currentTime = Date.now();
+    console.log('NOW', currentTime);
+    var filterValidKeys = (ifValidKey) => {
+      return (data[ifValidKey]['expiry'] > currentTime);
+    }
+    var firebaseDataKeysArray = Object.keys(data).filter(filterValidKeys);
+    var firebaseDataArray = firebaseDataKeysArray.map(function(offer){
+      var barName = data[offer]['barName'];
+      var validOffer = new Object();
+      validOffer['barName'] = data[offer]['barName'];
+      validOffer['offer'] = data[offer]['offer'];
+      validOffer['offerCode'] = data[offer]['offerCode']
+      validOffer['endTime'] = data[offer]['endTime'];
+      return validOffer;
+    });
+    callback(firebaseDataArray);
   });
-}
-
-var afterStateSet = (state) => {
-  console.log("stateKeys->>", Object.keys(state.offers));
-
 }
 
 var OffersPage = React.createClass({
@@ -33,15 +44,12 @@ var OffersPage = React.createClass({
 
   componentDidMount: function() {
     var _this = this;
-    if(_this.isMounted()) {
-    getLiveOffers(function(data){
+    if(this.isMounted()) {
+    getLiveOffers(function(offerDetails){
       _this.setState({
-        offers: data,
-        offersKeys: Object.keys(data)
-
+        offers: offerDetails
       }, function() {
-        console.log('state changed here it is', _this.state);
-        afterStateSet(_this.state);
+        console.log('state changed here it is', _this.state.offers);
       });
     });
     } else {
@@ -52,29 +60,20 @@ var OffersPage = React.createClass({
   render: function() {
     var _this = this;
 
-   if(!_this.state){
-
-    return (
+    return !_this.state ? (
       <div>
         <input value="LOADING..."/>
       </div>
-    )
-   }
-
-  var offerItems = _this.state.offersKeys.map((offerKey) => {
-    return <IndividualOffer
-      offerKey={offerKey}
-      offerDetails ={_this.state.offers[offerKey]} />
-
-  });
-   console.log("THIS-->>>>>",_this.state);
-   return (
-     <div>
-       {offerItems}
-     </div>
-   )
+    ) : (
+      <div>
+        {_this.state.offers.map((offerKey) => (
+          <IndividualOffer
+          offerDetails={offerKey}
+          />
+        ))}
+      </div>
+    );
   }
-
 });
 
 export default OffersPage;
