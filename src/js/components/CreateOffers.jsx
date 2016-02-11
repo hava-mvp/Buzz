@@ -113,6 +113,10 @@ var CreateOffers = React.createClass({
         });
       });
     })
+
+    document.getElementById('contactBtn').addEventListener('click', function(){
+      window.location.assign("/public/#/bar-contact");
+    })
   },
 
   render: function() {
@@ -130,6 +134,9 @@ var CreateOffers = React.createClass({
              <input className='form-control' id='offerCode' placeholder='Enter offer code here' />
              <button id='offerSubmitButton' className='btn btn-md button'>{this.state.message}</button>
            </form>
+         </div>
+         <div className="site-footer">
+           <p type="submit" id="contactBtn" className="navbar-brand">Having Issues? Contact Us</p>
          </div>
       </div>
     )

@@ -1,2 +1,2 @@
 # Buzz
-Landing page
+Web App

@@ -45,10 +45,12 @@
     "jsx-loader": "^0.13.2",
     "messagebird": "^2.1.0",
     "react": "^0.14.5",
+    "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.5",
     "react-router": "^1.0.3",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.9"
+    "webpack": "^1.12.9",
+    "why-is-node-running": "^1.1.1"
   },
   "devDependencies": {
     "istanbul": "^0.4.1",
