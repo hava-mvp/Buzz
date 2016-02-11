@@ -4,7 +4,7 @@ import React from 'react';
 
 var IndividualOffer = React.createClass({
   render: function() {
-    console.log("THIS--->>>>>",this.props.offerDetails.barName);
+    console.log("THIS--->>>>>",this.props.offerDetails);
     return (
 
       <li className="listItem">

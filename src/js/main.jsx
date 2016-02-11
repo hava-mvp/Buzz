@@ -20,9 +20,6 @@ let rootElement = document.getElementById('react-content');
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      offers: []
-    };
   }
 
   render(){

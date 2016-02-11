@@ -97,17 +97,20 @@ var CreateOffers = React.createClass({
       var offer = document.getElementById('offerDescription').value;
       var offerCode = document.getElementById('offerCode').value;
       var barName = document.cookie.match('havaBarName').input.split('havaBarName=')[1];
+      var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
       var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
       var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
       var offerExpiryMeridiem = document.getElementById('amPm').value;
       var checkedOfferExpiryHour = checkNotMidnight(offerExpiryHour, offerExpiryMeridiem);
       databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
-        firebaseRef.push({
-          barName: barName,
-          offer: offer,
-          offerCode: offerCode,
-          endTime: endTime
-        });
+        console.log('endTime', offerExpiration);
+      //   firebaseRef.push({
+      //     barName: barName,
+      //     offer: offer,
+      //     offerCode: offerCode,
+      //     endTime: endTime,
+      //     expiry: offerExpiration
+      //   });
       });
     })
   },
