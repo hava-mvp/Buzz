@@ -11,7 +11,7 @@ var checkCookie = () => {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/#customer';
+  window.location = '/public/#customer';
 }
 
 var getLiveOffers = (callback) => {
