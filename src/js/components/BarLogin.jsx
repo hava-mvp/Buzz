@@ -27,7 +27,7 @@ var BarLogin = React.createClass({
   componentDidMount: function() {
     var self = this;
     document.getElementById('button').addEventListener('click', function(){
-      var barName = document.getElementById('barName').value;
+      var barName = document.getElementById('barName') && document.getElementById('barName').value && document.getElementById('barName').value.replace(/\s/g, "#");
       firebaseRef.authWithPassword({
         email    : document.getElementById('email').value,
         password : document.getElementById('password').value

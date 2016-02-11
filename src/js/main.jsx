@@ -22,9 +22,6 @@ ReactDOM.render(<NavBar />, document.querySelector('.nav-bar'));
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      offers: []
-    };
   }
 
   render(){

@@ -27,16 +27,23 @@ label {
 form {
   margin-left: auto;
   margin-right: auto;
-}
-
-@media only screen and (max-width: 555px) {
+} @media only screen and (max-width: 555px) {
   form {
     margin-right: 0;
     margin-left: 0;
   }
 }
 
+select {
+  background-color: white;
+  color: black; 
+}
+
 /* LOGIN PAGES & CREATE OFFER PAGE */
+
+#endTime {
+  color: black;
+}
 
 .barName{
   font-size: 1.5em;
