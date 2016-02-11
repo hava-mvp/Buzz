@@ -4,17 +4,12 @@ var IndividualOffer = React.createClass({
 
   componentDidMount: function (){
     var self = this;
-    var buttons = document.getElementsByClassName('show-code-button');
-    for (var i = 0; i < buttons.length; i++){
-      buttons[i].addEventListener('click', function(){
-        var buttonId = this.outerHTML.split('id="')[1].split('"')[0];
-        var pId = self.props.offerDetails.offerCode
-        console.log(pId);
-        console.log(buttonId);
-        document.getElementById(buttonId).setAttribute("style", "display:none")
-        document.getElementById(pId).setAttribute("style", "display:block")
-      });
-    }
+    var id = this.props.offerDetails.barName.replace(/\"/g,"")
+    document.getElementById(id).addEventListener("click", function(){
+      var pId = self.props.offerDetails.offerCode
+      document.getElementById(id).setAttribute("style", "display:none")
+      document.getElementById(pId).setAttribute("style", "display:block")
+    })
   },
 
   render: function() {
