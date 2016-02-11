@@ -5,18 +5,18 @@ import React from 'react';
 var IndividualOffer = React.createClass({
 
   componentDidMount: function (){
-    var buttons = document.getElementsByClassName('show-code-button')[0].outerHTML
-    buttons.addEventListener('click', function(){
-      console.log('>>>>>>',document.getElementsByClassName('show-code-button')[0].outerHTML);
-      console.log('ID>>',document.getElementById('button'));
-
-      document.getElementById("showCode").innerHTML = "CODEEEEE";
-    })
+    // var buttons = document.getElementsByClassName('show-code-button')[0].outerHTML
+    // buttons.addEventListener('click', function(){
+    //   console.log('>>>>>>',document.getElementsByClassName('show-code-button')[0].outerHTML);
+    //   console.log('ID>>',document.getElementById('button'));
+    //
+    //   document.getElementById("showCode").innerHTML = "CODEEEEE";
+    // })
   },
 
   render: function() {
-    console.log("THIS--->>>>>",this.props.offerDetails.barName);
     return (
+    <div>
       <li className="listItem">
         <hr className="line" />
         <div className="barName">
@@ -31,19 +31,13 @@ var IndividualOffer = React.createClass({
         <div id="showCode" className="info">
           <button id="button" className="show-code-button btn btn-xs">Show Offer Code</button>
         </div>
+        <div id="map" className="info">
+          <button id="mapButton" className="show-map-button btn btn-xs">Map</button>
+        </div>
       </li>
+    </div>
     )
   }
 })
 
 export default IndividualOffer;
-
-
-// <div className="outer">
-//   <div className="inner">
-//     End Time: {this.props.offerDetails.endTime}
-//   </div>
-//   <div className="inner">
-//     <button id="button" className="show-code-button btn btn-xs">Show Offer Code</button>
-//   </div>
-// </div>

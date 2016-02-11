@@ -36,6 +36,12 @@ form {
   }
 }
 
+/* LIVE OFFERS PAGE*/
+
+.live-offers-wrapper{
+  padding-bottom: 4em;
+ }
+
 /* LOGIN PAGES & CREATE OFFER PAGE */
 
 .barName{
@@ -67,7 +73,11 @@ form {
   margin-left: auto;
   margin-right: auto;
 }
+.live-offers-wrapper{
 
+
+
+}
 .wrapper {
   left: 0;
   right: 0;
@@ -101,6 +111,12 @@ li {
 }
 
 .info {
+  padding-top: 0.5em;
+}
+
+.offer-footer{
+  width: 100%;
+  background-color: rgb(192, 192, 192);
   padding-top: 0.5em;
 }
 

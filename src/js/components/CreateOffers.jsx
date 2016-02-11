@@ -100,7 +100,7 @@ var CreateOffers = React.createClass({
            </form>
          </div>
          <div className="site-footer">
-           <p type="submit" id="contactBtn" className="navbar-brand">Having Issues? Contact Us</p>
+           <p type="submit" id="contactBtn" className="navbar-brand">Contact Us</p>
          </div>
       </div>
     )
