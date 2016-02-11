@@ -4,13 +4,12 @@ var IndividualOffer = React.createClass({
 
   componentDidMount: function (){
     var self = this;
-    var buttons = document.getElementsByClassName('show-code-button');
-    for (var i = 0; i < buttons.length; i++){
-      buttons[i].addEventListener('click', function(){
-        var id = this.outerHTML.split('id="')[1].split('"')[0];
-        document.getElementById(id).innerHTML = 'CODEEEEE'
-      });
-    }
+    var id = this.props.offerDetails.barName.replace(/\"/g,"")
+    document.getElementById(id).addEventListener("click", function(){
+      var pId = self.props.offerDetails.offerCode
+      document.getElementById(id).setAttribute("style", "display:none")
+      document.getElementById(pId).setAttribute("style", "display:block")
+    })
   },
 
   render: function() {
@@ -26,8 +25,9 @@ var IndividualOffer = React.createClass({
         <div className="info">
           End Time: {this.props.offerDetails.endTime}
         </div>
-        <div id={this.props.offerDetails.barName.replace(/\"/g,"")} className="info">
-          <button id={this.props.offerDetails.barName.replace(/\"/g,"")} className="show-code-button btn btn-xs">Show Offer Code</button>
+        <div className="info">
+          <button id={this.props.offerDetails.barName.replace(/\"/g,"")} className="show-code-button btn btn-xs">Show Code</button>
+          <p id={this.props.offerDetails.offerCode} className="code">{this.props.offerDetails.offerCode}</p>
         </div>
       </li>
     )
