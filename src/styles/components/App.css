@@ -79,26 +79,23 @@ form {
   color: #fff;
 }
 
+/* LIVE OFFERS PAGE */
 
-/* Navbar styling*/
-
-nav {
-  z-index: 1000;
+li {
+  list-style-type: none;
 }
 
-.navbar {
-  border-radius: 0;
-  margin: 0;
-  min-height: 25px;
+.show-code-button {
+  background-color: #76EEC6;
+  border-color: #76EEC6;
+  color: #474747;
 }
 
-.navbar-brand {
-  padding: 0;
-  height: 25px;
-  font-size: medium;
-  margin: 0.5em;
+.outer {
+  clear: both;
+  padding-bottom: 1em;
 }
 
-.navButton {
-  color: red;
+.inner {
+  float: left;
 }

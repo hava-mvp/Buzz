@@ -1,7 +1,5 @@
 import React from 'react';
 import Firebase from 'firebase';
-import NavBar from './nav/NavBar.jsx';
-
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 var firebaseRefPush = firebaseRef.push();
