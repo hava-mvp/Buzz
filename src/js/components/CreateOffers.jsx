@@ -13,7 +13,7 @@ var checkCookie = function() {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/public/#bar';
+  window.location = '/#bar';
 }
 
 var databaseOfferTime = (checkedHour, inputMinutes, callback) => {
@@ -96,7 +96,7 @@ var CreateOffers = React.createClass({
       console.log('clicked');
       var offer = document.getElementById('offerDescription').value;
       var offerCode = document.getElementById('offerCode').value;
-      var barName = document.cookie.match('havaBarName').input.split('havaBarName=')[1];
+      var barName = document.cookie.match('havaBarName') && document.cookie.match('havaBarName').input && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
       var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
       var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
       var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
@@ -115,7 +115,7 @@ var CreateOffers = React.createClass({
     })
 
     document.getElementById('contactBtn').addEventListener('click', function(){
-      window.location.assign("/public/#/bar-contact");
+      window.location.assign("/#/bar-contact");
     })
   },
 

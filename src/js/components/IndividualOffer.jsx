@@ -6,12 +6,12 @@ var IndividualOffer = React.createClass({
 
   componentDidMount: function (){
     var buttons = document.getElementsByClassName('show-code-button')[0].outerHTML
-    buttons.addEventListener('click', function(){
+    buttons.addEventListener('click', function() {
       console.log('>>>>>>',document.getElementsByClassName('show-code-button')[0].outerHTML);
       console.log('ID>>',document.getElementById('button'));
 
       document.getElementById("showCode").innerHTML = "CODEEEEE";
-    })
+    });
   },
 
   render: function() {
