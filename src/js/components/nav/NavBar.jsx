@@ -4,9 +4,6 @@ import {Link} from 'react-router';
 
 var NavBar = React.createClass({
 
-  componentDidMount: function() {
-
-  },
 
   render : function (){
       return (
@@ -15,10 +12,9 @@ var NavBar = React.createClass({
         </div>
 
       )
-    
+
+
   }
 });
 
 module.exports = NavBar;
-
-//window.location.match
