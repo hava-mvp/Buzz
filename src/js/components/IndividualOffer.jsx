@@ -1,21 +1,19 @@
 import React from 'react';
 
-
-
 var IndividualOffer = React.createClass({
 
   componentDidMount: function (){
-    var buttons = document.getElementsByClassName('show-code-button')[0].outerHTML
-    buttons.addEventListener('click', function() {
-      console.log('>>>>>>',document.getElementsByClassName('show-code-button')[0].outerHTML);
-      console.log('ID>>',document.getElementById('button'));
-
-      document.getElementById("showCode").innerHTML = "CODEEEEE";
-    });
+    var self = this;
+    var buttons = document.getElementsByClassName('show-code-button');
+    for (var i = 0; i < buttons.length; i++){
+      buttons[i].addEventListener('click', function(){
+        var id = this.outerHTML.split('id="')[1].split('"')[0];
+        document.getElementById(id).innerHTML = 'CODEEEEE'
+      });
+    }
   },
 
   render: function() {
-    console.log("THIS--->>>>>",this.props.offerDetails);
     return (
       <li className="listItem">
         <hr className="line" />
@@ -28,8 +26,8 @@ var IndividualOffer = React.createClass({
         <div className="info">
           End Time: {this.props.offerDetails.endTime}
         </div>
-        <div id="showCode" className="info">
-          <button id="button" className="show-code-button btn btn-xs">Show Offer Code</button>
+        <div id={this.props.offerDetails.barName.replace(/\"/g,"")} className="info">
+          <button id={this.props.offerDetails.barName.replace(/\"/g,"")} className="show-code-button btn btn-xs">Show Offer Code</button>
         </div>
       </li>
     )
@@ -37,13 +35,3 @@ var IndividualOffer = React.createClass({
 })
 
 export default IndividualOffer;
-
-
-// <div className="outer">
-//   <div className="inner">
-//     End Time: {this.props.offerDetails.endTime}
-//   </div>
-//   <div className="inner">
-//     <button id="button" className="show-code-button btn btn-xs">Show Offer Code</button>
-//   </div>
-// </div>
