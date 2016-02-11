@@ -16,8 +16,30 @@ var navigateToPreviousPage = () => {
   window.location = '/public/#bar';
 }
 
-var customerFriendlyExpiryTime = () => {
+var databaseOfferTime = (checkedHour, inputMinutes, callback) => {
+  var absoluteOfferSetTime = Date.now();  // current time in milliseconds;
+  var today = new Date(); // current date and time;
 
+  var hourThatOfferIsSet = today.toString() && today.toString().split(" ")[4] && today.toString().split(" ")[4].split(":")[0] && parseInt(today.toString().split(" ")[4].split(":")[0]);
+  var minsThatOfferIsSet = today.toString() && today.toString().split(" ")[4] && today.toString().split(" ")[4].split(":")[1] && today.toString().split(" ")[4].split(":")[1].split(":")[0] && parseInt(today.toString().split(" ")[4].split(":")[1].split(":")[0]);
+  // console.log('OFFER SET TIME' + hourThatOfferIsSet + ":" + minsThatOfferIsSet);
+  // console.log('OFFER EXPIRY AT' + checkedHour + ":" + inputMinutes);
+
+  var relativeOfferSetTimeInMilliseconds = (hourThatOfferIsSet*3600 + minsThatOfferIsSet*60)*1000;
+  var relativeOfferExpiryTimeInMilliseconds = 1000*((checkedHour*3600)+(inputMinutes*60));
+
+  var lengthOfOffer = relativeOfferExpiryTimeInMilliseconds > relativeOfferSetTimeInMilliseconds ? (relativeOfferExpiryTimeInMilliseconds - relativeOfferSetTimeInMilliseconds) : ((24*3600*1000 - relativeOfferSetTimeInMilliseconds) + relativeOfferExpiryTimeInMilliseconds);
+  console.log('offerExpires ', (lengthOfOffer/1000/3600));
+  var absoluteOfferExpiryTime = absoluteOfferSetTime + lengthOfOffer;
+  callback(absoluteOfferExpiryTime);
+}
+
+var checkNotMidnight = (inputHour, inputMeridiem) => {
+  if (inputMeridiem === 'am') {
+    return (inputHour === 12) ? 0 : inputHour;
+  } else {
+    return (inputHour === 12) ? inputHour : (inputHour+12);
+  }
 }
 
 var CreateOffers = React.createClass({
@@ -75,27 +97,30 @@ var CreateOffers = React.createClass({
       var offer = document.getElementById('offerDescription').value;
       var offerCode = document.getElementById('offerCode').value;
       var barName = document.cookie.match('havaBarName').input.split('havaBarName=')[1];
-      var offerExpiryHour = document.getElementById('hours').value;
-      var offerExpiryMinutes = document.getElementById('minutes').value;
+      var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
+      var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
       var offerExpiryMeridiem = document.getElementById('amPm').value;
-      
-      // firebaseRef.push({
-      //   barName: barName,
-      //   offer: offer,
-      //   offerCode: offerCode,
-      //   endTime: endTime
-      // })
+      var checkedOfferExpiryHour = checkNotMidnight(offerExpiryHour, offerExpiryMeridiem);
+      databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
+        firebaseRef.push({
+          barName: barName,
+          offer: offer,
+          offerCode: offerCode,
+          endTime: endTime
+        });
+      });
     })
   },
 
   render: function() {
     console.log('RENDERING');
     // <input className='form-control' id="endTime" placeholder='Enter end time for offer here' />
+    // <form action="" onSubmit={this.handleSubmit}>
+    // </form>
     return (
       <div>
          <div className='wrapper'>
            <h2>Create an Offer</h2>
-           <form action="" onSubmit={this.handleSubmit}>
              <label>Offer description</label>
              <input className='form-control' id="offerDescription" placeholder='Write offer description here' required type='text'/>
              <label>Offer Expiry Time: </label>
@@ -103,7 +128,6 @@ var CreateOffers = React.createClass({
              <label>Offer code</label>
              <input className='form-control' id='offerCode' placeholder='Enter offer code here' />
              <button id='offerSubmitButton' className='btn btn-md button'>{this.state.message}</button>
-           </form>
          </div>
       </div>
     )
