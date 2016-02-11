@@ -25,6 +25,13 @@ form {
   margin-right: auto;
 }
 
+@media only screen and (max-width: 555px) {
+  form {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
 /* LOGIN PAGES & CREATE OFFER PAGE */
 
 .barName{
@@ -72,9 +79,26 @@ form {
   color: #fff;
 }
 
-@media only screen and (max-width: 555px) {
-  form {
-    margin-right: 0;
-    margin-left: 0;
-  }
+
+/* Navbar styling*/
+
+nav {
+  z-index: 1000;
+}
+
+.navbar {
+  border-radius: 0;
+  margin: 0;
+  min-height: 25px;
+}
+
+.navbar-brand {
+  padding: 0;
+  height: 25px;
+  font-size: medium;
+  margin: 0.5em;
+}
+
+.navButton {
+  color: red;
 }
