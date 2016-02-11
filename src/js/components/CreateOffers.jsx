@@ -104,26 +104,24 @@ var CreateOffers = React.createClass({
       var checkedOfferExpiryHour = checkNotMidnight(offerExpiryHour, offerExpiryMeridiem);
       databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
         console.log('endTime', offerExpiration);
-      //   firebaseRef.push({
-      //     barName: barName,
-      //     offer: offer,
-      //     offerCode: offerCode,
-      //     endTime: endTime,
-      //     expiry: offerExpiration
-      //   });
+        firebaseRef.push({
+          barName: barName,
+          offer: offer,
+          offerCode: offerCode,
+          endTime: endTime,
+          expiry: offerExpiration
+        });
       });
     })
   },
 
   render: function() {
     console.log('RENDERING');
-    // <input className='form-control' id="endTime" placeholder='Enter end time for offer here' />
-    // <form action="" onSubmit={this.handleSubmit}>
-    // </form>
     return (
       <div>
          <div className='wrapper'>
            <h2>Create an Offer</h2>
+            <form action="" onSubmit={this.handleSubmit}>
              <label>Offer description</label>
              <input className='form-control' id="offerDescription" placeholder='Write offer description here' required type='text'/>
              <label>Offer Expiry Time: </label>
@@ -131,6 +129,7 @@ var CreateOffers = React.createClass({
              <label>Offer code</label>
              <input className='form-control' id='offerCode' placeholder='Enter offer code here' />
              <button id='offerSubmitButton' className='btn btn-md button'>{this.state.message}</button>
+           </form>
          </div>
       </div>
     )
