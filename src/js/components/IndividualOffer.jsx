@@ -65,7 +65,7 @@ var IndividualOffer = React.createClass({
           <h3 id={this.props.offerDetails.offerCode} className="code">{this.props.offerDetails.offerCode}</h3>
         </div>
         <div className="info map">
-          <button onClick={this.handleMapClick} id="mapButton" className="show-map-button btn btn-sm">Map</button>
+          <h4 onClick={this.handleMapClick} id="mapButton" >Map</h4>
         </div>
       </li>
     </div>
