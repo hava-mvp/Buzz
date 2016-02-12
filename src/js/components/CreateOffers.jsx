@@ -72,10 +72,7 @@ var CreateOffers = React.createClass({
 
   handleSubmit: function (event) {
     event.preventDefault();
-    this.setState({
-      type: 'info',
-      message: 'Sending...'
-    }, this.canPublishOffer());
+    this.canPublishOffer());
   },
 
   canPublishOffer: function() {
@@ -100,6 +97,10 @@ var CreateOffers = React.createClass({
 
   sendFormData: function () {
     console.log('inside sendFormData');
+    this.setState({
+      type: 'info',
+      message: 'Sending...';
+    });
     var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
     var formData = {
       offer: document.getElementById('offerDescription').value,

@@ -3,7 +3,6 @@ import Firebase from 'firebase';
 
 
 var getBarURL = (barName, callback) => {
-  var firebaseRef = new Firebase("https://havamvp.firebaseio.com/bars");
   firebaseRef.on("value", function(snapshot) {
     var barObj = snapshot.val();
 
@@ -27,8 +26,13 @@ var getBarURL = (barName, callback) => {
 
 var IndividualOffer = React.createClass({
 
-  componentDidMount: function (){
+  componentWillMount: function (){
+    var _this = this;
+    var liveOfferDetails = new Firebase("https://havamvp.firebaseio.com/bars");
+    
+  },
 
+  componentDidMount: function (){
     var self = this;
     var id = this.props.offerDetails.barName.replace(/\"/g,"")
     document.getElementById(id).addEventListener("click", function(){
@@ -37,6 +41,7 @@ var IndividualOffer = React.createClass({
       document.getElementById(pId).setAttribute("style", "display:block")
     })
   },
+
   handleMapClick: function(){
     console.log("MAP CLICK");
     var barName = this.props.offerDetails.barName.replace(/\"/g,"")
