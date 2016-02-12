@@ -32,12 +32,6 @@ var OffersPage = React.createClass({
 
   componentDidMount: function() {
 
-    console.log("CUSTOMER---CONTACT",document.getElementById("customer-contact"));
-    document.getElementById("customer-contact").addEventListener("click", function(){
-      console.log("CLICKED ON CONTACT");
-      window.location.assign("/public/#/customer-contact");
-    })
-
     var _this = this;
     if(_this.isMounted()) {
     getLiveOffers(function(data){
@@ -52,6 +46,10 @@ var OffersPage = React.createClass({
     } else {
       console.log('NOT MOUNTED');
     }
+  },
+
+  handleContactClick: function(){
+    window.location.assign("/public/#/customer-contact");
   },
 
   render: function() {
@@ -79,7 +77,7 @@ var OffersPage = React.createClass({
          {offerItems}
        </div>
        <div className="site-footer offer-footer">
-         <p type="submit" id="customer-contact">Contact Us</p>
+         <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
        </div>
      </div>
 
