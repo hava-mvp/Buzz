@@ -13,7 +13,7 @@ var checkCookie = function() {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/public/#bar';
+  window.location = '/#bar';
 }
 
 var databaseOfferTime = (checkedHour, inputMinutes, callback) => {
@@ -42,6 +42,26 @@ var checkNotMidnight = (inputHour, inputMeridiem) => {
   }
 }
 
+var addToDB = function () {
+  var offer = document.getElementById('offerDescription').value;
+  var offerCode = document.getElementById('offerCode').value;
+  var barName = document.cookie.match('havaBarName') && document.cookie.match('havaBarName').input && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
+  var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
+  var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
+  var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
+  var offerExpiryMeridiem = document.getElementById('amPm').value;
+  var checkedOfferExpiryHour = checkNotMidnight(offerExpiryHour, offerExpiryMeridiem);
+  databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
+    firebaseRef.push({
+      barName: barName,
+      offer: offer,
+      offerCode: offerCode,
+      endTime: endTime,
+      expiry: offerExpiration
+    });
+  });
+}
+
 var CreateOffers = React.createClass({
   getInitialState: function() {
     return {
@@ -68,9 +88,10 @@ var CreateOffers = React.createClass({
       if (request.readyState === 4) {
         if (request.status === 200 && request.responseText === 'ok') {
           _this.setState({ type: 'success', message: 'Your offer is live' });
+          addToDB();
         }
         else {
-          _this.setState({ type: 'danger', message: 'Sorry, there has been an error. Please refresh and try again.' });
+          _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
         }
       }
     };
@@ -92,35 +113,12 @@ var CreateOffers = React.createClass({
   },
 
   componentDidMount: function() {
-    document.getElementById('offerSubmitButton').addEventListener('click', function() {
-      console.log('clicked');
-      var offer = document.getElementById('offerDescription').value;
-      var offerCode = document.getElementById('offerCode').value;
-      var barName = document.cookie.match('havaBarName') && document.cookie.match('havaBarName').input && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
-      var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
-      var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
-      var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
-      var offerExpiryMeridiem = document.getElementById('amPm').value;
-      var checkedOfferExpiryHour = checkNotMidnight(offerExpiryHour, offerExpiryMeridiem);
-      databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
-        console.log('endTime', offerExpiration);
-        firebaseRef.push({
-          barName: barName,
-          offer: offer,
-          offerCode: offerCode,
-          endTime: endTime,
-          expiry: offerExpiration
-        });
-      });
-    })
-
     document.getElementById('contactBtn').addEventListener('click', function(){
-      window.location.assign("/public/#bar-contact");
+      window.location.assign("/#bar-contact");
     })
   },
 
   render: function() {
-    console.log('RENDERING');
     return (
       <div>
          <div className='wrapper'>
