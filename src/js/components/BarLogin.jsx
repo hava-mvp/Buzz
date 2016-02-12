@@ -38,12 +38,8 @@ var BarLogin = React.createClass({
         });
       }
       var checkEmailAddress = (barSnapshot) => {
-        console.log('barname exists')
-        var barObjectKey = Object.keys(barSnapshot);
         var barNameInDB = barSnapshot && barSnapshot[barObjectKey] && barSnapshot[barObjectKey]['barName'];
-        console.log('>>>>>>>>>>' + barNameInDB + "~~" + barName);
         var emailOfBarInDB = barSnapshot && barSnapshot[barObjectKey] && barSnapshot[barObjectKey]['email'];
-        console.log('>>>>>>>>>>' + emailOfBarInDB + "~~" + barEmail);
         ((barNameInDB === barName) && (emailOfBarInDB === barEmail)) ? barAuthorised() : alert("Login credentials do not match the name of the Bar with which you registered");
       }
       var barAuthorised = () => {
@@ -52,10 +48,8 @@ var BarLogin = React.createClass({
           password : barPass
         }, function(error, authData) {
           if (error) {
-            console.log("Login Failed!", error);
             alert('Login failed. Check your username or password.')
           } else {
-            console.log("Authenticated successfully with payload:", authData);
             var cookifiedBarName = document.getElementById('barName').value && document.getElementById('barName').value.replace(/\s/g, "#");
             document.cookie = 'havaBarName=' + JSON.stringify(cookifiedBarName) + "; path='/'";
             navigateToNextPage();
