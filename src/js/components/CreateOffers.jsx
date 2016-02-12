@@ -136,7 +136,7 @@ var CreateOffers = React.createClass({
            </form>
          </div>
          <div className="site-footer">
-           <p onClick={this.handleContactClick} className="navbar-brand">Contact Us</p>
+           <p onClick={this.handleContactClick} className="navbar-brand">Having issues? Contact Us</p>
          </div>
       </div>
     )
