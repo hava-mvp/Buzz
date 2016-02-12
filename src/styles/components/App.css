@@ -34,6 +34,11 @@ form {
   }
 }
 
+/* LIVE OFFERS PAGE*/
+
+.live-offers-wrapper{
+  padding-bottom: 4em;
+ }
 select {
   background-color: white;
   color: black;
@@ -75,6 +80,10 @@ select {
   margin-right: auto;
 }
 
+.live-offers-wrapper{
+
+}
+
 .wrapper {
   left: 0;
   right: 0;
@@ -111,6 +120,17 @@ li {
   padding-top: 0.5em;
 }
 
+.offer-footer{
+  width: 100%;
+  background-color: rgb(192, 192, 192);
+  padding-top: 0.5em;
+}
+
+/*.outer {
+  clear: both;
+  padding-bottom: 1em;
+  */
+  
 .code {
   display: none;
 }
