@@ -13,7 +13,7 @@ var checkCookie = function() {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/#bar';
+  window.location = '/public/#bar';
 }
 
 var databaseOfferTime = (checkedHour, inputMinutes, callback) => {
@@ -114,7 +114,7 @@ var CreateOffers = React.createClass({
 
   handleContactClick: function(){
     document.getElementById('contactBtn').addEventListener('click', function(){
-      window.location.assign("/#bar-contact");
+      window.location.assign("/public/#bar-contact");
     })
   },
 
