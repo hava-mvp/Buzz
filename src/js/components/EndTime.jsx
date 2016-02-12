@@ -6,23 +6,23 @@ var offerExpiryTime = React.createClass({
     var hourSelection = ['1','2','3','4','5','6','7','8','9','10','11','12'];
     var minuteSelection = ['00', '10', '20', '30', '40', '50'];
     return (
-      <div id='endTime'>
+      <div className="endTime" id='endTime'>
         <select id='hours' required>
-          <option selected="selected" disabled="disabled" value="">HOUR</option>
+          <option selected="selected" disabled="disabled" value="">Hour</option>
           { hourSelection.map((hour) => (
               <Time hour={hour}/>
           )) }
         </select>
         <select id='minutes' required>
-          <option selected="selected" disabled="disabled" value="">MINUTES</option>
+          <option selected="selected" disabled="disabled" value="">Minutes</option>
           { minuteSelection.map((minutes) => (
               <Time minutes={minutes}/>
           )) }
         </select>
         <select id='amPm' required>
-          <option selected="selected" disabled="disabled" value="">AM/PM</option>
-          <option value="am">AM</option>
-          <option value="pm">PM</option>
+          <option selected="selected" disabled="disabled" value="">am/pm</option>
+          <option value="am">am</option>
+          <option value="pm">pm</option>
         </select>
       </div>
     );
