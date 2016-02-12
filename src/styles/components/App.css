@@ -27,9 +27,7 @@ label {
 form {
   margin-left: auto;
   margin-right: auto;
-}
-
-@media only screen and (max-width: 555px) {
+} @media only screen and (max-width: 555px) {
   form {
     margin-right: 0;
     margin-left: 0;
@@ -41,8 +39,16 @@ form {
 .live-offers-wrapper{
   padding-bottom: 4em;
  }
+select {
+  background-color: white;
+  color: black;
+}
 
 /* LOGIN PAGES & CREATE OFFER PAGE */
+
+#endTime {
+  color: black;
+}
 
 .barName{
   font-size: 1.5em;
@@ -114,6 +120,7 @@ li {
   padding-top: 0.5em;
 }
 
+<<<<<<< HEAD
 .offer-footer{
   width: 100%;
   background-color: rgb(192, 192, 192);
@@ -123,11 +130,11 @@ li {
 /*.outer {
   clear: both;
   padding-bottom: 1em;
+=======
+.code {
+  display: none;
+>>>>>>> c0dcef5272c471d0aa5bb7c0c63d51ebc190af4d
 }
-
-.inner {
-  float: left;
-}*/
 
 
 /* HAVA LOGO IN NAV BAR */

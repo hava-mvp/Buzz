@@ -1,6 +1,7 @@
 import React from 'react';
 import Firebase from 'firebase';
 
+<<<<<<< HEAD
 
 
 var getBarURL = (barName, callback) => {
@@ -23,7 +24,6 @@ var getBarURL = (barName, callback) => {
           }
        }
     }
-    //callback(snapshot.val());
   });
 }
 
@@ -31,20 +31,21 @@ var IndividualOffer = React.createClass({
 
   componentDidMount: function (){
 
-    // var buttons = document.getElementsByClassName('show-code-button')[0].outerHTML
-    // buttons.addEventListener('click', function(){
-    //   console.log('>>>>>>',document.getElementsByClassName('show-code-button')[0].outerHTML);
-    //   console.log('ID>>',document.getElementById('button'));
-    //
-    //   document.getElementById("showCode").innerHTML = "CODEEEEE";
-    // })
+    var self = this;
+    var id = this.props.offerDetails.barName.replace(/\"/g,"")
+    document.getElementById(id).addEventListener("click", function(){
+      var pId = self.props.offerDetails.offerCode
+      document.getElementById(id).setAttribute("style", "display:none")
+      document.getElementById(pId).setAttribute("style", "display:block")
+    })
   },
   handleMapClick: function(){
     var barName = this.props.offerDetails.barName.replace(/\"/g,"")
     getBarURL(barName, function(url){
-      var win = window.open(url,'_blank');    });
+      var win = window.open(url,'_blank');
+    });
+  }
 
-  },
 
   render: function() {
     return (
@@ -60,8 +61,9 @@ var IndividualOffer = React.createClass({
         <div className="info">
           End Time: {this.props.offerDetails.endTime}
         </div>
-        <div id="showCode" className="info">
-          <button id="button" className="show-code-button btn btn-xs">Show Offer Code</button>
+        <div className="info">
+          <button id={this.props.offerDetails.barName.replace(/\"/g,"")} className="show-code-button btn btn-xs">Show Code</button>
+          <p id={this.props.offerDetails.offerCode} className="code">{this.props.offerDetails.offerCode}</p>
         </div>
         <div id="map" className="info">
           <button id="mapButton" className="show-map-button btn btn-xs">
@@ -77,5 +79,8 @@ var IndividualOffer = React.createClass({
 })
 
 export default IndividualOffer;
+<<<<<<< HEAD
 
 // onClick={this.handleMapClick}
+=======
+>>>>>>> c0dcef5272c471d0aa5bb7c0c63d51ebc190af4d
