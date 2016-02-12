@@ -19,7 +19,6 @@ var getLiveOffers = (callback) => {
   firebaseRef.limitToLast(100).on("value", function(snapshot) {
     var data = snapshot.val();
     var currentTime = Date.now();
-    console.log('NOW', currentTime);
     var filterValidKeys = (ifValidKey) => {
       return (data[ifValidKey]['expiry'] > currentTime);
     }
@@ -54,8 +53,6 @@ var OffersPage = React.createClass({
       _this.setState({
         offers: offerDetails
       }, function() {
-        afterStateSet(_this.state);
-
       });
     });
     } else {
@@ -73,29 +70,21 @@ var OffersPage = React.createClass({
     return !_this.state ? (
       <div>
         <input value="LOADING..."/>
-          <p id="customer-cgit giontact" ></p>
       </div>
-    )
-
-
-  var offerItems = _this.state.offersKeys.map((offerKey) => {
-    return <IndividualOffer
-      offerKey={offerKey}
-      offerDetails ={_this.state.offers[offerKey]} />
-
-  });
-   return (
-     <div>
-       <div className="live-offers-wrapper">
-         {offerItems}
-       </div>
-       <div className="site-footer offer-footer">
-         <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
-       </div>
+    ) : (
+      <div>
+      <div className="live-offers-wrapper">
+        {_this.state.offers.map((offerKey) => (
+          <IndividualOffer
+            offerDetails = {offerKey}
+          />
+      ))}
+      </div>
+      <div className="site-footer offer-footer">
+        <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+      </div>
      </div>
-
-   )
-
+    )
   }
 });
 

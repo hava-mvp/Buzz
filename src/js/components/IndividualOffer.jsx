@@ -1,8 +1,6 @@
 import React from 'react';
 import Firebase from 'firebase';
 
-<<<<<<< HEAD
-
 
 var getBarURL = (barName, callback) => {
   var firebaseRef = new Firebase("https://havamvp.firebaseio.com/bars");
@@ -40,11 +38,12 @@ var IndividualOffer = React.createClass({
     })
   },
   handleMapClick: function(){
+    console.log("MAP CLICK");
     var barName = this.props.offerDetails.barName.replace(/\"/g,"")
     getBarURL(barName, function(url){
       var win = window.open(url,'_blank');
     });
-  }
+  },
 
 
   render: function() {
@@ -79,8 +78,3 @@ var IndividualOffer = React.createClass({
 })
 
 export default IndividualOffer;
-<<<<<<< HEAD
-
-// onClick={this.handleMapClick}
-=======
->>>>>>> c0dcef5272c471d0aa5bb7c0c63d51ebc190af4d

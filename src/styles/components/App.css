@@ -79,11 +79,11 @@ select {
   margin-left: auto;
   margin-right: auto;
 }
+
 .live-offers-wrapper{
 
-
-
 }
+
 .wrapper {
   left: 0;
   right: 0;
@@ -120,7 +120,6 @@ li {
   padding-top: 0.5em;
 }
 
-<<<<<<< HEAD
 .offer-footer{
   width: 100%;
   background-color: rgb(192, 192, 192);
@@ -130,10 +129,10 @@ li {
 /*.outer {
   clear: both;
   padding-bottom: 1em;
-=======
+  */
+  
 .code {
   display: none;
->>>>>>> c0dcef5272c471d0aa5bb7c0c63d51ebc190af4d
 }
 
 
