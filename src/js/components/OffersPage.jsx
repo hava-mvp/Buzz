@@ -11,7 +11,7 @@ var checkCookie = () => {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/#customer';
+  window.location = '/public/#customer';
 }
 
 var getLiveOffers = (callback) => {
@@ -61,7 +61,7 @@ var OffersPage = React.createClass({
   },
 
   handleContactClick: function(){
-    window.location.assign("/#/customer-contact");
+    window.location.assign("/public/#/customer-contact");
   },
 
   render: function() {
@@ -70,10 +70,16 @@ var OffersPage = React.createClass({
     return !_this.state ? (
       <div>
         <h4 className="loading">Loading...</h4>
+        <div className="site-footer offer-footer">
+          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+        </div>
       </div>
     ) : ((_this.state.offers.length === 0) ? (
       <div>
         <p className="noLiveOffers">Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!</p>
+        <div className="site-footer offer-footer">
+          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+        </div>
       </div>
     ) : (
       <div>

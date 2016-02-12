@@ -51,7 +51,7 @@ var setCookie = () => {
 }
 
 var navigateToNextPage = () => {
-  window.location = '/#live-offers';
+  window.location = '/public/#live-offers';
 }
 
 var CustomerLogin = React.createClass({
@@ -71,7 +71,7 @@ var CustomerLogin = React.createClass({
           <h2>To get deals please enter your:</h2>
           <label>Email address</label>
           <input className='form-control' id="email" placeholder='Enter email' required type='email'/>
-          <label>Mobile Number</label>
+          <label>Mobile number</label>
           <input className='form-control' id="phoneNumber" placeholder='Enter phone number' />
           <button id='button' className='btn btn-md button'>Get Deals</button>
         </div>
