@@ -71,7 +71,7 @@ var OffersPage = React.createClass({
       <div>
         <input id="offersLoading" value="LOADING..."/>
       </div>
-    ) : ((_this.state === null) ? (
+    ) : ((_this.state.offers.length === 0) ? (
       <div>
         <input id="noLiveOffers" value="Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!"/>
       </div>
