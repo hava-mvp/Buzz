@@ -112,7 +112,7 @@ var CreateOffers = React.createClass({
     checkCookie();
   },
 
-  componentDidMount: function() {
+  handleContactClick: function(){
     document.getElementById('contactBtn').addEventListener('click', function(){
       window.location.assign("/#bar-contact");
     })
@@ -134,7 +134,7 @@ var CreateOffers = React.createClass({
            </form>
          </div>
          <div className="site-footer">
-           <p type="submit" id="contactBtn" className="navbar-brand">Having Issues? Contact Us</p>
+           <p onClick={this.handleContactClick} className="navbar-brand">Contact Us</p>
          </div>
       </div>
     )
