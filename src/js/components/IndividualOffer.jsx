@@ -61,8 +61,8 @@ var IndividualOffer = React.createClass({
           End Time: {this.props.offerDetails.endTime}
         </div>
         <div className="info">
-          <button id={this.props.offerDetails.barName.replace(/\"/g,"")} className="show-code-button btn btn-sm">Show Code</button>
-          <p id={this.props.offerDetails.offerCode} className="code">{this.props.offerDetails.offerCode}</p>
+          <button id={this.props.offerDetails.barName.replace(/\"/g,"")} className="show-code-button btn btn-lg">Show Code</button>
+          <h3 id={this.props.offerDetails.offerCode} className="code">{this.props.offerDetails.offerCode}</h3>
         </div>
         <div className="info map">
           <button onClick={this.handleMapClick} id="mapButton" className="show-map-button btn btn-sm">Map</button>
