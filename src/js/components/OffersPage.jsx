@@ -72,8 +72,8 @@ var OffersPage = React.createClass({
         <h4 className="loading">Loading...</h4>
       </div>
     ) : ((_this.state.offers.length === 0) ? (
-      <div>
-        <p className="noLiveOffers">Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!</p>
+      <div className="wrapper">
+        <p className="noLiveOffers">You've caught us when there are no live offers! Come back in a bit and check us out again!</p>
       </div>
     ) : (
       <div>
