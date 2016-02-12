@@ -72,10 +72,34 @@ var CreateOffers = React.createClass({
 
   handleSubmit: function (event) {
     event.preventDefault();
-    this.setState({ type: 'info', message: 'Sending...' }, this.sendFormData);
+    this.setState({
+      type: 'info',
+      message: 'Sending...'
+    }, this.canPublishOffer());
+  },
+
+  canPublishOffer: function() {
+    var _this = this;
+    var barName = document.cookie.match('havaBarName') && document.cookie.match('havaBarName').input && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
+    var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
+    firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
+      barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.sendFormData();
+    });
+  },
+
+  checkForExistingOffers: function(barOfferHistory) {
+    var _this = this;
+    var currentTime = Date.now();
+    console.log('BAROFFERHISTORY', barOfferHistory);
+    var unexpiredOffers = (unexpiredOffer) => {
+      return (barOfferHistory[unexpiredOffer]['expiry'] > currentTime);
+    }
+    var unexpiredOffersArray = Object.keys(barOfferHistory).filter(unexpiredOffers);
+    unexpiredOffersArray.length === 0 ? _this.sendFormData : alert('You still have an active offer! Please wait for it to expire before publishing a new one.');
   },
 
   sendFormData: function () {
+    console.log('inside sendFormData');
     var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
     var formData = {
       offer: document.getElementById('offerDescription').value,
