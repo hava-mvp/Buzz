@@ -45,7 +45,7 @@ var setCookie = () => {
     var allUsersArr = Object.keys(allUsers)
     var userNo = allUsersArr.length - 1;
     var user = allUsersArr[userNo];
-    document.cookie = "havaid=" + user + "; path=/";
+    document.cookie = "havaid=" + user + "expiry=31536e3;"+ "; path=/";
   })
   navigateToNextPage();
 }
