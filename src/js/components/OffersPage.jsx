@@ -19,7 +19,6 @@ var getLiveOffers = (callback) => {
   firebaseRef.limitToLast(100).on("value", function(snapshot) {
     var data = snapshot.val();
     var currentTime = Date.now();
-    console.log('NOW', currentTime);
     var filterValidKeys = (ifValidKey) => {
       return (data[ifValidKey]['expiry'] > currentTime);
     }
@@ -37,24 +36,32 @@ var getLiveOffers = (callback) => {
   });
 }
 
+var afterStateSet = (state) => {
+
+}
+
 var OffersPage = React.createClass({
   componentWillMount: function() {
     checkCookie();
   },
 
   componentDidMount: function() {
+
     var _this = this;
     if(this.isMounted()) {
     getLiveOffers(function(offerDetails){
       _this.setState({
         offers: offerDetails
       }, function() {
-        console.log('state changed here it is', _this.state.offers);
       });
     });
     } else {
       console.log('NOT MOUNTED');
     }
+  },
+
+  handleContactClick: function(){
+    window.location.assign("/public/#/customer-contact");
   },
 
   render: function() {
@@ -66,13 +73,18 @@ var OffersPage = React.createClass({
       </div>
     ) : (
       <div>
+      <div className="live-offers-wrapper">
         {_this.state.offers.map((offerKey) => (
           <IndividualOffer
-          offerDetails={offerKey}
+            offerDetails = {offerKey}
           />
-        ))}
+      ))}
       </div>
-    );
+      <div className="site-footer offer-footer">
+        <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+      </div>
+     </div>
+    )
   }
 });
 
