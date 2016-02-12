@@ -130,6 +130,19 @@ li {
   display: none;
 }
 
+.noLiveOffers {
+  color: #fff;
+}
+
+.loading {
+  color: #fff;
+  text-align: center;
+  padding-top: 3em;
+}
+
+.map {
+  margin-top: 0.5em;
+}
 
 /* HAVA LOGO IN NAV BAR */
 

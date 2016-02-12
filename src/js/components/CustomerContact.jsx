@@ -2,6 +2,10 @@ import React from 'react';
 
 var CustomerContact = React.createClass({
 
+  handleBackClick: function(){
+    window.location.assign("/public/#live-offers");
+  },
+
   render: function() {
     return (
       <div className="contact-wrapper">
@@ -22,6 +26,9 @@ var CustomerContact = React.createClass({
             <a href="https://twitter.com/thehavaapp">
               <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697029-twitter-512.png"/>
             </a>
+          </div>
+          <div className="site-footer">
+            <p onClick={this.handleBackClick} id="contactBtn" className="navbar-brand">Back to Live Offers</p>
           </div>
       </div>
     )
