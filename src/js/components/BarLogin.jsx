@@ -38,6 +38,7 @@ var BarLogin = React.createClass({
         });
       }
       var checkEmailAddress = (barSnapshot) => {
+        var barObjectKey = Object.keys(barSnapshot);
         var barNameInDB = barSnapshot && barSnapshot[barObjectKey] && barSnapshot[barObjectKey]['barName'];
         var emailOfBarInDB = barSnapshot && barSnapshot[barObjectKey] && barSnapshot[barObjectKey]['email'];
         ((barNameInDB === barName) && (emailOfBarInDB === barEmail)) ? barAuthorised() : alert("Login credentials do not match the name of the Bar with which you registered");
