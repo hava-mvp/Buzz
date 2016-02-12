@@ -74,7 +74,7 @@ var OffersPage = React.createClass({
     ) : ((_this.state.offers.length === 0) ? (
       <div>
         <div id="noLiveOffers">
-          Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!"
+          Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!
         </div>
       </div>
     ) : (
