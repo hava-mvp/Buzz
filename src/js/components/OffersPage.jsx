@@ -69,22 +69,26 @@ var OffersPage = React.createClass({
 
     return !_this.state ? (
       <div>
-        <input value="LOADING..."/>
+        <input id="offersLoading" value="LOADING..."/>
+      </div>
+    ) : ((_this.state === null) ? (
+      <div>
+        <input id="noLiveOffers" value="Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!"/>
       </div>
     ) : (
       <div>
-      <div className="live-offers-wrapper">
-        {_this.state.offers.map((offerKey) => (
-          <IndividualOffer
-            offerDetails = {offerKey}
-          />
-      ))}
+        <div className="live-offers-wrapper">
+          {_this.state.offers.map((offerKey) => (
+            <IndividualOffer
+              offerDetails = {offerKey}
+            />
+        ))}
+        </div>
+        <div className="site-footer offer-footer">
+          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+        </div>
       </div>
-      <div className="site-footer offer-footer">
-        <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
-      </div>
-     </div>
-    )
+    ));
   }
 });
 

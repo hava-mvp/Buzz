@@ -88,9 +88,11 @@ var CreateOffers = React.createClass({
       if (request.readyState === 4) {
         if (request.status === 200 && request.responseText === 'ok') {
           _this.setState({ type: 'success', message: 'Your offer is live' });
+          console.log('ADDED TO DB');
           addToDB();
         }
         else {
+          console.log('DONT ADD TO DB');
           _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
         }
       }
@@ -126,10 +128,10 @@ var CreateOffers = React.createClass({
             <form action="" onSubmit={this.handleSubmit}>
              <label>Offer description</label>
              <input className='form-control' id="offerDescription" placeholder='Write offer description here' required type='text'/>
-             <label>Offer Expiry Time: </label>
-             <EndTime />
              <label>Offer code</label>
              <input className='form-control' id='offerCode' placeholder='Enter offer code here' />
+             <label>Offer expiry time: </label>
+             <EndTime />
              <button id='offerSubmitButton' className='btn btn-md button'>{this.state.message}</button>
            </form>
          </div>
