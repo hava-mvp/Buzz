@@ -139,9 +139,7 @@ var CreateOffers = React.createClass({
   },
 
   handleContactClick: function(){
-    document.getElementById('contactBtn').addEventListener('click', function(){
-      window.location.assign("/public/#bar-contact");
-    })
+    window.location.assign("/public/#bar-contact");
   },
 
   render: function() {
@@ -160,7 +158,7 @@ var CreateOffers = React.createClass({
            </form>
          </div>
          <div className="site-footer">
-           <p onClick={this.handleContactClick} className="navbar-brand">Contact Us</p>
+           <p onClick={this.handleContactClick} id="contactBtn" className="navbar-brand">Contact Us</p>
          </div>
       </div>
     )
