@@ -36,7 +36,7 @@ form {
 
 select {
   background-color: white;
-  color: black; 
+  color: black;
 }
 
 /* LOGIN PAGES & CREATE OFFER PAGE */
@@ -111,14 +111,9 @@ li {
   padding-top: 0.5em;
 }
 
-/*.outer {
-  clear: both;
-  padding-bottom: 1em;
+.code {
+  display: none;
 }
-
-.inner {
-  float: left;
-}*/
 
 
 /* HAVA LOGO IN NAV BAR */
