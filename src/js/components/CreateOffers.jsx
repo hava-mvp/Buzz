@@ -114,7 +114,7 @@ var CreateOffers = React.createClass({
 
   handleContactClick: function(){
     document.getElementById('contactBtn').addEventListener('click', function(){
-      window.location.assign("/public/#bar-contact");
+      window.location.assign("/#bar-contact");
     })
   },
 

@@ -61,7 +61,7 @@ var OffersPage = React.createClass({
   },
 
   handleContactClick: function(){
-    window.location.assign("/public/#/customer-contact");
+    window.location.assign("/#/customer-contact");
   },
 
   render: function() {
