@@ -26,40 +26,43 @@ var BarLogin = React.createClass({
   componentDidMount: function() {
     var self = this;
     document.getElementById('button').addEventListener('click', function(){
-      var barName = document.getElementById('barName') && document.getElementById('barName').value.toString();
-      var barEmail = document.getElementById('email') && document.getElementById('email').value.toString();
+      var barName = document.getElementById('barName') && document.getElementById('barName').value;
+      var barEmail = document.getElementById('email') && document.getElementById('email').value;
       var barPass = document.getElementById('password') && document.getElementById('password').value;
       var firebaseLoginRef = new Firebase("https://havamvp.firebaseio.com/customer");
-      var firebaseBarNameRef = new Firebase("https://havamvp.firebaseio.com/bars");
-      console.log('barname', barName);
-      firebaseBarNameRef.orderByChild("barName").equalTo(barName).on("value", function(barNameSnapshot) {
-        var barObjectKey = Object.keys(barNameSnapshot.val()).toString();
-        if (barNameSnapshot.val()[barObjectKey]['barName'] === barName) {
-          firebaseBarNameRef.child(barObjectKey).on("value", function(barObjectEmailSnapshot) {
-            if (barObjectEmailSnapshot.val()['email'] === barEmail) {
-              firebaseLoginRef.authWithPassword({
-                email    : barName,
-                password : barPass
-              }, function(error, authData) {
-                if (error) {
-                  console.log("Login Failed!", error);
-                  alert('Login failed. Check your username or password.')
-                } else {
-                  var cookifiedBarName = document.getElementById('barName').value && document.getElementById('barName').value.replace(/\s/g, "#");
-                  document.cookie = 'havaBarName=' + JSON.stringify(cookifiedBarName) + "; path='/'";
-                  console.log("Authenticated successfully with payload:", authData);
-                  navigateToNextPage();
-                }
-              });
-            } else {
-              alert("Login credentials do not match the name of the Bar with which you registered");
-            }
-          })
-        } else {
-          console.log('Not found!');
-          alert("Bar not registered! If you'd like to join, please contact the Hava Team to register! If you are registered, please check your spelling and try again.");
-        }
-      })
+      var checkBarRegistered = () => {
+        console.log('checking bar is registered');
+        var firebaseBarNameRef = new Firebase("https://havamvp.firebaseio.com/bars");
+        firebaseBarNameRef.orderByChild("barName").equalTo(barName).once("value", function(barNameRegistered) {
+          barNameRegistered.val() ? checkEmailAddress(barNameRegistered.val()) : alert("Bar not registered! If you'd like to join, please contact the Hava Team to register! If you are registered, please check your spelling and try again.");
+        });
+      }
+      var checkEmailAddress = (barSnapshot) => {
+        console.log('barname exists')
+        var barObjectKey = Object.keys(barSnapshot);
+        var barNameInDB = barSnapshot && barSnapshot[barObjectKey] && barSnapshot[barObjectKey]['barName'];
+        console.log('>>>>>>>>>>' + barNameInDB + "~~" + barName);
+        var emailOfBarInDB = barSnapshot && barSnapshot[barObjectKey] && barSnapshot[barObjectKey]['email'];
+        console.log('>>>>>>>>>>' + emailOfBarInDB + "~~" + barEmail);
+        ((barNameInDB === barName) && (emailOfBarInDB === barEmail)) ? barAuthorised() : alert("Login credentials do not match the name of the Bar with which you registered");
+      }
+      var barAuthorised = () => {
+        firebaseLoginRef.authWithPassword({
+          email    : barEmail,
+          password : barPass
+        }, function(error, authData) {
+          if (error) {
+            console.log("Login Failed!", error);
+            alert('Login failed. Check your username or password.')
+          } else {
+            console.log("Authenticated successfully with payload:", authData);
+            var cookifiedBarName = document.getElementById('barName').value && document.getElementById('barName').value.replace(/\s/g, "#");
+            document.cookie = 'havaBarName=' + JSON.stringify(cookifiedBarName) + "; path='/'";
+            navigateToNextPage();
+          }
+        });
+      }
+      checkBarRegistered();
     })
   },
 
