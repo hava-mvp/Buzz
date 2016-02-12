@@ -77,15 +77,16 @@ var OffersPage = React.createClass({
       </div>
     ) : (
       <div>
-      <div className="live-offers-wrapper">
-        {_this.state.offers.map((offerKey) => (
-          <IndividualOffer
-            offerDetails = {offerKey}
-          />
-      ))}
-      </div>
-      <div className="site-footer offer-footer">
-        <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+        <div className="live-offers-wrapper">
+          {_this.state.offers.map((offerKey) => (
+            <IndividualOffer
+              offerDetails = {offerKey}
+            />
+        ))}
+        </div>
+        <div className="site-footer offer-footer">
+          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+        </div>
       </div>
     ));
   }
