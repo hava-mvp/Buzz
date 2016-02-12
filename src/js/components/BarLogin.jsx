@@ -28,6 +28,7 @@ var BarLogin = React.createClass({
     document.getElementById('button').addEventListener('click', function(){
       var barName = document.getElementById('barName') && document.getElementById('barName').value;
       var barEmail = document.getElementById('email') && document.getElementById('email').value;
+      var barPass = document.getElementById('password') && document.getElementById('password').value;
       var cookifiedBarName = document.getElementById('barName').value && document.getElementById('barName').value.replace(/\s/g, "#");
       var firebaseLoginRef = new Firebase("https://havamvp.firebaseio.com/customer");
       var firebaseBarNameRef = new Firebase("https://havamvp.firebaseio.com/bars");
@@ -37,8 +38,8 @@ var BarLogin = React.createClass({
           firebaseBarNameRef.child(barObjectKey).on("value", function(barObjectEmailSnapshot) {
             if (barObjectEmailSnapshot.val()['email'] === barEmail) {
               firebaseLoginRef.authWithPassword({
-                email    : document.getElementById('email').value,
-                password : document.getElementById('password').value
+                email    : barName,
+                password : barPass
               }, function(error, authData) {
                 if (error) {
                   console.log("Login Failed!", error);
