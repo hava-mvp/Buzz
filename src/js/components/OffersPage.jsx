@@ -62,7 +62,11 @@ var OffersPage = React.createClass({
 
     return !_this.state ? (
       <div>
-        <input value="LOADING..."/>
+        <input id="offersLoading" value="LOADING..."/>
+      </div>
+    ) : ((_this.state === null) ? (
+      <div>
+        <input id="noLiveOffers" value="Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!"/>
       </div>
     ) : (
       <div>
@@ -72,7 +76,7 @@ var OffersPage = React.createClass({
           />
         ))}
       </div>
-    );
+    ));
   }
 });
 
