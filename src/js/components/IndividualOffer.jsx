@@ -1,6 +1,30 @@
 import React from 'react';
 import Firebase from 'firebase';
-import BarLocation from './BarLocation.jsx'
+import BarLocation from './BarLocation.jsx';
+
+
+var getBarURL = (barName, callback) => {
+  var firebaseRef = new Firebase("https://havamvp.firebaseio.com/bars");
+  firebaseRef.on("value", function(snapshot) {
+    var barObj = snapshot.val();
+
+    for (var key in barObj) {
+       if (barObj.hasOwnProperty(key)) {
+          var obj = barObj[key];
+          for (var prop in obj) {
+             if (obj.hasOwnProperty(prop)) {
+               var objProp = obj[prop]
+
+               if(obj[prop] === barName){
+
+                 callback(obj.mapURL);
+               }
+             }
+          }
+       }
+    }
+  });
+}
 
 var IndividualOffer = React.createClass({
 
@@ -13,6 +37,15 @@ var IndividualOffer = React.createClass({
       document.getElementById(pId).setAttribute("style", "display:block")
     });
   },
+
+  handleMapClick: function(){
+    console.log("MAP CLICK");
+    var barName = this.props.offerDetails.barName.replace(/\"/g,"")
+    getBarURL(barName, function(url){
+      var win = window.open(url,'_blank');
+    });
+  },
+
 
   render: function() {
     var _this = this;
@@ -30,11 +63,11 @@ var IndividualOffer = React.createClass({
           End Time: {_this.props.offerDetails.endTime}
         </div>
         <div className="info">
-          <button id={_this.props.offerDetails.barName.replace(/\"/g,"")} className="show-code-button btn btn-lg">Show Code</button>
+          <button id={_this.props.offerDetails.barName.replace(/\"/g,"")} className="show-code-button btn btn-sm">Show Code</button>
           <h3 id={_this.props.offerDetails.offerCode} className="code">{_this.props.offerDetails.offerCode}</h3>
         </div>
-        <div className="info map">
-          <BarLocation offerDetails={_this.props.offerDetails.barName}/>
+        <div className="info">
+          <h5 onClick={this.handleMapClick} className="show-map-button" >Map</h5>
         </div>
       </li>
     </div>
