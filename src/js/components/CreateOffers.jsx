@@ -16,52 +16,6 @@ var navigateToPreviousPage = () => {
   window.location = '/public/#bar';
 }
 
-var databaseOfferTime = (checkedHour, inputMinutes, callback) => {
-  var absoluteOfferSetTime = Date.now();  // current time in milliseconds;
-  var today = new Date(); // current date and time;
-
-  var hourThatOfferIsSet = today.toString() && today.toString().split(" ")[4] && today.toString().split(" ")[4].split(":")[0] && parseInt(today.toString().split(" ")[4].split(":")[0]);
-  var minsThatOfferIsSet = today.toString() && today.toString().split(" ")[4] && today.toString().split(" ")[4].split(":")[1] && today.toString().split(" ")[4].split(":")[1].split(":")[0] && parseInt(today.toString().split(" ")[4].split(":")[1].split(":")[0]);
-  // console.log('OFFER SET TIME' + hourThatOfferIsSet + ":" + minsThatOfferIsSet);
-  // console.log('OFFER EXPIRY AT' + checkedHour + ":" + inputMinutes);
-
-  var relativeOfferSetTimeInMilliseconds = (hourThatOfferIsSet*3600 + minsThatOfferIsSet*60)*1000;
-  var relativeOfferExpiryTimeInMilliseconds = 1000*((checkedHour*3600)+(inputMinutes*60));
-
-  var lengthOfOffer = relativeOfferExpiryTimeInMilliseconds > relativeOfferSetTimeInMilliseconds ? (relativeOfferExpiryTimeInMilliseconds - relativeOfferSetTimeInMilliseconds) : ((24*3600*1000 - relativeOfferSetTimeInMilliseconds) + relativeOfferExpiryTimeInMilliseconds);
-  console.log('offerExpires ', (lengthOfOffer/1000/3600));
-  var absoluteOfferExpiryTime = absoluteOfferSetTime + lengthOfOffer;
-  callback(absoluteOfferExpiryTime);
-}
-
-var checkNotMidnight = (inputHour, inputMeridiem) => {
-  if (inputMeridiem === 'am') {
-    return (inputHour === 12) ? 0 : inputHour;
-  } else {
-    return (inputHour === 12) ? inputHour : (inputHour+12);
-  }
-}
-
-var addToDB = function () {
-  var offer = document.getElementById('offerDescription').value;
-  var offerCode = document.getElementById('offerCode').value;
-  var barName = document.cookie.match('havaBarName') && document.cookie.match('havaBarName').input && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
-  var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
-  var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
-  var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
-  var offerExpiryMeridiem = document.getElementById('amPm').value;
-  var checkedOfferExpiryHour = checkNotMidnight(offerExpiryHour, offerExpiryMeridiem);
-  databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
-    firebaseRef.push({
-      barName: barName,
-      offer: offer,
-      offerCode: offerCode,
-      endTime: endTime,
-      expiry: offerExpiration
-    });
-  });
-}
-
 var CreateOffers = React.createClass({
   getInitialState: function() {
     return {
@@ -72,15 +26,18 @@ var CreateOffers = React.createClass({
 
   handleSubmit: function (event) {
     event.preventDefault();
-    this.setState({
-      type: 'info',
-      message: 'Sending...'
-    }, this.canPublishOffer());
+    document.getElementById('offerSubmitButton').disabled = true;
+    this.canPublishOffer();
   },
 
   canPublishOffer: function() {
     var _this = this;
-    var barName = document.cookie.match('havaBarName') && document.cookie.match('havaBarName').input && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0] && document.cookie.match('havaBarName').input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
+    var havaBarName = document.cookie.match('havaBarName');
+    var barName = havaBarName &&
+                  havaBarName.input &&
+                  havaBarName.input.split('havaBarName=')[1] &&
+                  havaBarName.input.split('havaBarName=')[1].split(";")[0] &&
+                  havaBarName.input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
     var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
     firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
       barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.sendFormData();
@@ -95,34 +52,93 @@ var CreateOffers = React.createClass({
       return (barOfferHistory[unexpiredOffer]['expiry'] > currentTime);
     }
     var unexpiredOffersArray = Object.keys(barOfferHistory).filter(unexpiredOffers);
-    unexpiredOffersArray.length === 0 ? _this.sendFormData : alert('You still have an active offer! Please wait for it to expire before publishing a new one.');
+    console.log('~~~~~~~', unexpiredOffersArray.length);
+    unexpiredOffersArray.length === 0 ? _this.sendFormData() : console.log('NOT SENDING');
+    // alert('You still have an active offer! Please wait for it to expire before publishing a new one.');
   },
 
   sendFormData: function () {
-    console.log('inside sendFormData');
-    var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
-    var formData = {
-      offer: document.getElementById('offerDescription').value,
-      endTime: endTime,
-    };
-
-    var request = new XMLHttpRequest();
     var _this = this;
-    request.onreadystatechange = function() {
-      if (request.readyState === 4) {
-        if (request.status === 200 && request.responseText === 'ok') {
-          _this.setState({ type: 'success', message: 'Your offer is live' });
-          console.log('ADDED TO DB');
-          addToDB();
+    _this.setState({
+      type: 'info',
+      message: 'Sending...'
+    }, function(){
+      var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
+      var formData = {
+        offer: document.getElementById('offerDescription').value,
+        endTime: endTime,
+      };
+
+      var request = new XMLHttpRequest();
+      var _this = this;
+      request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+          if (request.status === 200 && request.responseText === 'ok') {
+            _this.setState({ type: 'success', message: 'Your offer is live' });
+            console.log('ADDED TO DB');
+            _this.addToDB();
+          }
+          else {
+            console.log('DONT ADD TO DB');
+            _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
+          }
         }
-        else {
-          console.log('DONT ADD TO DB');
-          _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
-        }
-      }
-    };
-    request.open('POST', '/sendTextMessage', true);
-    request.send(this.requestBuildQueryString(formData));
+      };
+      request.open('POST', '/sendTextMessage', true);
+      request.send(this.requestBuildQueryString(formData));
+    });
+  },
+
+  databaseOfferTime: function(checkedHour, inputMinutes, callback) {
+    var absoluteOfferSetTime = Date.now();  // current time in milliseconds;
+    var today = new Date(); // current date and time;
+
+    var hourThatOfferIsSet = today.toString() && today.toString().split(" ")[4] && today.toString().split(" ")[4].split(":")[0] && parseInt(today.toString().split(" ")[4].split(":")[0]);
+    var minsThatOfferIsSet = today.toString() && today.toString().split(" ")[4] && today.toString().split(" ")[4].split(":")[1] && today.toString().split(" ")[4].split(":")[1].split(":")[0] && parseInt(today.toString().split(" ")[4].split(":")[1].split(":")[0]);
+    // console.log('OFFER SET TIME' + hourThatOfferIsSet + ":" + minsThatOfferIsSet);
+    // console.log('OFFER EXPIRY AT' + checkedHour + ":" + inputMinutes);
+
+    var relativeOfferSetTimeInMilliseconds = (hourThatOfferIsSet*3600 + minsThatOfferIsSet*60)*1000;
+    var relativeOfferExpiryTimeInMilliseconds = 1000*((checkedHour*3600)+(inputMinutes*60));
+
+    var lengthOfOffer = relativeOfferExpiryTimeInMilliseconds > relativeOfferSetTimeInMilliseconds ? (relativeOfferExpiryTimeInMilliseconds - relativeOfferSetTimeInMilliseconds) : ((24*3600*1000 - relativeOfferSetTimeInMilliseconds) + relativeOfferExpiryTimeInMilliseconds);
+    console.log('offerExpires ', (lengthOfOffer/1000/3600));
+    var absoluteOfferExpiryTime = absoluteOfferSetTime + lengthOfOffer;
+    callback(absoluteOfferExpiryTime);
+  },
+
+  checkNotMidnight: function(inputHour, inputMeridiem) {
+    if (inputMeridiem === 'am') {
+      return (inputHour === 12) ? 0 : inputHour;
+    } else {
+      return (inputHour === 12) ? inputHour : (inputHour+12);
+    }
+  },
+
+  addToDB: function() {
+    var offer = document.getElementById('offerDescription').value;
+    var offerCode = document.getElementById('offerCode').value;
+    var havaBarName = document.cookie.match('havaBarName');
+    var barName = havaBarName &&
+                  havaBarName.input &&
+                  havaBarName.input.split('havaBarName=')[1] &&
+                  havaBarName.input.split('havaBarName=')[1].split(";")[0] &&
+                  havaBarName.input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
+    var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
+    var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
+    var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
+    var offerExpiryMeridiem = document.getElementById('amPm').value;
+    var checkedOfferExpiryHour = this.checkNotMidnight(offerExpiryHour, offerExpiryMeridiem);
+    this.databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
+      firebaseRef.push({
+        barName: barName,
+        offer: offer,
+        offerCode: offerCode,
+        endTime: endTime,
+        expiry: offerExpiration
+      });
+      document.getElementById('offerSubmitButton').disabled = false;
+    });
   },
 
   requestBuildQueryString: function (params) {
