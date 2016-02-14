@@ -45,7 +45,7 @@ form {
 select {
   background-color: #fff;
   color: #474747;
-  margin-right: 1em;
+  margin-right: 0.9em;
 }
 
 /* LOGIN PAGES & CREATE OFFER PAGE */
@@ -118,6 +118,12 @@ li {
   text-shadow: none;
 }
 
+.show-map-button {
+  text-decoration: underline;
+  color: #fff;
+  margin-top: 0.5em;
+}
+
 .line {
   width: 85%;
 }
@@ -134,6 +140,9 @@ li {
 
 .code {
   display: none;
+  color: #76EEC6;
+  margin-top: 0.5em;
+  margin-bottom: 0;
 }
 
 .noLiveOffers {
@@ -144,12 +153,6 @@ li {
   color: #fff;
   text-align: center;
   padding-top: 3em;
-}
-
-.map {
-  margin-top: 0.5em;
-  color: #fff;
-
 }
 
 /* HAVA LOGO IN NAV BAR */
