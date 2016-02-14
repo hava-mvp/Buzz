@@ -1,7 +1,5 @@
 import React from 'react';
 import Firebase from 'firebase';
-import BarLocation from './BarLocation.jsx';
-
 
 var getBarURL = (barName, callback) => {
   var firebaseRef = new Firebase("https://havamvp.firebaseio.com/bars");
