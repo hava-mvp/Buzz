@@ -21,7 +21,7 @@ var BarLocation = React.createClass({
     var _this = this;
     return (
       <div className="info map">
-        <h5 onClick={_this.barLocationLink} className="show-map-button">Map</h5>
+        <h5 onClick={_this.barLocationLink} className="show-map-button map-h5">Map</h5>
       </div>
     )
   }
