@@ -15,7 +15,7 @@ var checkLocalStorage = () => {
 }
 
 var navigateToNextPage = () => {
-  window.location = '/public/#create-offers';
+  window.location = '/#create-offers';
 }
 
 var BarLogin = React.createClass({

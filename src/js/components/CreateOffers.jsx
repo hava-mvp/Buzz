@@ -14,7 +14,7 @@ var checkLocalStorage = function() {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/public/#bar';
+  window.location = '/#bar';
 }
 
 var CreateOffers = React.createClass({
@@ -165,7 +165,7 @@ var CreateOffers = React.createClass({
   },
 
   handleContactClick: function(){
-    window.location.assign("/public/#bar-contact");
+    window.location.assign("/#bar-contact");
   },
 
   render: function() {

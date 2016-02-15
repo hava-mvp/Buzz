@@ -3,7 +3,7 @@ import React from 'react';
 var CustomerContact = React.createClass({
 
   handleBackClick: function(){
-    window.location.assign("/public/#live-offers");
+    window.location.assign("/#live-offers");
   },
 
   render: function() {
