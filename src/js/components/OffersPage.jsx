@@ -24,13 +24,9 @@ var getLiveOffers = (callback) => {
       return (data[ifValidKey]['expiry'] > currentTime);
     }
     var firebaseDataKeysArray = Object.keys(data).filter(filterValidKeys);
-    console.log('!!!!!!!!!!!!!!!', firebaseDataKeysArray);
     var firebaseDataKeysOrderedByExpiry = firebaseDataKeysArray.sort(function(a,b){
-      console.log('>>>>', data[a]['expiry'])
-      console.log('bbbb', data[b]['expiry'])
       return data[a]['expiry'] > data[b]['expiry'];
     });
-    console.log('!!!!!!!!!!!!!!!', firebaseDataKeysOrderedByExpiry);
     var firebaseDataArray = firebaseDataKeysOrderedByExpiry.map(function(offer){
       var barName = data[offer]['barName'];
       var validOffer = new Object();
