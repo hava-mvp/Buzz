@@ -24,20 +24,22 @@ var getLiveOffers = (callback) => {
       return (data[ifValidKey]['expiry'] > currentTime);
     }
     var firebaseDataKeysArray = Object.keys(data).filter(filterValidKeys);
+    console.log('!!!!!!!!!!!!!!!', firebaseDataKeysArray);
     var firebaseDataKeysOrderedByExpiry = firebaseDataKeysArray.sort(function(a,b){
+      console.log('>>>>', data[a]['expiry'])
+      console.log('bbbb', data[b]['expiry'])
       return data[a]['expiry'] > data[b]['expiry'];
     });
-    console.log('>>>>>>>>>>..', firebaseDataKeysArray);
     console.log('!!!!!!!!!!!!!!!', firebaseDataKeysOrderedByExpiry);
-    // var firebaseDataArray = firebaseDataKeysArray.map(function(offer){
-    //   var barName = data[offer]['barName'];
-    //   var validOffer = new Object();
-    //   validOffer['barName'] = data[offer]['barName'];
-    //   validOffer['offer'] = data[offer]['offer'];
-    //   validOffer['offerCode'] = data[offer]['offerCode']
-    //   validOffer['endTime'] = data[offer]['endTime'];
-    //   return validOffer;
-    // });
+    var firebaseDataArray = firebaseDataKeysOrderedByExpiry.map(function(offer){
+      var barName = data[offer]['barName'];
+      var validOffer = new Object();
+      validOffer['barName'] = data[offer]['barName'];
+      validOffer['offer'] = data[offer]['offer'];
+      validOffer['offerCode'] = data[offer]['offerCode']
+      validOffer['endTime'] = data[offer]['endTime'];
+      return validOffer;
+    });
     callback(firebaseDataArray);
   });
 }
