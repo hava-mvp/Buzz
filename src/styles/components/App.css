@@ -122,6 +122,8 @@ li {
   text-decoration: underline;
   color: #fff;
   margin-top: 0.5em;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .line {
@@ -153,18 +155,6 @@ li {
   color: #fff;
   text-align: center;
   padding-top: 3em;
-}
-
-.map {
-  margin-top: 0.5em;
-  color: #fff;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-h5 > .map-h5{
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 /* HAVA LOGO IN NAV BAR */
