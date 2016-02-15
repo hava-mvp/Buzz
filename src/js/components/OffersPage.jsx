@@ -23,7 +23,7 @@ var getLiveOffers = (callback) => {
     var filterValidKeys = (ifValidKey) => {
       return (data[ifValidKey]['expiry'] > currentTime);
     }
-    var firebaseDataKeysArray = data ? Object.keys(data).filter(filterValidKeys) : ['noOffersInDatabase'];
+    // var firebaseDataKeysArray = data ? Object.keys(data).filter(filterValidKeys) : ['noOffersInDatabase'];
     var firebaseDataArray = firebaseDataKeysArray.map(function(offer){
       var barName = data[offer]['barName'];
       var validOffer = new Object();
