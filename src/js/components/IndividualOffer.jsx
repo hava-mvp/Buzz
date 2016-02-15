@@ -18,14 +18,10 @@ var IndividualOffer = React.createClass({
           {_this.props.offerDetails.offer}
         </div>
         <div className="info">
-          Offer Expires at: {_this.props.offerDetails.endTime}
+          End Time: {_this.props.offerDetails.endTime}
         </div>
-        <div className="info">
-          <ToggleOfferCode offerDetails={_this.props.offerDetails}/>
-        </div>
-        <div className="info map">
-          <BarLocation offerDetails={_this.props.offerDetails.barName}/>
-        </div>
+        <ToggleOfferCode offerDetails={_this.props.offerDetails}/>
+        <BarLocation offerDetails={_this.props.offerDetails.barName}/>
       </li>
     </div>
     )

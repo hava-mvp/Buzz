@@ -153,6 +153,11 @@ li {
   text-decoration: underline;
 }
 
+h5 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /* HAVA LOGO IN NAV BAR */
 
 .havaLogo {
