@@ -5,8 +5,9 @@ import CreateOffers from './CreateOffers.jsx';
 
 
 
-var checkCookie = () => {
-  if(document.cookie.match('havaBarName')) {
+var checkLocalStorage = () => {
+  var barName = localStorage.getItem('havaBarName');
+  if(barName !== null) {
     navigateToNextPage();
   } else {
     return;
@@ -20,7 +21,7 @@ var navigateToNextPage = () => {
 var BarLogin = React.createClass({
 
   componentWillMount: function() {
-    checkCookie();
+    checkLocalStorage();
   },
 
   componentDidMount: function() {
@@ -53,6 +54,7 @@ var BarLogin = React.createClass({
           } else {
             var cookifiedBarName = document.getElementById('barName').value && document.getElementById('barName').value.replace(/\s/g, "#");
             document.cookie = 'havaBarName=' + JSON.stringify(cookifiedBarName) + "; path='/'";
+            localStorage.setItem('havaBarName', JSON.stringify(cookifiedBarName))
             navigateToNextPage();
           }
         });
