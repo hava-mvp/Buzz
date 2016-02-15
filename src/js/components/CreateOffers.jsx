@@ -37,11 +37,20 @@ var CreateOffers = React.createClass({
       alert("Please fill in all details");
     } else {
       document.getElementById('offerSubmitButton').disabled = true;
+      alert(`Are you sure you want to publish the following offer?
+
+        Offer Description: ${offer}
+        Offer Expiry Time: ${offerExpiryHour}:${offerExpiryMinutes} ${offerExpiryMeridiem}
+        Offer Code: ${offerCode}
+
+      Once published, customers will be notified, and the offer will not retractable.
+        `);
       this.canPublishOffer();
     }
   },
 
   canPublishOffer: function() {
+    console.log('>>>>>>>>>>>>>> inside canPublishOffer');
     var _this = this;
     var havaBarName = document.cookie.match('havaBarName');
     var barName = havaBarName &&
