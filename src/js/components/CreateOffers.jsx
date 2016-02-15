@@ -4,8 +4,9 @@ import EndTime from './EndTime.jsx'
 
 var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
 
-var checkCookie = function() {
-  if(document.cookie.match('havaBarName')) {
+var checkLocalStorage = function() {
+  var barName = localStorage.getItem('havaBarName');
+  if(barName !== null) {
     return;
   } else {
     navigateToPreviousPage();
@@ -161,7 +162,7 @@ var CreateOffers = React.createClass({
   },
 
   componentWillMount: function() {
-    checkCookie();
+    checkLocalStorage();
   },
 
   handleContactClick: function(){

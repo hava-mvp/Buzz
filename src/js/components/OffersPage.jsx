@@ -2,8 +2,9 @@ import React from 'react';
 import Firebase from 'firebase';
 import IndividualOffer from './IndividualOffer.jsx'
 
-var checkCookie = () => {
-  if(document.cookie.match('havaid')) {
+var checkLocalStorage = () => {
+  var havaid = localStorage.getItem('havaid');
+  if(havaid !== null) {
     return;
   } else {
     navigateToPreviousPage();
@@ -42,7 +43,7 @@ var afterStateSet = (state) => {
 
 var OffersPage = React.createClass({
   componentWillMount: function() {
-    checkCookie();
+    checkLocalStorage();
   },
 
   componentDidMount: function() {

@@ -5,8 +5,9 @@ var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
 var firebaseRefPush = firebaseRef.push();
 
 
-var checkCookie = () => {
-  if(document.cookie.match('havaid')) {
+var checkLocalStorage = () => {
+  var havaid = localStorage.getItem('havaid');
+  if(havaid !== null) {
     navigateToNextPage();
   } else {
     console.log('no havaid');
@@ -45,6 +46,7 @@ var setCookie = () => {
     var allUsersArr = Object.keys(allUsers)
     var userNo = allUsersArr.length - 1;
     var user = allUsersArr[userNo];
+    localStorage.setItem('havaid', user)
     document.cookie = "havaid=" + user + "expiry=31536e3;"+ "; path=/";
   })
   navigateToNextPage();
@@ -57,7 +59,7 @@ var navigateToNextPage = () => {
 var CustomerLogin = React.createClass({
 
   componentWillMount: function() {
-    checkCookie();
+    checkLocalStorage();
   },
   componentDidMount: function() {
     document.getElementById('button').addEventListener('click', function(){
