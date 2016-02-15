@@ -11,7 +11,6 @@ var checkLocalStorage = () => {
     navigateToNextPage();
   } else {
     console.log('no havaid');
-    document.getElementById('offerSubmitButton').disabled = false;
     return;
   }
 }
@@ -23,7 +22,7 @@ var checkInput = () => {
 }
 
 var checkUser = (userPhoneNumber) => {
-  document.getElementById('offerSubmitButton').disabled = true;
+  document.getElementById('button').disabled = true;
   var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber.toString() + '\\b');
   firebaseRef.on('value', function(snapshot){
     var databaseSnapshot = JSON.stringify(snapshot.val());
