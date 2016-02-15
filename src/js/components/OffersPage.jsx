@@ -23,7 +23,7 @@ var getLiveOffers = (callback) => {
     var filterValidKeys = (ifValidKey) => {
       return (data[ifValidKey]['expiry'] > currentTime);
     }
-    // var firebaseDataKeysArray = data ? Object.keys(data).filter(filterValidKeys) : ['noOffersInDatabase'];
+    var firebaseDataKeysArray = Object.keys(data).filter(filterValidKeys);
     var firebaseDataArray = firebaseDataKeysArray.map(function(offer){
       var barName = data[offer]['barName'];
       var validOffer = new Object();
@@ -49,8 +49,6 @@ var OffersPage = React.createClass({
     getLiveOffers(function(offerDetails){
       _this.setState({
         offers: offerDetails
-      }, function() {
-        console.log('state set with offerDetails')
       });
     });
     } else {
@@ -74,7 +72,9 @@ var OffersPage = React.createClass({
       </div>
     ) : ((_this.state.offers.length === 0) ? (
       <div>
-        <p className="noLiveOffers">Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!</p>
+        <div className="wrapper">
+          <p className="noLiveOffers">Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!</p>
+        </div>
         <div className="site-footer offer-footer">
           <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
         </div>

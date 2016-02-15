@@ -15,10 +15,9 @@ var checkLocalStorage = () => {
   }
 }
 
-var checkInput = () => {
+var checkInput = (customerLoginButton) => {
   var userPhoneNumber = document.getElementById('phoneNumber').value.replace("+44", "0").replace(/\s/g, "");
-  console.log(userPhoneNumber);
-  (userPhoneNumber.match(/^\d{11}$/)) ? checkUser(userPhoneNumber) : alert('Please enter a valid phone number');
+  (userPhoneNumber.match(/^\d{11}$/)) ? checkUser(userPhoneNumber) : (alert('Please enter a valid phone number'), customerLoginButton.disabled=false);
 }
 
 var checkUser = (userPhoneNumber) => {
@@ -62,8 +61,10 @@ var CustomerLogin = React.createClass({
     checkLocalStorage();
   },
   componentDidMount: function() {
-    document.getElementById('button').addEventListener('click', function(){
-      checkInput();
+    var customerLoginButton = document.getElementById('button');
+    customerLoginButton.addEventListener('click', function(){
+      customerLoginButton.disabled = true;
+      checkInput(customerLoginButton);
     })
   },
   render: function() {
