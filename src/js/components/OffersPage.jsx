@@ -23,7 +23,7 @@ var getLiveOffers = (callback) => {
     var filterValidKeys = (ifValidKey) => {
       return (data[ifValidKey]['expiry'] > currentTime);
     }
-    var firebaseDataKeysArray = Object.keys(data).filter(filterValidKeys);
+    var firebaseDataKeysArray = data ? Object.keys(data).filter(filterValidKeys) : ['noOffersInDatabase'];
     var firebaseDataArray = firebaseDataKeysArray.map(function(offer){
       var barName = data[offer]['barName'];
       var validOffer = new Object();
@@ -35,10 +35,6 @@ var getLiveOffers = (callback) => {
     });
     callback(firebaseDataArray);
   });
-}
-
-var afterStateSet = (state) => {
-
 }
 
 var OffersPage = React.createClass({
@@ -54,6 +50,7 @@ var OffersPage = React.createClass({
       _this.setState({
         offers: offerDetails
       }, function() {
+        console.log('state set with offerDetails')
       });
     });
     } else {

@@ -11,6 +11,7 @@ var checkLocalStorage = () => {
     navigateToNextPage();
   } else {
     console.log('no havaid');
+    document.getElementById('offerSubmitButton').disabled = false;
     return;
   }
 }
@@ -22,7 +23,7 @@ var checkInput = () => {
 }
 
 var checkUser = (userPhoneNumber) => {
-  console.log('inside check user');
+  document.getElementById('offerSubmitButton').disabled = true;
   var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber.toString() + '\\b');
   firebaseRef.on('value', function(snapshot){
     var databaseSnapshot = JSON.stringify(snapshot.val());
@@ -35,7 +36,7 @@ var submitUser = () => {
   firebaseRefPush.set({
     email: document.getElementById('email').value,
     phoneNumber: document.getElementById('phoneNumber').value
-  })
+  });
   setCookie();
 }
 

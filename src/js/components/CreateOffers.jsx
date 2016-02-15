@@ -64,8 +64,7 @@ var CreateOffers = React.createClass({
     }
     var unexpiredOffersArray = Object.keys(barOfferHistory).filter(unexpiredOffers);
     console.log('~~~~~~~', unexpiredOffersArray.length);
-    unexpiredOffersArray.length === 0 ? _this.sendFormData() : console.log('NOT SENDING');
-    // alert('You still have an active offer! Please wait for it to expire before publishing a new one.');
+    unexpiredOffersArray.length === 0 ? _this.sendFormData() : alert('You still have an active offer! Please wait for it to expire before publishing a new one.');
   },
 
   sendFormData: function () {
