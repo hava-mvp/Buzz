@@ -20,11 +20,10 @@ var BarLocation = React.createClass({
   render: function() {
     var _this = this;
     return (
-    <div>
       <h5 onClick={_this.barLocationLink} className="show-map-button">Map</h5>
-    </div>
     )
   }
-})
+  
+});
 
 export default BarLocation;
