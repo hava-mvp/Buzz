@@ -23,7 +23,7 @@ var BarLocation = React.createClass({
       <h5 onClick={_this.barLocationLink} className="show-map-button">Map</h5>
     )
   }
-  
+
 });
 
 export default BarLocation;

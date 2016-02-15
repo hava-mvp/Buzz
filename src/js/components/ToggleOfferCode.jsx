@@ -21,10 +21,8 @@ var OfferCodeButton = React.createClass({
     var barOfferEndTime = _this.props.offerDetails.endTime;
     var barOfferToggleButton = barName + "-" + barOfferEndTime;
     return (
-    <div>
       <button id={barOfferToggleButton} className="show-code-button btn btn-lg this">Show Code</button>
       <h3 id={_this.props.offerDetails.offerCode} className="code">{_this.props.offerDetails.offerCode}</h3>
-    </div>
     )
   }
 })

@@ -149,7 +149,8 @@ li {
 .map {
   margin-top: 0.5em;
   color: #fff;
-
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 /* HAVA LOGO IN NAV BAR */
