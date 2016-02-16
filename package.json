@@ -38,7 +38,6 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "css-loader": "^0.23.1",
-    "env2": "^2.0.6",
     "firebase": "^2.3.2",
     "formsy-react": "^0.17.0",
     "formsy-react-components": "^0.6.6",
