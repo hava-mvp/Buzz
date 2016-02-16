@@ -26,7 +26,6 @@ var CreateOffers = React.createClass({
   },
 
   handleSubmit: function (event) {
-    console.log('hi');
     event.preventDefault();
     var offer = document.getElementById('offerDescription').value;
     var offerCode = document.getElementById('offerCode').value;

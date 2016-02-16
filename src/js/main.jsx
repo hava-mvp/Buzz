@@ -13,6 +13,7 @@ import BarContact      from './components/BarContact.jsx'
 import NavBar          from './components/nav/NavBar.jsx';
 import HavaAdmin       from './components/HavaAdmin.jsx';
 import NotFound        from './components/NotFound.jsx';
+import Index           from './components/Index.jsx';
 
 let Home = require('./components/views/home.jsx');
 
@@ -28,7 +29,8 @@ class App extends Component {
   render(){
     return(
       <Router>
-        <Route path="/">
+        <Route path="/" >
+          <IndexRoute component={Index} />
           <Route path="bar" component={BarLogin} />
           <Route path="create-offers" component={CreateOffers} />
           <Route path="customer-contact" component={CustomerContact} />
@@ -37,7 +39,6 @@ class App extends Component {
           <Route path="live-offers" component={OffersPage} />
           <Route path="hava-admin" component={HavaAdmin} />
           <Route path="*" component={NotFound} />
-
         </Route>
       </Router>
     );

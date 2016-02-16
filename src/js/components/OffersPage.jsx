@@ -76,7 +76,12 @@ var OffersPage = React.createClass({
     ) : ((_this.state.offers.length === 0) ? (
       <div>
         <div className="wrapper">
-          <p className="noLiveOffers">Sorry! You've caught us when there are no live offers! Come back in a bit and check us out again!</p>
+          <p className="noLiveOffers">
+            Keep calm - we've got this.
+          </p>
+          <p className="noLiveOffers">
+            Our bars will be in touch soon :)
+          </p>
         </div>
         <div className="site-footer offer-footer">
           <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
