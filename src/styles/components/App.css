@@ -45,7 +45,7 @@ form {
 select {
   background-color: #fff;
   color: #474747;
-  margin-right: 0.9em;
+  margin-right: 0.7em;
 }
 
 /* LOGIN PAGES & CREATE OFFER PAGE */
@@ -97,6 +97,7 @@ select {
   flex-direction: column;
   padding: 2em;
   color: #fff;
+  margin-bottom: 350px;
 }
 
 /* LIVE OFFERS PAGE */
@@ -212,6 +213,24 @@ li {
   color: #fff;
 }
 
+.pint-img{
+  width: 100%;
+  margin-bottom: 10%;
+}
+
+.not-found-wrapper {
+  left: 0;
+  right: 0;
+  position: absolute;
+  top: 0;
+  margin-top: 30%;
+  height: 80%;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  padding: 2em;
+  color: #fff;
+}
 /* INDEX PAGE */
 
 .index-button {

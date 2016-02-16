@@ -27,22 +27,23 @@ var BarLogin = React.createClass({
   componentDidMount: function() {
     var self = this;
     document.getElementById('button').addEventListener('click', function(){
+      document.getElementById('button').disabled = true;
       var barName = document.getElementById('barName') && document.getElementById('barName').value;
       var barEmail = document.getElementById('email') && document.getElementById('email').value;
       var barPass = document.getElementById('password') && document.getElementById('password').value;
-      var firebaseLoginRef = new Firebase("https://havamvp.firebaseio.com/customer");
+      var firebaseLoginRef = new Firebase("https://hava-peter.firebaseio.com/customer");
       var checkBarRegistered = () => {
         console.log('checking bar is registered');
-        var firebaseBarNameRef = new Firebase("https://havamvp.firebaseio.com/bars");
+        var firebaseBarNameRef = new Firebase("https://hava-peter.firebaseio.com/bars");
         firebaseBarNameRef.orderByChild("barName").equalTo(barName).once("value", function(barNameRegistered) {
-          barNameRegistered.val() ? checkEmailAddress(barNameRegistered.val()) : alert("Bar not registered! If you'd like to join, please contact the Hava Team to register! If you are registered, please check your spelling and try again.");
+          barNameRegistered.val() ? checkEmailAddress(barNameRegistered.val()) : (alert("Bar not registered! If you'd like to join, please contact the Hava Team to register! If you are registered, please check your spelling and try again."), document.getElementById('button').disabled = false);
         });
       }
       var checkEmailAddress = (barSnapshot) => {
         var barObjectKey = Object.keys(barSnapshot);
         var barNameInDB = barSnapshot && barSnapshot[barObjectKey] && barSnapshot[barObjectKey]['barName'];
         var emailOfBarInDB = barSnapshot && barSnapshot[barObjectKey] && barSnapshot[barObjectKey]['email'];
-        ((barNameInDB === barName) && (emailOfBarInDB === barEmail)) ? barAuthorised() : alert("Login credentials do not match the name of the Bar with which you registered");
+        ((barNameInDB === barName) && (emailOfBarInDB === barEmail)) ? barAuthorised() : (alert("Login credentials do not match the name of the Bar with which you registered"), document.getElementById('button').disabled = false);
       }
       var barAuthorised = () => {
         firebaseLoginRef.authWithPassword({
@@ -50,7 +51,8 @@ var BarLogin = React.createClass({
           password : barPass
         }, function(error, authData) {
           if (error) {
-            alert('Login failed. Check your username or password.')
+            alert('Login failed. Check your username or password.');
+            document.getElementById('button').disabled = false;
           } else {
             var cookifiedBarName = document.getElementById('barName').value && document.getElementById('barName').value.replace(/\s/g, "#");
             document.cookie = 'havaBarName=' + JSON.stringify(cookifiedBarName) + "; path='/'";
