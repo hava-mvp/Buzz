@@ -1,7 +1,7 @@
 import React from 'react';
 import Firebase from 'firebase';
 
-var firebaseRef = new Firebase("https://havamvp.firebaseio.com/customer");
+var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/customer");
 var firebaseRefPush = firebaseRef.push();
 
 
