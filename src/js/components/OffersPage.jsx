@@ -97,7 +97,7 @@ var OffersPage = React.createClass({
         ))}
         </div>
         <div className="site-footer offer-footer">
-          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+          <p type="submit" onClick={this.handleContactClick} className="footer-text">Contact Us</p>
         </div>
       </div>
     ));
