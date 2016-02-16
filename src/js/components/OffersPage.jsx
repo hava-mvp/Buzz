@@ -16,7 +16,7 @@ var navigateToPreviousPage = () => {
 }
 
 var getLiveOffers = (callback) => {
-  var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
+  var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
   firebaseRef.limitToLast(100).on("value", function(snapshot) {
     var data = snapshot.val();
     var currentTime = Date.now();

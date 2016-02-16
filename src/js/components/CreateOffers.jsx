@@ -2,7 +2,7 @@ import React from 'react';
 import Firebase from 'firebase';
 import EndTime from './EndTime.jsx'
 
-var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
+var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
 
 var checkLocalStorage = function() {
   var barName = localStorage.getItem('havaBarName');
@@ -50,7 +50,7 @@ var CreateOffers = React.createClass({
                   havaBarName.input.split('havaBarName=')[1] &&
                   havaBarName.input.split('havaBarName=')[1].split(";")[0] &&
                   havaBarName.input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
-    var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
+    var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
     firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
       barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.confirmOffer();
     });
