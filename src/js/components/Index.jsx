@@ -3,11 +3,11 @@ import React from 'react';
 var Index = React.createClass({
 
   handleBarClick: function(){
-    window.location.assign("/public/#bar");
+    window.location.assign("/#bar");
   },
 
   handleCustomerClick: function(){
-    window.location.assign("/public/#customer");
+    window.location.assign("/#customer");
   },
 
   render: function() {
