@@ -28,3 +28,4 @@ node_modules
 
 public/bundle.js
 .DS_Store
+.env
