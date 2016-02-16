@@ -97,6 +97,7 @@ select {
   flex-direction: column;
   padding: 2em;
   color: #fff;
+  margin-bottom: 320px;
 }
 
 /* LIVE OFFERS PAGE */
