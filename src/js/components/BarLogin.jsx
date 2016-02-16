@@ -36,7 +36,7 @@ var BarLogin = React.createClass({
         console.log('checking bar is registered');
         var firebaseBarNameRef = new Firebase("https://hava-peter.firebaseio.com/bars");
         firebaseBarNameRef.orderByChild("barName").equalTo(barName).once("value", function(barNameRegistered) {
-          barNameRegistered.val() ? checkEmailAddress(barNameRegistered.val()) : (alert("Bar not registered! If you'd like to join, please contact the Hava Team to register! If you are registered, please check your spelling and try again."), document.getElementById('button').disabled = false;)
+          barNameRegistered.val() ? checkEmailAddress(barNameRegistered.val()) : (alert("Bar not registered! If you'd like to join, please contact the Hava Team to register! If you are registered, please check your spelling and try again."), document.getElementById('button').disabled = false);
         });
       }
       var checkEmailAddress = (barSnapshot) => {
