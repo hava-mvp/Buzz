@@ -2,12 +2,13 @@ import React from 'react';
 import Firebase from 'firebase';
 import { Router, Route, Link } from 'react-router';
 
-var firebaseRef = new Firebase("https://havamvp.firebaseio.com/bars");
+var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/bars");
 
 var HavaAdmin = React.createClass({
 
   componentDidMount: function() {
     document.getElementById('button').addEventListener('click', function(){
+      document.getElementById('button').disabled = true;
       var barName = document.getElementById('barName').value
       var email = document.getElementById('email').value
       var address = document.getElementById('address').value
@@ -21,6 +22,7 @@ var HavaAdmin = React.createClass({
         if (error) {
           console.log('ERROR',error);
           alert('There was a problem. Please try again.')
+          document.getElementById('offerSubmitButton').disabled = false;
         } else {
           alert('Bar successfully added.')
           document.getElementById("form").reset();
