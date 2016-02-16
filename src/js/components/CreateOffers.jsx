@@ -27,6 +27,7 @@ var CreateOffers = React.createClass({
 
   handleSubmit: function (event) {
     event.preventDefault();
+    document.getElementById('offerSubmitButton').disabled = true;
     var offer = document.getElementById('offerDescription').value;
     var offerCode = document.getElementById('offerCode').value;
     var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
@@ -34,16 +35,8 @@ var CreateOffers = React.createClass({
     var offerExpiryMeridiem = document.getElementById('amPm').value;
     if (offer === "" || offerCode === "" || offerExpiryHour === "" || offerExpiryMinutes === "" || offerExpiryMeridiem === "") {
       alert("Please fill in all details");
+      document.getElementById('offerSubmitButton').disabled = false;
     } else {
-      document.getElementById('offerSubmitButton').disabled = true;
-      alert(`Are you sure you want to publish the following offer?
-
-        Offer Description: ${offer}
-        Offer Expiry Time: ${offerExpiryHour}:${offerExpiryMinutes} ${offerExpiryMeridiem}
-        Offer Code: ${offerCode}
-
-      Once published, customers will be notified, and the offer will not retractable.
-        `);
       this.canPublishOffer();
     }
   },
@@ -59,7 +52,7 @@ var CreateOffers = React.createClass({
                   havaBarName.input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
     var firebaseRef = new Firebase("https://havamvp.firebaseio.com/offers");
     firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
-      barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.sendFormData();
+      barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.confirmOffer();
     });
   },
 
@@ -72,7 +65,30 @@ var CreateOffers = React.createClass({
     }
     var unexpiredOffersArray = Object.keys(barOfferHistory).filter(unexpiredOffers);
     console.log('~~~~~~~', unexpiredOffersArray.length);
-    unexpiredOffersArray.length === 0 ? _this.sendFormData() : alert('You still have an active offer! Please wait for it to expire before publishing a new one.');
+    unexpiredOffersArray.length === 0 ? _this.confirmOffer() : (alert('You still have an active offer! Please wait for it to expire before publishing a new one.'), document.getElementById('offerSubmitButton').disabled = false);
+  },
+
+  confirmOffer: function () {
+    var _this = this;
+    var offer = document.getElementById('offerDescription').value;
+    var offerCode = document.getElementById('offerCode').value;
+    var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
+    var offerExpiryMinutes = document.getElementById('minutes').value;
+    var offerExpiryMeridiem = document.getElementById('amPm').value;
+    var confirmation = confirm(`Are you sure you want to publish the following offer?
+
+      Offer Description: ${offer}
+      Offer Expiry Time: ${offerExpiryHour}:${offerExpiryMinutes} ${offerExpiryMeridiem}
+      Offer Code: ${offerCode}
+
+    Once published, customers will be notified, and the offer will not retractable.
+      `);
+      if (confirmation === true) {
+        _this.sendFormData()
+      } else {
+        document.getElementById('offerSubmitButton').disabled = false;
+        return;
+      }
   },
 
   sendFormData: function () {
