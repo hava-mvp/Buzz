@@ -27,6 +27,7 @@ var CreateOffers = React.createClass({
 
   handleSubmit: function (event) {
     event.preventDefault();
+    document.getElementById('offerSubmitButton').disabled = true;
     var offer = document.getElementById('offerDescription').value;
     var offerCode = document.getElementById('offerCode').value;
     var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
@@ -34,6 +35,7 @@ var CreateOffers = React.createClass({
     var offerExpiryMeridiem = document.getElementById('amPm').value;
     if (offer === "" || offerCode === "" || offerExpiryHour === "" || offerExpiryMinutes === "" || offerExpiryMeridiem === "") {
       alert("Please fill in all details");
+      document.getElementById('offerSubmitButton').disabled = false;
     } else {
       this.canPublishOffer();
     }
@@ -63,7 +65,7 @@ var CreateOffers = React.createClass({
     }
     var unexpiredOffersArray = Object.keys(barOfferHistory).filter(unexpiredOffers);
     console.log('~~~~~~~', unexpiredOffersArray.length);
-    unexpiredOffersArray.length === 0 ? _this.confirmOffer() : alert('You still have an active offer! Please wait for it to expire before publishing a new one.');
+    unexpiredOffersArray.length === 0 ? _this.confirmOffer() : (alert('You still have an active offer! Please wait for it to expire before publishing a new one.'), document.getElementById('offerSubmitButton').disabled = false);
   },
 
   confirmOffer: function () {
@@ -84,6 +86,7 @@ var CreateOffers = React.createClass({
       if (confirmation === true) {
         _this.sendFormData()
       } else {
+        document.getElementById('offerSubmitButton').disabled = false;
         return;
       }
   },
@@ -107,7 +110,6 @@ var CreateOffers = React.createClass({
           if (request.status === 200 && request.responseText === 'ok') {
             _this.setState({ type: 'success', message: 'Your offer is live' });
             console.log('ADDED TO DB');
-            document.getElementById('offerSubmitButton').disabled = true;
             _this.addToDB();
           }
           else {
