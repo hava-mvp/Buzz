@@ -26,7 +26,6 @@ var CreateOffers = React.createClass({
   },
 
   handleSubmit: function (event) {
-    console.log('hi');
     event.preventDefault();
     var offer = document.getElementById('offerDescription').value;
     var offerCode = document.getElementById('offerCode').value;
@@ -192,8 +191,8 @@ var CreateOffers = React.createClass({
              <button id='offerSubmitButton' className='btn btn-md button'>{this.state.message}</button>
            </form>
          </div>
-         <div className="site-footer">
-           <p onClick={this.handleContactClick} id="contactBtn" className="navbar-brand">Contact Us</p>
+         <div className="site-footer offer-footer">
+           <p onClick={this.handleContactClick} id="contactBtn" className="footer-text">Contact Us</p>
          </div>
       </div>
     )

@@ -141,7 +141,6 @@ li {
 }
 
 .code {
-  display: none;
   color: #76EEC6;
   margin-top: 0.15em;
   margin-bottom: 0;
@@ -155,6 +154,10 @@ li {
   color: #fff;
   text-align: center;
   padding-top: 3em;
+}
+
+.footer-text {
+  color: #474747;
 }
 
 /* HAVA LOGO IN NAV BAR */
@@ -174,15 +177,6 @@ li {
 }
 
 /* FOOTER */
-
-.navbar-brand {
-  text-shadow: none;
-  color: #a4a4a4;
-  margin-top: 1em;
-  padding-top: 2em;
-  font-size: medium;
-  padding-right: 2em;
-}
 
 .site-footer {
   position: fixed;
@@ -216,4 +210,39 @@ li {
   flex-direction: column;
   padding: 2em;
   color: #fff;
+}
+
+.pint-img{
+  width: 100%;
+  margin-bottom: 10%;
+}
+
+.not-found-wrapper {
+  left: 0;
+  right: 0;
+  position: absolute;
+  top: 0;
+  margin-top: 30%;
+  height: 80%;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  padding: 2em;
+  color: #fff;
+}
+/* INDEX PAGE */
+
+.index-button {
+  background-color: #76EEC6;
+  border-color: #76EEC6;
+  color: #474747;
+  background-image: none;
+  text-shadow: none;
+  margin-top: 3em;
+  font-weight: bold;
+}
+
+.index-title {
+  text-align: center;
+  font-weight: lighter;
 }
