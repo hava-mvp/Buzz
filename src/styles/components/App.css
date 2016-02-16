@@ -156,6 +156,10 @@ li {
   padding-top: 3em;
 }
 
+.footer-text {
+  color: #474747;
+}
+
 /* HAVA LOGO IN NAV BAR */
 
 .havaLogo {
@@ -194,7 +198,7 @@ li {
 .rowSocial {
   margin-left: auto;
   margin-right: auto;
-  display: block;
+  display: inline-table;
 }
 
 .icon{
