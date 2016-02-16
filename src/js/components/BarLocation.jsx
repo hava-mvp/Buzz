@@ -16,7 +16,6 @@ var BarLocation = React.createClass({
     });
   },
 
-
   render: function() {
     var _this = this;
     return (
