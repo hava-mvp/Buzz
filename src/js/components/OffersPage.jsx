@@ -32,8 +32,9 @@ var getLiveOffers = (callback) => {
       validOffer['offerCode'] = data[offer]['offerCode']
       validOffer['endTime'] = data[offer]['endTime'];
       return validOffer;
-    }).reverse();
-    callback(firebaseDataArray);
+    });
+    var firebaseDataNewestFirst = firebaseDataArray.reverse();
+    callback(firebaseDataNewestFirst);
   });
 }
 
