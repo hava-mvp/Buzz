@@ -200,10 +200,7 @@ var CreateOffers = React.createClass({
       <div>
         <div className="wrapper">
           <p className="noLiveOffers">
-            Keep calm - we've got this.
-          </p>
-          <p className="noLiveOffers">
-            Our bars will be in touch soon :)
+            Your offer is now live!
           </p>
         </div>
         <div className="site-footer offer-footer">
