@@ -24,10 +24,7 @@ var getLiveOffers = (callback) => {
       return (data[ifValidKey]['expiry'] > currentTime);
     }
     var firebaseDataKeysArray = Object.keys(data).filter(filterValidKeys);
-    var firebaseDataKeysOrderedByExpiry = firebaseDataKeysArray.sort(function(a,b){
-      return data[a]['expiry'] > data[b]['expiry'];
-    });
-    var firebaseDataArray = firebaseDataKeysOrderedByExpiry.map(function(offer){
+    var firebaseDataArray = firebaseDataKeysArray.map(function(offer){
       var barName = data[offer]['barName'];
       var validOffer = new Object();
       validOffer['barName'] = data[offer]['barName'];
@@ -35,7 +32,7 @@ var getLiveOffers = (callback) => {
       validOffer['offerCode'] = data[offer]['offerCode']
       validOffer['endTime'] = data[offer]['endTime'];
       return validOffer;
-    });
+    }).reverse();
     callback(firebaseDataArray);
   });
 }
