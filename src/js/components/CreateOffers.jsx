@@ -108,7 +108,10 @@ var CreateOffers = React.createClass({
       request.onreadystatechange = function() {
         if (request.readyState === 4) {
           if (request.status === 200 && request.responseText === 'ok') {
-            _this.setState({ type: 'success', message: 'Your offer is live' });
+            _this.setState({
+              type: 'success',
+              message: 'Your offer is live'
+            });
             console.log('ADDED TO DB');
             _this.addToDB();
           }
@@ -193,7 +196,21 @@ var CreateOffers = React.createClass({
   },
 
   render: function() {
-    return (
+    return this.state.type === 'success' ? (
+      <div>
+        <div className="wrapper">
+          <p className="noLiveOffers">
+            Keep calm - we've got this.
+          </p>
+          <p className="noLiveOffers">
+            Our bars will be in touch soon :)
+          </p>
+        </div>
+        <div className="site-footer offer-footer">
+          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+        </div>
+      </div>
+    ) : (
       <div>
          <div className='wrapper'>
            <h2>Create an Offer</h2>
