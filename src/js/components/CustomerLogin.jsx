@@ -63,7 +63,7 @@ var CustomerLogin = React.createClass({
       customerDetailsInDB ? customerKey = Object.keys(customerDetailsInDB) : null;
       if (customerKey !== null || undefined) {
         var cookiesSet = _this.setCookie(customerKey);
-        cookiesSet === 'ok' ? navigateToPage('/public/#live-offers') : _this.setCookie(userPhoneNumber);
+        cookiesSet === 'ok' ? navigateToPage('/#live-offers') : _this.setCookie(userPhoneNumber);
       }
     });
   },
