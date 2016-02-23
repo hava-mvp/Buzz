@@ -47,12 +47,13 @@ var setCookie = () => {
     var user = allUsersArr[userNo];
     localStorage.setItem('havaid', user)
     document.cookie = "havaid=" + user + "expiry=31536e3;"+ "; path=/";
-  })
-  navigateToNextPage();
+  });
+  setTimeout(navigateToNextPage(), 100);
 }
 
 var navigateToNextPage = () => {
-  window.location = '/#live-offers';
+  console.log('navigating to next page');
+  window.location = '/public/#live-offers';
 }
 
 var CustomerLogin = React.createClass({

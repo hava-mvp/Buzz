@@ -3,7 +3,7 @@ import React from 'react';
 var BarContact = React.createClass({
 
   handleBackClick: function(){
-    window.location.assign("/#create-offers");
+    window.location.assign("/public/#create-offers");
   },
 
   render: function() {
