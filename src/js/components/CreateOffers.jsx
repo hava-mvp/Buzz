@@ -42,7 +42,6 @@ var CreateOffers = React.createClass({
   },
 
   canPublishOffer: function() {
-    console.log('>>>>>>>>>>>>>> inside canPublishOffer');
     var _this = this;
     var havaBarName = document.cookie.match('havaBarName');
     var barName = havaBarName &&
@@ -59,12 +58,10 @@ var CreateOffers = React.createClass({
   checkForExistingOffers: function(barOfferHistory) {
     var _this = this;
     var currentTime = Date.now();
-    console.log('BAROFFERHISTORY', barOfferHistory);
     var unexpiredOffers = (unexpiredOffer) => {
       return (barOfferHistory[unexpiredOffer]['expiry'] > currentTime);
     }
     var unexpiredOffersArray = Object.keys(barOfferHistory).filter(unexpiredOffers);
-    console.log('~~~~~~~', unexpiredOffersArray.length);
     unexpiredOffersArray.length === 0 ? _this.confirmOffer() : (alert('You still have an active offer! Please wait for it to expire before publishing a new one.'), document.getElementById('offerSubmitButton').disabled = false);
   },
 
@@ -81,7 +78,7 @@ var CreateOffers = React.createClass({
       Offer Expiry Time: ${offerExpiryHour}:${offerExpiryMinutes} ${offerExpiryMeridiem}
       Offer Code: ${offerCode}
 
-    Once published, customers will be notified, and the offer will not retractable.
+Once published, customers will be notified, and the offer will not retractable.
       `);
       if (confirmation === true) {
         _this.sendFormData()
@@ -97,33 +94,32 @@ var CreateOffers = React.createClass({
       type: 'info',
       message: 'Sending...'
     }, function(){
-      console.log('!!!!!!' + JSON.stringify(this.state));
-      // var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
-      // var formData = {
-      //   offer: document.getElementById('offerDescription').value,
-      //   endTime: endTime,
-      // };
+      var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
+      var formData = {
+        offer: document.getElementById('offerDescription').value,
+        endTime: endTime,
+      };
 
-      // var request = new XMLHttpRequest();
+      var request = new XMLHttpRequest();
       var _this = this;
-      // request.onreadystatechange = function() {
-      //   if (request.readyState === 4) {
-      //     if (request.status === 200 && request.responseText === 'ok') {
-      //       _this.setState({
-      //         type: 'success',
-      //         message: 'Your offer is live'
-      //       });
-      //       console.log('ADDED TO DB');
+      request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+          if (request.status === 200 && request.responseText === 'ok') {
+            _this.setState({
+              type: 'success',
+              message: 'Your offer is live'
+            });
+            console.log('ADDED TO DB');
             _this.addToDB();
-      //     }
-      //     else {
-      //       console.log('DONT ADD TO DB');
-      //       _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
-      //     }
-      //   }
-      // };
-      // request.open('POST', '/sendTextMessage', true);
-      // request.send(this.requestBuildQueryString(formData));
+          }
+          else {
+            console.log('DONT ADD TO DB');
+            _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
+          }
+        }
+      };
+      request.open('POST', '/sendTextMessage', true);
+      request.send(this.requestBuildQueryString(formData));
     });
   },
 
@@ -142,7 +138,7 @@ var CreateOffers = React.createClass({
     var lengthOfOffer = relativeOfferExpiryTimeInMilliseconds > relativeOfferSetTimeInMilliseconds ? (relativeOfferExpiryTimeInMilliseconds - relativeOfferSetTimeInMilliseconds) : ((24*3600*1000 - relativeOfferSetTimeInMilliseconds) + relativeOfferExpiryTimeInMilliseconds);
     console.log('offerExpires ', (lengthOfOffer/1000/3600));
     var absoluteOfferExpiryTime = absoluteOfferSetTime + lengthOfOffer;
-    callback(absoluteOfferExpiryTime);
+    callback(absoluteOfferSetTime, absoluteOfferExpiryTime);
   },
 
   checkNotMidnight: function(inputHour, inputMeridiem) {
@@ -168,19 +164,18 @@ var CreateOffers = React.createClass({
     var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
     var offerExpiryMeridiem = document.getElementById('amPm').value;
     var checkedOfferExpiryHour = this.checkNotMidnight(offerExpiryHour, offerExpiryMeridiem);
-    _this.databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
+    _this.databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerSetTime, offerExpiration){
       firebaseRef.push({
         barName: barName,
         offer: offer,
         offerCode: offerCode,
         endTime: endTime,
-        expiry: offerExpiration
+        expiry: offerExpiration,
+        offerSet: offerSetTime
       });
       document.getElementById('offerSubmitButton').disabled = false;
       _this.setState({
         offerExpiryTime: offerExpiration
-      }, function(){
-        console.log('!!!!!!' + JSON.stringify(_this.state));
       });
     });
   },
@@ -199,7 +194,7 @@ var CreateOffers = React.createClass({
   },
 
   componentDidMount: function() {
-    this.state ? console.log('!!!!!!' + JSON.stringify(this.state)) : console.log('NO STATES!');
+    this.state ? console.log('>>>>>>>>>>>>>...' + JSON.stringify(this.state)) : console.log('NO STATES!');
   },
 
   handleContactClick: function(){
@@ -212,6 +207,7 @@ var CreateOffers = React.createClass({
     var humanReadableExpiryTimeBreakdown = ((offerExpiryTime-currentTime)/1000/3600).toFixed(4);
     var humanReadableExpiryHour = humanReadableExpiryTimeBreakdown.toString().split('.')[0];
     var humanReadableExpiryMinutes = (parseInt(humanReadableExpiryTimeBreakdown.toString().split('.')[1])*60/10000).toFixed(0);
+
     return (!offerExpiryTime || currentTime > offerExpiryTime) ? (
       <div>
          <div className='wrapper'>
