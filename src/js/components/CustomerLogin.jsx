@@ -60,8 +60,9 @@ var CustomerLogin = React.createClass({
     var _this = this;
     firebaseRef.orderByChild("phoneNumber").equalTo(userPhoneNumber).once("value", function(phoneNumberInDB){
       var customerDetailsInDB = phoneNumberInDB.val();
-      customerDetailsInDB ? customerKey = Object.keys(customerDetailsInDB) : null;
-      if (customerKey !== null || undefined) {
+      customerDetailsInDB ? customerKey = Object.keys(customerDetailsInDB) : console.log('NO PHONE NUMBER IN DATABASE' + userPhoneNumber);
+      if (customerKey !== (undefined || null || "")) {
+        console.log('CUSTOMER KEY NOT NULL ' + customerKey)
         var cookiesSet = _this.setCookie(customerKey);
         cookiesSet === 'ok' ? navigateToPage('/#live-offers') : _this.setCookie(userPhoneNumber);
       }
