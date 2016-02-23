@@ -12,12 +12,12 @@ var HavaAdmin = React.createClass({
       var barName = document.getElementById('barName').value
       var email = document.getElementById('email').value
       var address = document.getElementById('address').value
-      var mapURL = document.getElementById('mapURL').value
+      var latLong = document.getElementById('latLong').value
       firebaseRef.push({
         barName: barName,
         email: email,
         address: address,
-        mapURL: mapURL
+        mapURL: latLong
       }, function (error){
         if (error) {
           console.log('ERROR',error);
@@ -43,8 +43,8 @@ var HavaAdmin = React.createClass({
             <input className='form-control' id="email" placeholder='Enter the bar email login' required type='email' />
             <label>Address</label>
             <input className='form-control' id="address" placeholder='Enter the address of the bar' required type='text' />
-            <label>Map URL</label>
-            <input className='form-control' id="mapURL" placeholder='Enter the lon and lat google maps url' required type='text' />
+            <label>Latitude and Longitude</label>
+            <input className='form-control' id="latLong" placeholder='Enter the lat and lon of the bar' required type='text' />
             <button id='button' className='btn btn-md button'>Add Bar</button>
           </form>
         </div>
