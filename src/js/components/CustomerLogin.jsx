@@ -23,7 +23,7 @@ var checkInput = (customerLoginButton) => {
 var checkUser = (userPhoneNumber) => {
   document.getElementById('button').disabled = true;
   var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber.toString() + '\\b');
-  firebaseRef.on('value', function(snapshot){
+  firebaseRef.once('value', function(snapshot){
     var databaseSnapshot = JSON.stringify(snapshot.val());
     databaseSnapshot.match(userPhoneNumberRegex) ? setCookie() : submitUser();
   });
@@ -40,7 +40,7 @@ var submitUser = () => {
 
 var setCookie = () => {
   console.log('setting cookie');
-  firebaseRef.on('value', function(snapshot){
+  firebaseRef.once('value', function(snapshot){
     var allUsers = snapshot.val();
     var allUsersArr = Object.keys(allUsers)
     var userNo = allUsersArr.length - 1;
