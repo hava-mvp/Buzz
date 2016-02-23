@@ -6,7 +6,7 @@ import CreateOffers from './CreateOffers.jsx';
 var checkLocalStorage = () => {
   var barName = localStorage.getItem('havaBarName');
   if(barName !== null) {
-    navigateToNextPage();
+    navigateToPage('/public/#create-offers');
   } else {
     return;
   }
