@@ -35,7 +35,7 @@ var BarLogin = React.createClass({
         var barDetailsKey;
         firebaseBarNameRef.orderByChild("email").equalTo(barEmail).once("value", function(emailRegisteredWithBar) {
           var barDetailsInDB = emailRegisteredWithBar.val();
-          barDetailsInDB ? barDetailsKey = Object.keys(emailRegisteredWithBar.val()) : alert('Please contact Hava, no bar was found registered to your account');
+          barDetailsInDB ? barDetailsKey = Object.keys(barDetailsInDB) : alert('Please contact Hava, no bar was found registered to your account');
           var barNameInDB = barDetailsInDB && barDetailsInDB[barDetailsKey] && barDetailsInDB[barDetailsKey]['barName'];
           console.log('>>>>>>',barNameInDB);
           var cookifiedBarName = barNameInDB.replace(/\s/g, "#");
