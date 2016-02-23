@@ -7,7 +7,7 @@ var firebaseRefPush = firebaseRef.push();
 var checkLocalStorage = () => {
   var havaid = localStorage.getItem('havaid');
   if(havaid !== null) {
-    navigateToPage('/public/#live-offers');
+    navigateToPage('/#live-offers');
   } else {
     console.log('no havaid');
     return;
@@ -55,7 +55,7 @@ var CustomerLogin = React.createClass({
       setTimeout(function(){
         (user !== null || undefined || "") ? (localStorage.setItem('havaid', user),
         document.cookie = "havaid=" + user + "expiry=31536e3;"+ "; path=/",
-        navigateToPage('/public/#live-offers')) : checkLocalStorage();
+        navigateToPage('/#live-offers')) : checkLocalStorage();
       }, 200);
     });
   },
