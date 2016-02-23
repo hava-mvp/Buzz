@@ -1,5 +1,28 @@
 import React from 'react';
 
+var checkLocalStorage = () => {
+  var barName = localStorage.getItem('havaBarName');
+  var customerId = localStorage.getItem('havaid');
+  if(barName === null && customerId === null) {
+    console.log('not logged in');
+    return;
+  } else if (barName !== null && customerId === null)  {
+    console.log('barname loggedin');
+    navigateToNextPage('/public/#create-offers');
+  } else if (barName === null && customerId !== null)  {
+    console.log('customer logged in');
+    navigateToNextPage('/public/#live-offers');
+  } else {
+    // if barName and customerId in localStorage:
+    console.log('BOTH logged in');
+    navigateToNextPage('/public/#create-offers');
+  }
+}
+
+var navigateToNextPage = (location) => {
+  window.location = location;
+}
+
 var Index = React.createClass({
 
   handleBarClick: function(){
@@ -8,6 +31,10 @@ var Index = React.createClass({
 
   handleCustomerClick: function(){
     window.location.assign("/#customer");
+  },
+
+  componentWillMount: function(){
+    checkLocalStorage();
   },
 
   render: function() {

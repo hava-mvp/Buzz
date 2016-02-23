@@ -97,29 +97,33 @@ var CreateOffers = React.createClass({
       type: 'info',
       message: 'Sending...'
     }, function(){
-      var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
-      var formData = {
-        offer: document.getElementById('offerDescription').value,
-        endTime: endTime,
-      };
+      console.log('!!!!!!' + JSON.stringify(this.state));
+      // var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
+      // var formData = {
+      //   offer: document.getElementById('offerDescription').value,
+      //   endTime: endTime,
+      // };
 
-      var request = new XMLHttpRequest();
+      // var request = new XMLHttpRequest();
       var _this = this;
-      request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-          if (request.status === 200 && request.responseText === 'ok') {
-            _this.setState({ type: 'success', message: 'Your offer is live' });
-            console.log('ADDED TO DB');
+      // request.onreadystatechange = function() {
+      //   if (request.readyState === 4) {
+      //     if (request.status === 200 && request.responseText === 'ok') {
+      //       _this.setState({
+      //         type: 'success',
+      //         message: 'Your offer is live'
+      //       });
+      //       console.log('ADDED TO DB');
             _this.addToDB();
-          }
-          else {
-            console.log('DONT ADD TO DB');
-            _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
-          }
-        }
-      };
-      request.open('POST', '/sendTextMessage', true);
-      request.send(this.requestBuildQueryString(formData));
+      //     }
+      //     else {
+      //       console.log('DONT ADD TO DB');
+      //       _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
+      //     }
+      //   }
+      // };
+      // request.open('POST', '/sendTextMessage', true);
+      // request.send(this.requestBuildQueryString(formData));
     });
   },
 
@@ -150,6 +154,7 @@ var CreateOffers = React.createClass({
   },
 
   addToDB: function() {
+    var _this = this;
     var offer = document.getElementById('offerDescription').value;
     var offerCode = document.getElementById('offerCode').value;
     var havaBarName = document.cookie.match('havaBarName');
@@ -163,7 +168,7 @@ var CreateOffers = React.createClass({
     var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
     var offerExpiryMeridiem = document.getElementById('amPm').value;
     var checkedOfferExpiryHour = this.checkNotMidnight(offerExpiryHour, offerExpiryMeridiem);
-    this.databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
+    _this.databaseOfferTime(checkedOfferExpiryHour, offerExpiryMinutes, function(offerExpiration){
       firebaseRef.push({
         barName: barName,
         offer: offer,
@@ -172,6 +177,11 @@ var CreateOffers = React.createClass({
         expiry: offerExpiration
       });
       document.getElementById('offerSubmitButton').disabled = false;
+      _this.setState({
+        offerExpiryTime: offerExpiration
+      }, function(){
+        console.log('!!!!!!' + JSON.stringify(_this.state));
+      });
     });
   },
 
@@ -188,12 +198,21 @@ var CreateOffers = React.createClass({
     checkLocalStorage();
   },
 
+  componentDidMount: function() {
+    this.state ? console.log('!!!!!!' + JSON.stringify(this.state)) : console.log('NO STATES!');
+  },
+
   handleContactClick: function(){
     window.location.assign("/#bar-contact");
   },
 
   render: function() {
-    return (
+    var currentTime = Date.now();
+    var offerExpiryTime = this.state.offerExpiryTime;
+    var humanReadableExpiryTimeBreakdown = ((offerExpiryTime-currentTime)/1000/3600).toFixed(4);
+    var humanReadableExpiryHour = humanReadableExpiryTimeBreakdown.toString().split('.')[0];
+    var humanReadableExpiryMinutes = (parseInt(humanReadableExpiryTimeBreakdown.toString().split('.')[1])*60/10000).toFixed(0);
+    return (!offerExpiryTime || currentTime > offerExpiryTime) ? (
       <div>
          <div className='wrapper'>
            <h2>Create an Offer</h2>
@@ -210,6 +229,17 @@ var CreateOffers = React.createClass({
          <div className="site-footer offer-footer">
            <p onClick={this.handleContactClick} id="contactBtn" className="footer-text">Contact Us</p>
          </div>
+      </div>
+    ) : (
+      <div>
+        <div className="wrapper">
+          <p className="noLiveOffers">
+            Your offer is now live!
+          </p>
+        </div>
+        <div className="site-footer offer-footer">
+          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
+        </div>
       </div>
     )
   }
