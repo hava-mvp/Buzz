@@ -11,8 +11,8 @@ var BarLocation = React.createClass({
     barDetails.orderByChild('barName').equalTo(eachBarName).on("value", function(barOfferPublishHistory) {
       var barObj = barOfferPublishHistory.val();
       var barKey = Object.keys(barObj);
-      var barLocation = barObj[barKey]['mapURL'];
-      window.open(barLocation, '_blank');
+      var barLocation = "http://maps.apple.com/?q=" + barObj[barKey]['mapURL'];
+      window.location = barLocation;
     });
   },
 
