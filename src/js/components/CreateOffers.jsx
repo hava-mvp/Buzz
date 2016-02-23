@@ -94,32 +94,32 @@ Once published, customers will be notified, and the offer will not retractable.
       type: 'info',
       message: 'Sending...'
     }, function(){
-      // var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
-      // var formData = {
-      //   offer: document.getElementById('offerDescription').value,
-      //   endTime: endTime,
-      // };
+      var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
+      var formData = {
+        offer: document.getElementById('offerDescription').value,
+        endTime: endTime,
+      };
 
-      // var request = new XMLHttpRequest();
+      var request = new XMLHttpRequest();
       var _this = this;
-      // request.onreadystatechange = function() {
-      //   if (request.readyState === 4) {
-      //     if (request.status === 200 && request.responseText === 'ok') {
-      //       _this.setState({
-      //         type: 'success',
-      //         message: 'Your offer is live'
-      //       });
-      //       console.log('ADDED TO DB');
+      request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+          if (request.status === 200 && request.responseText === 'ok') {
+            _this.setState({
+              type: 'success',
+              message: 'Your offer is live'
+            });
+            console.log('ADDED TO DB');
             _this.addToDB();
-      //     }
-      //     else {
-      //       console.log('DONT ADD TO DB');
-      //       _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
-      //     }
-      //   }
-      // };
-      // request.open('POST', '/sendTextMessage', true);
-      // request.send(this.requestBuildQueryString(formData));
+          }
+          else {
+            console.log('DONT ADD TO DB');
+            _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
+          }
+        }
+      };
+      request.open('POST', '/sendTextMessage', true);
+      request.send(this.requestBuildQueryString(formData));
     });
   },
 
