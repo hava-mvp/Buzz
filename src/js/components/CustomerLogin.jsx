@@ -32,31 +32,40 @@ var CustomerLogin = React.createClass({
     var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber.toString() + '\\b');
     firebaseRef.once('value', function(snapshot){
       var databaseSnapshot = JSON.stringify(snapshot.val());
-      databaseSnapshot.match(userPhoneNumberRegex) ? _this.setCookie() : _this.submitUser();
+      databaseSnapshot.match(userPhoneNumberRegex) ? _this.getUserId(userPhoneNumber) : _this.submitUser();
     });
   },
 
   submitUser: function() {
-    console.log('user details submitted');
+    var _this = this;
+    console.log('NEW USER');
+    var userPhoneNumber = document.getElementById('phoneNumber').value;
     firebaseRefPush.set({
       email: document.getElementById('email').value,
-      phoneNumber: document.getElementById('phoneNumber').value
+      phoneNumber: userPhoneNumber
     });
-    this.setCookie();
+    _this.getUserId(userPhoneNumber);
   },
 
-  setCookie: function() {
-    console.log('setting cookie');
-    firebaseRef.once('value', function(snapshot){
-      var allUsers = snapshot.val();
-      var allUsersArr = Object.keys(allUsers)
-      var userNo = allUsersArr.length - 1;
-      var user = allUsersArr[userNo];
-      setTimeout(function(){
-        (user !== null || undefined || "") ? (localStorage.setItem('havaid', user),
-        document.cookie = "havaid=" + user + "expiry=31536e3;"+ "; path=/",
-        navigateToPage('/#live-offers')) : checkLocalStorage();
-      }, 200);
+  setCookie: function(userId) {
+    console.log('SETTING COOKIE');
+    localStorage.setItem('havaid', userId);
+    document.cookie = "havaid=" + userId + "expiry=31536e3;"+ "; path=/";
+    return (localStorage.getItem('havaid') && document.cookie.match('havaid')) ? 'ok' : 'not ok'
+  },
+
+  getUserId: function(userPhoneNumber) {
+    console.log('INSIDE GET USER ID');
+    var customerKey;
+    var _this = this;
+    firebaseRef.orderByChild("phoneNumber").equalTo(userPhoneNumber).once("value", function(phoneNumberInDB){
+      var customerDetailsInDB = phoneNumberInDB.val();
+      customerDetailsInDB ? customerKey = Object.keys(customerDetailsInDB) : console.log('NO PHONE NUMBER IN DATABASE' + userPhoneNumber);
+      if (customerKey !== (undefined || null || "")) {
+        console.log('CUSTOMER KEY NOT NULL ' + customerKey)
+        var cookiesSet = _this.setCookie(customerKey);
+        cookiesSet === 'ok' ? navigateToPage('/#live-offers') : _this.setCookie(userPhoneNumber);
+      }
     });
   },
 
