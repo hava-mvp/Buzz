@@ -8,7 +8,7 @@ var BarLocation = React.createClass({
     var _this = this;
     var eachBarName = _this.props.offerDetails.replace(/\"/g, "");
     var barDetails = new Firebase("https://hava-peter.firebaseio.com/bars");
-    barDetails.orderByChild('barName').equalTo(eachBarName).on("value", function(barOfferPublishHistory) {
+    barDetails.orderByChild('barName').equalTo(eachBarName).once("value", function(barOfferPublishHistory) {
       console.log('inside database!!')
       var barObj = barOfferPublishHistory.val();
       var barKey = Object.keys(barObj);
