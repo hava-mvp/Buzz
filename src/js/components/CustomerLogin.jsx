@@ -32,7 +32,7 @@ var CustomerLogin = React.createClass({
     var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber.toString() + '\\b');
     firebaseRef.once('value', function(snapshot){
       var databaseSnapshot = JSON.stringify(snapshot.val());
-      databaseSnapshot.match(userPhoneNumberRegex) ? _this.setCookie() : submitUser();
+      databaseSnapshot.match(userPhoneNumberRegex) ? _this.setCookie() : _this.submitUser();
     });
   },
 
