@@ -8,14 +8,14 @@ var checkLocalStorage = () => {
     return;
   } else if (barName !== null && customerId === null)  {
     console.log('barname loggedin');
-    navigateToNextPage('/public/#create-offers');
+    navigateToNextPage('/#create-offers');
   } else if (barName === null && customerId !== null)  {
     console.log('customer logged in');
-    navigateToNextPage('/public/#live-offers');
+    navigateToNextPage('/#live-offers');
   } else {
     // if barName and customerId in localStorage:
     console.log('BOTH logged in');
-    navigateToNextPage('/public/#create-offers');
+    navigateToNextPage('/#create-offers');
   }
 }
 
