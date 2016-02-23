@@ -212,9 +212,6 @@ var CreateOffers = React.createClass({
     var humanReadableExpiryTimeBreakdown = ((offerExpiryTime-currentTime)/1000/3600).toFixed(4);
     var humanReadableExpiryHour = humanReadableExpiryTimeBreakdown.toString().split('.')[0];
     var humanReadableExpiryMinutes = (parseInt(humanReadableExpiryTimeBreakdown.toString().split('.')[1])*60/10000).toFixed(0);
-    // <p className="noLiveOffers">
-    //   The offer you last published will expire in {humanReadableExpiryHour} hours and {humanReadableExpiryMinutes} minutes.
-    // </p>
     return (!offerExpiryTime || currentTime > offerExpiryTime) ? (
       <div>
          <div className='wrapper'>
