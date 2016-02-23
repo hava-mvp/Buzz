@@ -13,7 +13,7 @@ var BarLocation = React.createClass({
       var barObj = barOfferPublishHistory.val();
       var barKey = Object.keys(barObj);
       var barLocation = "http://maps.apple.com/?q=" + barObj[barKey]['mapURL'];
-      window.location.href = barLocation;
+      window.location = barLocation;
     });
   },
 
