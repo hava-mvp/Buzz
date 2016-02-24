@@ -1,10 +1,14 @@
-* {
+html {
   font-family: Avenir;
   font-weight: lighter;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
   background-color: #474747;
+  height: 100%;
+  overflow: hidden;
 }
 
 p {
@@ -97,7 +101,7 @@ select {
   flex-direction: column;
   padding: 2em;
   color: #fff;
-  margin-bottom: 350px;
+  /*margin-bottom: 350px;*/
 }
 
 /* LIVE OFFERS PAGE */
@@ -180,7 +184,7 @@ li {
 /* FOOTER */
 
 .site-footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   right: 0;
 }
