@@ -87,6 +87,8 @@ select {
 }
 
 .wrapper {
+  left: 0;
+  right: 0;
   position: absolute;
   margin-top: 10px;
   min-height: 60%;
@@ -96,7 +98,7 @@ select {
   flex-direction: column;
   padding: 1em;
   color: #fff;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 /* LIVE OFFERS PAGE */
