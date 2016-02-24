@@ -87,16 +87,18 @@ select {
 }
 
 .wrapper {
+  left: 0;
+  right: 0;
   position: absolute;
-  margin-top: 15%;
-  height: 100%;
+  margin-top: 10px;
+  min-height: 60%;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  padding: 2em;
+  padding: 1em;
   color: #fff;
-  /*margin-bottom: 350px;*/
+  margin-bottom: 20px;
 }
 
 /* LIVE OFFERS PAGE */
