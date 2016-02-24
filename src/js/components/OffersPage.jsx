@@ -12,7 +12,7 @@ var checkLocalStorage = () => {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/public/#customer';
+  window.location = '/#customer';
 }
 
 var getLiveOffers = (callback) => {
@@ -58,7 +58,7 @@ var OffersPage = React.createClass({
   },
 
   handleContactClick: function(){
-    window.location.assign("/public/#customer-contact");
+    window.location.assign("/#customer-contact");
   },
 
   render: function() {
