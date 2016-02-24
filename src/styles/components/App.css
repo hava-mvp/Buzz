@@ -6,7 +6,7 @@
 html, body {
   background-color: #474747;
   min-height: 100%;
-  overflow: scroll;
+  overflow: visible;
 }
 
 p {
