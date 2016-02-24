@@ -1,12 +1,12 @@
-html {
+* {
   font-family: Avenir;
   font-weight: lighter;
 }
 
-body {
+html, body {
   background-color: #474747;
   min-height: 100%;
-  overflow: scroll;
+  overflow: visible;
 }
 
 p {
@@ -90,16 +90,15 @@ select {
   left: 0;
   right: 0;
   position: absolute;
-  top: 0;
-  margin-top: 15%;
-  height: 80%;
+  margin-top: 10px;
+  min-height: 60%;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  padding: 2em;
+  padding: 1em;
   color: #fff;
-  /*margin-bottom: 350px;*/
+  margin-bottom: 20px;
 }
 
 /* LIVE OFFERS PAGE */
@@ -177,6 +176,7 @@ li {
   border-radius: 0;
   margin: 0;
   min-height: 25px;
+  display: block;
 }
 
 /* FOOTER */
