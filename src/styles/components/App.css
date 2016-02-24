@@ -1,10 +1,12 @@
-* {
+html {
   font-family: Avenir;
   font-weight: lighter;
 }
 
 body {
   background-color: #474747;
+  min-height: 100%;
+  overflow: scroll;
 }
 
 p {
@@ -97,7 +99,7 @@ select {
   flex-direction: column;
   padding: 2em;
   color: #fff;
-  margin-bottom: 350px;
+  /*margin-bottom: 350px;*/
 }
 
 /* LIVE OFFERS PAGE */
