@@ -44,18 +44,11 @@ var CreateOffers = React.createClass({
   canPublishOffer: function() {
     var _this = this;
     var havaBarName = localStorage.getItem('havaBarName');
-    console.log('>>>>>>>>>>>>>>>>', havaBarName);
-    if (havaBarName) {
-      console.log("!!!!!!!!", havaBarName)
-      var barName = havaBarName && havaBarName.replace(/#/g, " ");
-      console.log("!!!!!!!!", barName)
-      var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
-      firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
-        barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.confirmOffer();
-      });
-    } else {
-      checkLocalStorage();
-    }
+    var barName = havaBarName ? havaBarName.replace(/#/g, " ") : (alert('Something went wrong, please refresh the page and try again.'), checkLocalStorage());
+    var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
+    firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
+      barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.confirmOffer();
+    });
   },
 
   checkForExistingOffers: function(barOfferHistory) {
