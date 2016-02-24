@@ -43,16 +43,19 @@ var CreateOffers = React.createClass({
 
   canPublishOffer: function() {
     var _this = this;
-    var havaBarName = document.cookie.match('havaBarName');
-    var barName = havaBarName &&
-                  havaBarName.input &&
-                  havaBarName.input.split('havaBarName=')[1] &&
-                  havaBarName.input.split('havaBarName=')[1].split(";")[0] &&
-                  havaBarName.input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
-    var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
-    firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
-      barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.confirmOffer();
-    });
+    var havaBarName = localStorage.getItem('havaBarName');
+    console.log('>>>>>>>>>>>>>>>>', havaBarName);
+    if (havaBarName) {
+      console.log("!!!!!!!!", havaBarName)
+      var barName = havaBarName && havaBarName.replace(/#/g, " ");
+      console.log("!!!!!!!!", barName)
+      var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
+      firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
+        barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.confirmOffer();
+      });
+    } else {
+      checkLocalStorage();
+    }
   },
 
   checkForExistingOffers: function(barOfferHistory) {
@@ -100,26 +103,26 @@ Once published, customers will be notified, and the offer will not retractable.
         endTime: endTime,
       };
 
-      var request = new XMLHttpRequest();
+      // var request = new XMLHttpRequest();
       var _this = this;
-      request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-          if (request.status === 200 && request.responseText === 'ok') {
-            _this.setState({
-              type: 'success',
-              message: 'Your offer is live'
-            });
+      // request.onreadystatechange = function() {
+      //   if (request.readyState === 4) {
+      //     if (request.status === 200 && request.responseText === 'ok') {
+      //       _this.setState({
+      //         type: 'success',
+      //         message: 'Your offer is live'
+      //       });
             console.log('ADDED TO DB');
             _this.addToDB();
-          }
-          else {
-            console.log('DONT ADD TO DB');
-            _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
-          }
-        }
-      };
-      request.open('POST', '/sendTextMessage', true);
-      request.send(this.requestBuildQueryString(formData));
+      //     }
+      //     else {
+      //       console.log('DONT ADD TO DB');
+      //       _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
+      //     }
+      //   }
+      // };
+      // request.open('POST', '/sendTextMessage', true);
+      // request.send(this.requestBuildQueryString(formData));
     });
   },
 

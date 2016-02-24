@@ -1,14 +1,14 @@
 html {
   font-family: Avenir;
   font-weight: lighter;
-  height: 100%;
-  overflow: hidden;
+  /*height: 100%;
+  overflow: hidden;*/
 }
 
 body {
   background-color: #474747;
-  height: 100%;
-  overflow: hidden;
+  /*height: 100%;
+  overflow: hidden;*/
 }
 
 p {
