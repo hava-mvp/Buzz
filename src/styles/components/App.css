@@ -1,14 +1,12 @@
 html {
   font-family: Avenir;
   font-weight: lighter;
-  /*height: 100%;
-  overflow: hidden;*/
 }
 
 body {
   background-color: #474747;
-  /*height: 100%;
-  overflow: hidden;*/
+  min-height: 100%;
+  overflow: scroll;
 }
 
 p {
@@ -184,7 +182,7 @@ li {
 /* FOOTER */
 
 .site-footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
 }
