@@ -8,14 +8,14 @@ var checkLocalStorage = () => {
     return;
   } else if (barName !== null && customerId === null)  {
     console.log('barname loggedin');
-    navigateToNextPage('/#create-offers');
+    navigateToNextPage('/public/#create-offers');
   } else if (barName === null && customerId !== null)  {
     console.log('customer logged in');
-    navigateToNextPage('/#live-offers');
+    navigateToNextPage('/public/#live-offers');
   } else {
     // if barName and customerId in localStorage:
     console.log('BOTH logged in');
-    navigateToNextPage('/#create-offers');
+    navigateToNextPage('/public/#create-offers');
   }
 }
 
@@ -26,11 +26,11 @@ var navigateToNextPage = (location) => {
 var Index = React.createClass({
 
   handleBarClick: function(){
-    window.location.assign("/#bar");
+    window.location.assign("/public/#bar");
   },
 
   handleCustomerClick: function(){
-    window.location.assign("/#customer");
+    window.location.assign("/public/#customer");
   },
 
   componentWillMount: function(){
