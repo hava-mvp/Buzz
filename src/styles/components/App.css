@@ -171,14 +171,14 @@ li {
   margin-left: auto;
   margin-right: auto;
   display: block;
-}
+} 
 
 .navbar {
   border-radius: 0;
   margin: 0;
-  min-height: 40px;
+  min-height: 25px;
   display: block;
-}
+} 
 
 /* FOOTER */
 
