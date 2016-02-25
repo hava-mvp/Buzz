@@ -15,7 +15,7 @@ var checkLocalStorage = function() {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/#bar';
+  window.location = '/public/#bar';
 }
 
 var CreateOffers = React.createClass({
@@ -209,7 +209,7 @@ Once published, customers will be notified, and the offer will not retractable.
   },
 
   handleContactClick: function(){
-    window.location.assign("/#bar-contact");
+    window.location.assign("/public/#bar-contact");
   },
 
   render: function() {
