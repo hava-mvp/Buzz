@@ -102,19 +102,18 @@ Once published, customers will be notified, and the offer will not retractable.
     var request = new XMLHttpRequest();
     var _this = this;
     request.onreadystatechange = function() {
-      if (request.readyState === 4) {
-        if (request.status === 200 && request.responseText === 'ok') {
-          console.log('!!!!!!!!!!!', request.responseText);
+      if (request.status === 200 && request.readyState === 4) {
+        if (request.responseText.match !== 'notOk') {
+          console.log('DONT ADD TO DB');
+          _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
+        }
+        else {
           _this.setState({
             type: 'success',
             message: 'Your offer is live'
           });
           console.log('ADDED TO DB');
           _this.addToDB();
-        }
-        else {
-          console.log('DONT ADD TO DB');
-          _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
         }
       }
     };
