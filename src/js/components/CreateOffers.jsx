@@ -6,6 +6,7 @@ var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
 
 var checkLocalStorage = function() {
   var barName = localStorage.getItem('havaBarName');
+  console.log('CHECKLOCALSTORAGE', barName);
   if(barName !== null) {
     return;
   } else {
@@ -43,7 +44,7 @@ var CreateOffers = React.createClass({
 
   canPublishOffer: function() {
     var _this = this;
-    var havaBarName = localStorage.getItem('havaBarName');
+    var havaBarName = _this.state.havaBarName;
     var barName = havaBarName ? havaBarName.replace(/#/g, " ") : (alert('Something went wrong, please refresh the page and try again.'), checkLocalStorage());
     var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
     firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
@@ -86,37 +87,39 @@ Once published, customers will be notified, and the offer will not retractable.
 
   sendFormData: function () {
     var _this = this;
+    console.log('THIS STATE', _this.state);
     _this.setState({
       type: 'info',
       message: 'Sending...'
-    }, function(){
-      var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
-      var formData = {
-        offer: document.getElementById('offerDescription').value,
-        endTime: endTime,
-      };
-
-      var request = new XMLHttpRequest();
-      var _this = this;
-      request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-          if (request.status === 200 && request.responseText === 'ok') {
-            _this.setState({
-              type: 'success',
-              message: 'Your offer is live'
-            });
-            console.log('ADDED TO DB');
-            _this.addToDB();
-          }
-          else {
-            console.log('DONT ADD TO DB');
-            _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
-          }
-        }
-      };
-      request.open('POST', '/sendTextMessage', true);
-      request.send(this.requestBuildQueryString(formData));
     });
+    var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
+    var formData = {
+      offer: document.getElementById('offerDescription').value,
+      endTime: endTime,
+      barName: _this.state.havaBarName
+    };
+
+    var request = new XMLHttpRequest();
+    var _this = this;
+    request.onreadystatechange = function() {
+      if (request.readyState === 4) {
+        if (request.status === 200 && request.responseText === 'ok') {
+          console.log('!!!!!!!!!!!', request.responseText);
+          _this.setState({
+            type: 'success',
+            message: 'Your offer is live'
+          });
+          console.log('ADDED TO DB');
+          _this.addToDB();
+        }
+        else {
+          console.log('DONT ADD TO DB');
+          _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
+        }
+      }
+    };
+    request.open('POST', '/sendTextMessage', true);
+    request.send(this.requestBuildQueryString(formData));
   },
 
   databaseOfferTime: function(checkedHour, inputMinutes, callback) {
@@ -186,11 +189,24 @@ Once published, customers will be notified, and the offer will not retractable.
   },
 
   componentWillMount: function() {
-    checkLocalStorage();
+    checkLocalStorage()
   },
 
   componentDidMount: function() {
-    this.state ? console.log('>>>>>>>>>>>>>...' + JSON.stringify(this.state)) : console.log('NO STATES!');
+    var barName = localStorage.getItem('havaBarName');
+    var cleanBarName;
+    if (barName.match(/\"/g)) {
+      cleanBarName = barName.replace(/\"/g, "");
+    } else if (barName.match(/#/g)) {
+      cleanBarName = barName.replace(/#/g, " ");
+    } else if (barName.match(/\"/g) && barName.match(/#/g)) {
+      cleanBarName = barName.replace(/\"/g, "").match(/#/g);
+    } else {
+      cleanBarName = barName;
+    }
+    this.setState({
+      havaBarName: cleanBarName
+    });
   },
 
   handleContactClick: function(){
