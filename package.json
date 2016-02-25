@@ -53,10 +53,10 @@
     "react-router": "^1.0.3",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.9",
+    "env2": "^2.0.6",
     "why-is-node-running": "^1.1.1"
   },
   "devDependencies": {
-    "env2": "^2.0.6",
     "istanbul": "^0.4.1",
     "pre-commit": "^1.1.2",
     "react-addons-test-utils": "^0.14.5",
