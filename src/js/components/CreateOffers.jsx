@@ -103,7 +103,8 @@ Once published, customers will be notified, and the offer will not retractable.
     var _this = this;
     request.onreadystatechange = function() {
       if (request.status === 200 && request.readyState === 4) {
-        if (request.responseText.match !== 'notOk') {
+        var messagesNotSent = new RegExp('notOk', 'g');
+        if (request.responseText.match(messagesNotSent)) {
           console.log('DONT ADD TO DB');
           _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
         }
