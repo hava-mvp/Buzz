@@ -6,7 +6,7 @@ import CreateOffers from './CreateOffers.jsx';
 var checkLocalStorage = () => {
   var barName = localStorage.getItem('havaBarName');
   if(barName !== null) {
-    navigateToPage('/public/#create-offers');
+    navigateToPage('/#create-offers');
   } else {
     return;
   }
@@ -41,7 +41,7 @@ var BarLogin = React.createClass({
           var cookifiedBarName = barNameInDB.replace(/\s/g, "#");
           document.cookie = 'havaBarName=' + JSON.stringify(cookifiedBarName) + "; path='/'";
           localStorage.setItem('havaBarName', JSON.stringify(cookifiedBarName));
-          navigateToPage('/public/#create-offers');
+          navigateToPage('/#create-offers');
         });
       }
       var barAuthorised = () => {
