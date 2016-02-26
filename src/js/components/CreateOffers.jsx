@@ -152,12 +152,7 @@ Once published, customers will be notified, and the offer will not retractable.
     var _this = this;
     var offer = document.getElementById('offerDescription').value;
     var offerCode = document.getElementById('offerCode').value;
-    var havaBarName = document.cookie.match('havaBarName');
-    var barName = havaBarName &&
-                  havaBarName.input &&
-                  havaBarName.input.split('havaBarName=')[1] &&
-                  havaBarName.input.split('havaBarName=')[1].split(";")[0] &&
-                  havaBarName.input.split('havaBarName=')[1].split(";")[0].replace(/#/g, " ");
+    var barName = _this.state.havaBarName;
     var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
     var offerExpiryHour = document.getElementById('hours').value && parseInt(document.getElementById('hours').value);
     var offerExpiryMinutes = document.getElementById('minutes').value && parseInt(document.getElementById('minutes').value);
