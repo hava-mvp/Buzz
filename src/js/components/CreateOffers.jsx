@@ -171,7 +171,7 @@ Once published, customers will be notified, and the offer will not retractable.
         endTime: endTime,
         expiry: offerExpiration,
         offerSet: offerSetTime
-      }, _this.sendFormData();
+      }, _this.sendFormData())
       document.getElementById('offerSubmitButton').disabled = false;
       _this.setState({
         offerExpiryTime: offerExpiration
