@@ -78,7 +78,7 @@ var CreateOffers = React.createClass({
 Once published, customers will be notified, and the offer will not retractable.
       `);
       if (confirmation === true) {
-        _this.sendFormData()
+        _this.addToDB();
       } else {
         document.getElementById('offerSubmitButton').disabled = false;
         return;
@@ -103,7 +103,8 @@ Once published, customers will be notified, and the offer will not retractable.
     var _this = this;
     request.onreadystatechange = function() {
       if (request.status === 200 && request.readyState === 4) {
-        if (request.responseText.match !== 'notOk') {
+        var messagesNotSent = new RegExp('notOk', 'g');
+        if (request.responseText.match(messagesNotSent)) {
           console.log('DONT ADD TO DB');
           _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
         }
@@ -170,7 +171,7 @@ Once published, customers will be notified, and the offer will not retractable.
         endTime: endTime,
         expiry: offerExpiration,
         offerSet: offerSetTime
-      });
+      }, _this.sendFormData();
       document.getElementById('offerSubmitButton').disabled = false;
       _this.setState({
         offerExpiryTime: offerExpiration
