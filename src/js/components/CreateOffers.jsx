@@ -190,16 +190,12 @@ Once published, customers will be notified, and the offer will not retractable.
   componentDidMount: function() {
     var barName = localStorage.getItem('havaBarName');
     var cleanBarName;
-    if (barName.match(/\"/g)) {
-      cleanBarName = barName.replace(/\"/g, "");
-    } else if (barName.match(/#/g)) {
-      cleanBarName = barName.replace(/#/g, " ");
-    } else if (barName.match(/\"/g) && barName.match(/#/g)) {
-      cleanBarName = barName.replace(/\"/g, "").match(/#/g);
+    var regex = /(\")|(#)/g
+    if (barName.match(regex)) {
+      cleanBarName = barName.replace(/\"/g, "").replace(/#/g, " ");
     } else {
       cleanBarName = barName;
-    }
-    this.setState({
+    }    this.setState({
       havaBarName: cleanBarName
     });
   },
