@@ -11,7 +11,7 @@ var BarContact = React.createClass({
       <div className="contact-wrapper">
         <h2>Contact Us</h2>
           <p>
-            Call the Hava office at: 07xxxxxxxxx
+            Call the Hava office at: 07821573753
           </p>
           <p>
             Email us at:
