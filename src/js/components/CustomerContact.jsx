@@ -20,7 +20,7 @@ var CustomerContact = React.createClass({
             <a href="https://www.instagram.com/thehavaapp/">
               <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697067-instagram-512.png"/>
             </a>
-            <a href="https://www.facebook.com/">
+            <a href="https://www.facebook.com/havaapp/">
               <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697057-facebook-512.png"/>
             </a>
             <a href="https://twitter.com/thehavaapp">
