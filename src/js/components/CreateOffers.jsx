@@ -135,7 +135,13 @@ Once published, customers will be notified, and the offer will not be retractabl
         endTime: endTime,
         expiry: offerExpiration,
         offerSet: offerSetTime
-      }, _this.sendFormData())
+      }, function(){
+        _this.setState({
+          type: 'success',
+          message: 'Your offer is live'
+        });
+        _this.sendFormData()
+      });
       document.getElementById('offerSubmitButton').disabled = false;
       _this.setState({
         offerExpiryTime: offerExpiration
@@ -167,10 +173,6 @@ Once published, customers will be notified, and the offer will not be retractabl
         }
         else {
           console.log('MESSAGES SENT');
-          _this.setState({
-            type: 'success',
-            message: 'Your offer is live'
-          });
         }
       }
     };
