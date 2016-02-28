@@ -1,6 +1,7 @@
 import React from 'react';
 import Firebase from 'firebase';
 import IndividualOffer from './IndividualOffer.jsx'
+import ContactFooter from './ContactFooter.jsx'
 
 var checkLocalStorage = () => {
   var havaid = localStorage.getItem('havaid');
@@ -63,9 +64,7 @@ var OffersPage = React.createClass({
     return !_this.state ? (
       <div>
         <h4 className="loading">Loading...</h4>
-        <div className="site-footer offer-footer">
-          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
-        </div>
+          <ContactFooter navigateTo={'/#customer-contact'} footerName={'Contact Us'} />
       </div>
     ) : ((_this.state.offers.length === 0) ? (
       <div>
@@ -77,9 +76,7 @@ var OffersPage = React.createClass({
             Our bars will be in touch soon :)
           </p>
         </div>
-        <div className="site-footer offer-footer">
-          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
-        </div>
+        <ContactFooter navigateTo={'/#customer-contact'} footerName={'Contact Us'} />
       </div>
     ) : (
       <div>
@@ -90,9 +87,7 @@ var OffersPage = React.createClass({
             />
         ))}
         </div>
-        <div className="site-footer offer-footer">
-          <p type="submit" className="footer-text" onClick={this.handleContactClick}>Contact Us</p>
-        </div>
+        <ContactFooter navigateTo={'/#customer-contact'} footerName={'Contact Us'} />
       </div>
     ));
   }

@@ -1,7 +1,23 @@
 import React from 'react';
 import ContactFooter from './ContactFooter.jsx'
 
+var checkLocalStorage = function() {
+  var barName = localStorage.getItem('havaBarName');
+  if(barName !== null) {
+    return;
+  } else {
+    navigateToPage('/#bar');
+  }
+}
+
+var navigateToPage = (pageUrl) => {
+  window.location = pageUrl;
+}
+
 var BarContact = React.createClass({
+  componentWillMount: function() {
+    checkLocalStorage();
+  },
 
   handleBackClick: function(){
     window.location.assign("/#create-offers");
