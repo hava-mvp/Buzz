@@ -13,7 +13,7 @@ var checkLocalStorage = () => {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/#customer';
+  window.location = '/public/#customer';
 }
 
 var getLiveOffers = (callback) => {
@@ -64,7 +64,7 @@ var OffersPage = React.createClass({
     return !_this.state ? (
       <div>
         <h4 className="loading">Loading...</h4>
-          <ContactFooter navigateTo={'/#customer-contact'} footerName={'Contact Us'} />
+          <ContactFooter navigateTo={'/public/#customer-contact'} footerName={'Contact Us'} />
       </div>
     ) : ((_this.state.offers.length === 0) ? (
       <div>
@@ -76,7 +76,7 @@ var OffersPage = React.createClass({
             Our bars will be in touch soon :)
           </p>
         </div>
-        <ContactFooter navigateTo={'/#customer-contact'} footerName={'Contact Us'} />
+        <ContactFooter navigateTo={'/public/#customer-contact'} footerName={'Contact Us'} />
       </div>
     ) : (
       <div>
@@ -87,7 +87,7 @@ var OffersPage = React.createClass({
             />
         ))}
         </div>
-        <ContactFooter navigateTo={'/#customer-contact'} footerName={'Contact Us'} />
+        <ContactFooter navigateTo={'/public/#customer-contact'} footerName={'Contact Us'} />
       </div>
     ));
   }

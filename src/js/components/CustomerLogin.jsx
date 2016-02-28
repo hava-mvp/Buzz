@@ -7,7 +7,7 @@ var firebaseRefPush = firebaseRef.push();
 var checkLocalStorage = () => {
   var havaid = localStorage.getItem('havaid');
   if(havaid !== null) {
-    navigateToPage('/#live-offers');
+    navigateToPage('/public/#live-offers');
   } else {
     console.log('no havaid');
     return;
@@ -63,7 +63,7 @@ var CustomerLogin = React.createClass({
       if (customerKey !== (undefined || null || "")) {
         console.log('CUSTOMER KEY NOT NULL ' + customerKey)
         var cookiesSet = _this.setCookie(customerKey);
-        cookiesSet === 'ok' ? navigateToPage('/#live-offers') : _this.setCookie(userPhoneNumber);
+        cookiesSet === 'ok' ? navigateToPage('/public/#live-offers') : _this.setCookie(userPhoneNumber);
       }
     });
   },

@@ -6,7 +6,7 @@ var checkLocalStorage = function() {
   if(barName !== null) {
     return;
   } else {
-    navigateToPage('/#customer');
+    navigateToPage('/public/#customer');
   }
 }
 
@@ -20,7 +20,7 @@ var CustomerContact = React.createClass({
   },
 
   handleBackClick: function(){
-    window.location.assign("/#live-offers");
+    window.location.assign("/public/#live-offers");
   },
 
   render: function() {
@@ -42,7 +42,7 @@ var CustomerContact = React.createClass({
             <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697029-twitter-512.png"/>
           </a>
         </div>
-        <ContactFooter navigateTo={'/#live-offers'} footerName={'Back to Live Offers'} />
+        <ContactFooter navigateTo={'/public/#live-offers'} footerName={'Back to Live Offers'} />
       </div>
     )
   }
