@@ -139,13 +139,11 @@ Once published, customers will be notified, and the offer will not be retractabl
         _this.setState({
           type: 'success',
           message: 'Your offer is live'
+          offerExpiryTime: offerExpiration
         });
         _this.sendFormData()
       });
       document.getElementById('offerSubmitButton').disabled = false;
-      _this.setState({
-        offerExpiryTime: offerExpiration
-      });
     });
   },
 
