@@ -138,7 +138,7 @@ Once published, customers will be notified, and the offer will not be retractabl
       }, function(){
         _this.setState({
           type: 'success',
-          message: 'Your offer is live'
+          message: 'Your offer is live',
           offerExpiryTime: offerExpiration
         });
         _this.sendFormData()
