@@ -76,7 +76,7 @@ var CreateOffers = React.createClass({
       Offer Expiry Time: ${offerExpiryHour}:${offerExpiryMinutes} ${offerExpiryMeridiem}
       Offer Code: ${offerCode}
 
-Once published, customers will be notified, and the offer will not retractable.
+Once published, customers will be notified, and the offer will not be retractable.
       `);
       if (confirmation === true) {
         _this.addToDB();
