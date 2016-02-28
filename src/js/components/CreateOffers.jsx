@@ -16,7 +16,7 @@ var checkLocalStorage = function() {
 }
 
 var navigateToPreviousPage = () => {
-  window.location = '/public/#bar';
+  window.location = '/#bar';
 }
 
 var CreateOffers = React.createClass({
@@ -46,7 +46,7 @@ var CreateOffers = React.createClass({
   canPublishOffer: function() {
     var _this = this;
     var havaBarName = _this.state.havaBarName;
-    var barName = havaBarName ? havaBarName.replace(/public/#/g, " ") : (alert('Something went wrong, please refresh the page and try again.'), checkLocalStorage());
+    var barName = havaBarName ? havaBarName.replace(/#/g, " ") : (alert('Something went wrong, please refresh the page and try again.'), checkLocalStorage());
     var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
     firebaseRef.orderByChild('barName').equalTo(barName).once("value", function(barOfferPublishHistory) {
       barOfferPublishHistory.val() ? _this.checkForExistingOffers(barOfferPublishHistory.val()) : _this.confirmOffer();
@@ -196,12 +196,16 @@ Once published, customers will be notified, and the offer will not be retractabl
     var cleanBarName;
     var regex = /(\")|(#)/g
     if (barName.match(regex)) {
-      cleanBarName = barName.replace(/\"/g, "").replace(/public/#/g, " ");
+      cleanBarName = barName.replace(/\"/g, "").replace(/#/g, " ");
     } else {
       cleanBarName = barName;
     }    this.setState({
       havaBarName: cleanBarName
     });
+  },
+
+  handleContactClick: function(){
+    window.location.assign("/#bar-contact");
   },
 
   render: function() {
