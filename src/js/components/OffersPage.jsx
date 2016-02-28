@@ -57,10 +57,6 @@ var OffersPage = React.createClass({
     }
   },
 
-  handleContactClick: function(){
-    window.location.assign("/#customer-contact");
-  },
-
   render: function() {
     var _this = this;
 
@@ -95,7 +91,7 @@ var OffersPage = React.createClass({
         ))}
         </div>
         <div className="site-footer offer-footer">
-          <p type="submit" onClick={this.handleContactClick} className="footer-text">Contact Us</p>
+          <p type="submit" className="footer-text" onClick={this.handleContactClick}>Contact Us</p>
         </div>
       </div>
     ));

@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactFooter from './ContactFooter.jsx'
 
 var BarContact = React.createClass({
 
@@ -28,9 +29,7 @@ var BarContact = React.createClass({
               <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697029-twitter-512.png"/>
             </a>
           </div>
-          <div className="site-footer offer-footer">
-            <p onClick={this.handleBackClick} id="contactBtn" className="footer-text">Back to Create Offers</p>
-          </div>
+          <ContactFooter navigateTo={'/#create-offers'} footerName={'Back to Create Offers'} />
       </div>
     )
   }
