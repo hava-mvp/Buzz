@@ -1,6 +1,7 @@
 import React from 'react';
 import Firebase from 'firebase';
-import EndTime from './EndTime.jsx'
+import EndTime from './EndTime.jsx';
+import ContactFooter from './ContactFooter.jsx'
 
 var firebaseRef = new Firebase("https://hava-peter.firebaseio.com/offers");
 
@@ -85,42 +86,6 @@ Once published, customers will be notified, and the offer will not be retractabl
       }
   },
 
-  sendFormData: function () {
-    var _this = this;
-    console.log('THIS STATE', _this.state);
-    _this.setState({
-      type: 'info',
-      message: 'Sending...'
-    });
-    var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
-    var formData = {
-      offer: document.getElementById('offerDescription').value,
-      endTime: endTime,
-      barName: _this.state.havaBarName
-    };
-
-    var request = new XMLHttpRequest();
-    var _this = this;
-    request.onreadystatechange = function() {
-      if (request.status === 200 && request.readyState === 4) {
-        var messagesNotSent = new RegExp('notOk', 'g');
-        if (request.responseText.match(messagesNotSent)) {
-          console.log('DONT ADD TO DB');
-          _this.setState({ type: 'danger', message: 'Error. Please refresh and try again.' });
-        }
-        else {
-          _this.setState({
-            type: 'success',
-            message: 'Your offer is live'
-          });
-          console.log('ADDED TO DB');
-          _this.addToDB();
-        }
-      }
-    };
-    request.open('POST', '/sendTextMessage', true);
-    request.send(this.requestBuildQueryString(formData));
-  },
 
   databaseOfferTime: function(checkedHour, inputMinutes, callback) {
     var absoluteOfferSetTime = Date.now();  // current time in milliseconds;
@@ -150,6 +115,10 @@ Once published, customers will be notified, and the offer will not be retractabl
 
   addToDB: function() {
     var _this = this;
+    _this.setState({
+      type: 'info',
+      message: 'Sending...'
+    });
     var offer = document.getElementById('offerDescription').value;
     var offerCode = document.getElementById('offerCode').value;
     var barName = _this.state.havaBarName;
@@ -172,6 +141,41 @@ Once published, customers will be notified, and the offer will not be retractabl
         offerExpiryTime: offerExpiration
       });
     });
+  },
+
+  sendFormData: function () {
+    console.log('OFFER ADDED TO DB');
+    var _this = this;
+    console.log('THIS STATE', _this.state);
+    var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
+    var formData = {
+      offer: document.getElementById('offerDescription').value,
+      endTime: endTime,
+      barName: _this.state.havaBarName
+    };
+
+    var request = new XMLHttpRequest();
+    var _this = this;
+    request.onreadystatechange = function() {
+      if (request.status === 200 && request.readyState === 4) {
+        var messagesNotSent = new RegExp('notOk', 'g');
+        if (request.responseText.match(messagesNotSent)) {
+          console.log('MESSAGES COULD NOT BE SENT');
+          _this.setState({
+            type: 'danger',
+            message: 'Offer live, but messages have failed to send.'});
+        }
+        else {
+          console.log('MESSAGES SENT');
+          _this.setState({
+            type: 'success',
+            message: 'Your offer is live'
+          });
+        }
+      }
+    };
+    request.open('POST', '/sendTextMessage', true);
+    request.send(this.requestBuildQueryString(formData));
   },
 
   requestBuildQueryString: function (params) {
@@ -200,10 +204,6 @@ Once published, customers will be notified, and the offer will not be retractabl
     });
   },
 
-  handleContactClick: function(){
-    window.location.assign("/#bar-contact");
-  },
-
   render: function() {
     var currentTime = Date.now();
     var offerExpiryTime = this.state.offerExpiryTime;
@@ -225,9 +225,7 @@ Once published, customers will be notified, and the offer will not be retractabl
              <button id='offerSubmitButton' className='btn btn-md button'>{this.state.message}</button>
            </form>
          </div>
-         <div className="site-footer offer-footer">
-           <p onClick={this.handleContactClick} id="contactBtn" className="footer-text">Contact Us</p>
-         </div>
+         <ContactFooter navigateTo={'/#bar-contact'} footerName={'Contact Us'} />
       </div>
     ) : (
       <div>
@@ -236,9 +234,7 @@ Once published, customers will be notified, and the offer will not be retractabl
             Your offer is now live!
           </p>
         </div>
-        <div className="site-footer offer-footer">
-          <p type="submit" onClick={this.handleContactClick}>Contact Us</p>
-        </div>
+        <ContactFooter navigateTo={'/#bar-contact'} footerName={'Contact Us'} />
       </div>
     )
   }

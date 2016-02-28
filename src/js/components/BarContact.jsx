@@ -1,6 +1,23 @@
 import React from 'react';
+import ContactFooter from './ContactFooter.jsx'
+
+var checkLocalStorage = function() {
+  var barName = localStorage.getItem('havaBarName');
+  if(barName !== null) {
+    return;
+  } else {
+    navigateToPage('/#bar');
+  }
+}
+
+var navigateToPage = (pageUrl) => {
+  window.location = pageUrl;
+}
 
 var BarContact = React.createClass({
+  componentWillMount: function() {
+    checkLocalStorage();
+  },
 
   handleBackClick: function(){
     window.location.assign("/#create-offers");
@@ -28,9 +45,7 @@ var BarContact = React.createClass({
               <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697029-twitter-512.png"/>
             </a>
           </div>
-          <div className="site-footer offer-footer">
-            <p onClick={this.handleBackClick} id="contactBtn" className="footer-text">Back to Create Offers</p>
-          </div>
+          <ContactFooter navigateTo={'/#create-offers'} footerName={'Back to Create Offers'} />
       </div>
     )
   }
