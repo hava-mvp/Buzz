@@ -91,7 +91,7 @@ select {
   left: 0;
   right: 0;
   position: absolute;
-  min-height: 60%;
+  min-height: 70%;
   display: flex;
   justify-content: center;
   align-content: center;
