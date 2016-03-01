@@ -141,19 +141,18 @@ Once published, customers will be notified, and the offer will not be retractabl
           message: 'Your offer is live',
           offerExpiryTime: offerExpiration
         });
-        _this.sendFormData()
+        _this.sendFormData(endTime, offer)
       });
       document.getElementById('offerSubmitButton').disabled = false;
     });
   },
 
-  sendFormData: function () {
+  sendFormData: function (endTime, offer) {
     console.log('OFFER ADDED TO DB');
     var _this = this;
-    console.log('THIS STATE', _this.state);
-    var endTime = String(document.getElementById('hours').value + ":" + document.getElementById('minutes').value + " " + document.getElementById('amPm').value)
+    console.log('END TIME: ' + endTime + '>>>>>' + offer);
     var formData = {
-      offer: document.getElementById('offerDescription').value,
+      offer: offer,
       endTime: endTime,
       barName: _this.state.havaBarName
     };
@@ -162,8 +161,8 @@ Once published, customers will be notified, and the offer will not be retractabl
     var _this = this;
     request.onreadystatechange = function() {
       if (request.status === 200 && request.readyState === 4) {
-        var messagesNotSent = new RegExp('notOk', 'g');
-        if (request.responseText.match(messagesNotSent)) {
+        console.log('!!!!!!!!!!!!!', request.responseText);
+        if (request.responseText === 'notOk') {
           console.log('MESSAGES COULD NOT BE SENT');
           _this.setState({
             type: 'danger',
