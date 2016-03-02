@@ -1,5 +1,6 @@
 // var log = require('why-is-node-running')
 var test = require('tape');
+var nock = require('nock');
 var start = require('../lib/start.js');
 var server = require('../lib/index.js');
 var sendTextMessage = require('../lib/sendTextMessage.js').sendTextMessage;
@@ -42,6 +43,8 @@ test('public served', function(t) {
 //     server.stop(t.end);
 //   });
 // });
+
+nock('')
 
 test('sendTextMessage', function(t) {
   var offer =  "This is a test offer";

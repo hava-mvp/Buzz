@@ -163,10 +163,10 @@ Once published, customers will be notified, and the offer will not be retractabl
       if (request.status === 200 && request.readyState === 4) {
         console.log('!!!!!!!!!!!!!', request.responseText);
         if (request.responseText === 'notOk') {
-          console.log('MESSAGES COULD NOT BE SENT');
+          console.log('NOT ALL MESSAGES SENT');
           _this.setState({
             type: 'danger',
-            message: 'Offer live, but messages have failed to send.'});
+            message: 'Offer live, but not all messages could be send.'});
         }
         else {
           console.log('MESSAGES SENT');
