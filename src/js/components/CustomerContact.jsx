@@ -6,7 +6,7 @@ var checkLocalStorage = function() {
   if(barName !== null) {
     return;
   } else {
-    navigateToPage('/public/#customer');
+    navigateToPage('/#customer');
   }
 }
 
@@ -42,7 +42,7 @@ var CustomerContact = React.createClass({
             <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697029-twitter-512.png"/>
           </a>
         </div>
-        <ContactFooter navigateTo={'/public/#live-offers'} footerName={'Back to Live Offers'} />
+        <ContactFooter navigateTo={'/#live-offers'} footerName={'Back to Live Offers'} />
       </div>
     )
   }

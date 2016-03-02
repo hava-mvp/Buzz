@@ -228,7 +228,7 @@ Once published, customers will be notified, and the offer will not be retractabl
              <button id='offerSubmitButton' className='btn btn-md button'>{this.state.message}</button>
            </form>
          </div>
-         <ContactFooter navigateTo={'/public/#bar-contact'} footerName={'Contact Us'} />
+         <ContactFooter navigateTo={'/#bar-contact'} footerName={'Contact Us'} />
       </div>
     ) : (
       <div>
@@ -237,7 +237,7 @@ Once published, customers will be notified, and the offer will not be retractabl
             Your offer is now live!
           </p>
         </div>
-        <ContactFooter navigateTo={'/public/#bar-contact'} footerName={'Contact Us'} />
+        <ContactFooter navigateTo={'/#bar-contact'} footerName={'Contact Us'} />
       </div>
     )
   }

@@ -6,7 +6,7 @@ var checkLocalStorage = function() {
   if(barName !== null) {
     return;
   } else {
-    navigateToPage('/public/#bar');
+    navigateToPage('/#bar');
   }
 }
 
@@ -45,7 +45,7 @@ var BarContact = React.createClass({
               <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697029-twitter-512.png"/>
             </a>
           </div>
-          <ContactFooter navigateTo={'/public/#create-offers'} footerName={'Back to Create Offers'} />
+          <ContactFooter navigateTo={'/#create-offers'} footerName={'Back to Create Offers'} />
       </div>
     )
   }
