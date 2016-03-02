@@ -44,8 +44,6 @@ test('public served', function(t) {
 //   });
 // });
 
-nock('')
-
 test('sendTextMessage', function(t) {
   var offer =  "This is a test offer";
   var endTime = "16:00";
