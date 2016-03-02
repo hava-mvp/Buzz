@@ -1,5 +1,6 @@
 // var log = require('why-is-node-running')
 var test = require('tape');
+var nock = require('nock');
 var start = require('../lib/start.js');
 var server = require('../lib/index.js');
 var sendTextMessage = require('../lib/sendTextMessage.js').sendTextMessage;
