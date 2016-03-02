@@ -32,14 +32,13 @@ var CustomerLogin = React.createClass({
     var userPhoneNumberRegex = new RegExp('\\b' + userPhoneNumber.toString() + '\\b');
     firebaseRef.once('value', function(snapshot){
       var databaseSnapshot = JSON.stringify(snapshot.val());
-      databaseSnapshot.match(userPhoneNumberRegex) ? _this.getUserId(userPhoneNumber) : _this.submitUser();
+      databaseSnapshot.match(userPhoneNumberRegex) ? _this.getUserId(userPhoneNumber) : _this.submitUser(userPhoneNumber);
     });
   },
 
-  submitUser: function() {
+  submitUser: function(userPhoneNumber) {
     var _this = this;
     console.log('NEW USER');
-    var userPhoneNumber = document.getElementById('phoneNumber').value;
     firebaseRefPush.set({
       email: document.getElementById('email').value,
       phoneNumber: userPhoneNumber
