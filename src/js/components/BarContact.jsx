@@ -1,6 +1,23 @@
 import React from 'react';
+import ContactFooter from './ContactFooter.jsx'
+
+var checkLocalStorage = function() {
+  var barName = localStorage.getItem('havaBarName');
+  if(barName !== null) {
+    return;
+  } else {
+    navigateToPage('/public/#bar');
+  }
+}
+
+var navigateToPage = (pageUrl) => {
+  window.location = pageUrl;
+}
 
 var BarContact = React.createClass({
+  componentWillMount: function() {
+    checkLocalStorage();
+  },
 
   handleBackClick: function(){
     window.location.assign("/#create-offers");
@@ -11,7 +28,7 @@ var BarContact = React.createClass({
       <div className="contact-wrapper">
         <h2>Contact Us</h2>
           <p>
-            Call the Hava office at: 07xxxxxxxxx
+            Call the Hava office at: <a href='tel:07821573753'>07821573753</a>
           </p>
           <p>
             Email us at:
@@ -21,16 +38,14 @@ var BarContact = React.createClass({
             <a href="https://www.instagram.com/thehavaapp/">
               <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697067-instagram-512.png"/>
             </a>
-            <a href="https://www.facebook.com/">
+            <a href="https://www.facebook.com/havaapp/">
               <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697057-facebook-512.png"/>
             </a>
             <a href="https://twitter.com/thehavaapp">
               <img className='icon' src="https://cdn1.iconfinder.com/data/icons/iconza-circle-social/64/697029-twitter-512.png"/>
             </a>
           </div>
-          <div className="site-footer offer-footer">
-            <p onClick={this.handleBackClick} id="contactBtn" className="footer-text">Back to Create Offers</p>
-          </div>
+          <ContactFooter navigateTo={'/public/#create-offers'} footerName={'Back to Create Offers'} />
       </div>
     )
   }

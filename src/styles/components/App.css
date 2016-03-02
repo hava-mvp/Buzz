@@ -17,7 +17,7 @@ h2 {
   text-align: center;
   padding-bottom: 15px;
   font-weight: normal;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 label {
@@ -91,14 +91,14 @@ select {
   left: 0;
   right: 0;
   position: absolute;
-  min-height: 60%;
+  min-height: 70%;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
   padding: 1em;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 /* LIVE OFFERS PAGE */
@@ -159,6 +159,7 @@ li {
 
 .footer-text {
   color: #474747;
+  margin: 5px 0 5px 0;
 }
 
 /* HAVA LOGO IN NAV BAR */
@@ -204,7 +205,6 @@ li {
   left: 0;
   right: 0;
   position: absolute;
-  top: 0;
   height: 60%;
   display: flex;
   justify-content: center;
